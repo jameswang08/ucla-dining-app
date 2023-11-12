@@ -1,15 +1,12 @@
-
-import { useState } from 'react'
-import './App.css'
-import TruckPage from './TruckPage.jsx'
+import "./App.css";
+import HomePage from "./HomePage.jsx";
 
 function App() {
-
   return (
     <>
-      <TruckPage />
+      <HomePage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
