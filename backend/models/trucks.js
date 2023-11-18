@@ -6,8 +6,7 @@ var truckSchema = mongoose.Schema({
   name: { type: String, required: true, unique: true },
   blurb: { type: String, required: true },
   image: { type: <Image />, default: null }, // placeholder for now
-  ratingSum: { type: Number, default: 0 }, // will need be divided by reviews.length to get average, is this good practice or should we use .aggregate()?
-  reviews: [Number], // review ids
+  reviews: [mongoose.Types.ObjectId],
 });
 
 // Model

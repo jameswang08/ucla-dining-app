@@ -6,9 +6,9 @@ var userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }, // should we add a minLength? questionable nonetheless
-  reputation: { type: String, default: 0 },
+  reputation: { type: Number, default: 0 },
   favorite: { type: String, default: null },
-  reviews: [Number], // review ids
+  reviews: [mongoose.Types.ObjectId],
 });
 
 // Model

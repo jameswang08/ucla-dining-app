@@ -8,7 +8,8 @@ var mealReviewSchema = mongoose.Schema({
 });
 var reviewSchema = mongoose.Schema({
   _id: { type: mongoose.Types.ObjectId, required: true, unique: true },
-  username: { type: String, required: true },
+  userId: { type: mongoose.Types.ObjectId, required: true },
+  truckId: { type: mongoose.Types.ObjectId, required: true },
   reviews: {
     breakfast: { type: mealReviewSchema, default: null },
     lunch: { type: mealReviewSchema, default: null },
