@@ -24,5 +24,5 @@ var reviewSchema = mongoose.Schema({
 // Model
 var Review = module.exports = mongoose.model('Review', reviewSchema, 'reviews');
 module.exports.getReviewById = function (id, callback) {
-  Review.find({ _id: id }, callback);
+  Review.findById(id, callback);
 };
