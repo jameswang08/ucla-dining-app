@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const UserModel = require('./models/users');
+const TrucksModel = require('./models/trucks');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -17,6 +19,21 @@ const mongoDB = process.env.secretURL;
 main().catch((err) => console.log(err)).finally(() => {console.log("Hello World!")});
 async function main() {
   await mongoose.connect(mongoDB);
+
+  // let user = new UserModel({
+  //   username: 'test2',
+  //   email: 'test2@gmail.com',
+  //   password: 'test',
+  // });
+
+  // user
+  //   .save()
+  //   .then((doc) => {
+  //     console.log(doc);
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   });
 }
 
 // view engine setup
