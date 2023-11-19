@@ -3,9 +3,9 @@ import React from "react";
 export default function NavBar() {
     return (
     <>
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-dark-yellow">
             <div className="flex-1">
-                <a className="btn glass bg-base-100 normal-case text-xl">BruinEats</a>
+                <a className="btn glass normal-case text-xl">BruinEats</a>
             </div>
 
             <div className="dropdown dropdown-hover">
