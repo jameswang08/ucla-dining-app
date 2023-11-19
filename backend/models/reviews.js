@@ -7,7 +7,6 @@ var mealReviewSchema = mongoose.Schema({
   review: { type: String, default: null },
 });
 var reviewSchema = mongoose.Schema({
-  _id: { type: mongoose.Types.ObjectId, required: true, unique: true },
   userId: { type: mongoose.Types.ObjectId, required: true },
   truckId: { type: mongoose.Types.ObjectId, required: true },
   reviews: {
