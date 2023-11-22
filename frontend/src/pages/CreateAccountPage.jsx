@@ -1,8 +1,8 @@
 import React from "react";
-import NavBar from "../components/NavBar.jsx"
-import '../../dist/output.css'
+import NavBar from "../components/NavBar.jsx";
+import "../../dist/output.css";
 
-export default function LoginPage() {
+export default function CreateAccountPage() {
   return (
     <div>
       <div>
@@ -10,7 +10,7 @@ export default function LoginPage() {
       </div>
 
       <div class="text-white ps-28 my-32">
-        <pre class="text-3xl leading-[5rem]">Login{"\n"}</pre>
+        <pre class="text-3xl leading-[5rem]">Create an Account{"\n"}</pre>
 
         <pre class="leading-[2.75rem]">{"\n"}</pre>
 
@@ -71,15 +71,11 @@ export default function LoginPage() {
               Password
             </label>
           </div>
+          
         </div>
-
-        <ul className="btn btn-active btn-link text-blue text-base ms-[-0.9rem] my-[-1rem]">
-          Create an Account
-        </ul>
-
-        <ul className="btn btn-active btn-link text-light-yellow text-xl ml-[36rem] my-[5.5rem]">
-          Login→
-        </ul>
+        <ul className="btn btn-active btn-link text-light-yellow text-xl ml-[33rem] my-[5.5rem]">
+            Create Account→
+          </ul>
       </div>
 
       {/* <div>
