@@ -1,10 +1,13 @@
-import "./App.css";
-import HomePage from "./HomePage.jsx";
+
+import './App.css';
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage'
+
 
 function App() {
   return (
     <>
-      <HomePage />
+      <LoginPage />
     </>
   );
 }
