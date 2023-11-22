@@ -1,14 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/*.{html,jsx}", "./*.{html,jsx}"],
+  content: ["./src/*.{html,jsx}","./src/*/*.{html,jsx}", "./*.{html,jsx}"],
   theme: {
     extend: {},
     colors: {
+      'blue': '#2563eb',
       'dark-yellow': '#fcd34d',
       'black': '#020617',
       'white': '#fafafa',
-      'light-yellow': '#fde68a'
-    }
+      'light-yellow': '#fde68a',
+      'gray': '#6b7280',
+    }, 
   },
   plugins: [
     require('@tailwindcss/typography'),require("daisyui")],
