@@ -3,7 +3,6 @@ import NavBar from "./NavBar.jsx"
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import AppBar from '@mui/material/AppBar';
-import '../dist/output.css'
 
 export default function HomePage() {
     return (
