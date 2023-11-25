@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Schema
-var truckSchema = mongoose.Schema({
+let truckSchema = mongoose.Schema({
   name: { type: String, required: true, unique: true },
   blurb: { type: String, required: true },
   image: { type: String, default: null }, // placeholder for now
@@ -63,10 +63,10 @@ truckSchema.methods.filterLateNightReviews = function () {
 };
 
 // Model
-var Truck = module.exports = mongoose.model('Truck', truckSchema, 'trucks');
-module.exports.getTruckById = function (id, callback) {
-  Truck.findById(id, callback);
+let Truck = module.exports = mongoose.model('Truck', truckSchema, 'trucks');
+module.exports.getTruckById = async function (id) {
+  return await Truck.findById(id);
 };
-module.exports.getTruckByName = function (name, callback) {
-  Truck.find({ name: name }, callback);
+module.exports.getTruckByName = async function (name) {
+  return await Truck.find({ name: name });
 };

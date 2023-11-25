@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Schema
-var userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }, // should we add a minLength? questionable nonetheless
@@ -31,13 +31,13 @@ userSchema.methods.sortReviewsByDate = function () {
 };
 
 // Model
-var User = module.exports = mongoose.model('User', userSchema, 'users');
-module.exports.getUserById = function (id, callback) {
-  User.findById(id, callback);
+let User = module.exports = mongoose.model('User', userSchema, 'users');
+module.exports.getUserById = async function (id) {
+  return await User.findById(id);
 };
-module.exports.getUserByName = function (username, callback) {
-  User.find({ username: username }, callback);
+module.exports.getUserByName = async function (username) {
+  return await User.find({ username: username });
 };
-module.exports.getUserByEmail = function (email, callback) {
-  User.find({ email: email }, callback);
+module.exports.getUserByEmail = async function (email) {
+  return await User.find({ email: email });
 };

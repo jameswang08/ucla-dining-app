@@ -15,6 +15,11 @@ main().catch((err) => console.log(err)).finally(() => {console.log("Hello World!
 async function main() {
   await mongoose.connect(mongoDB);
 
+  // let query1 = await UserModel.find({ username: "test2" });
+  // let query2 = await UserModel.getUserByName("test2");
+  // console.log(query1);
+  // console.log(query2);
+
   // let user = new UserModel({
   //   username: 'test2',
   //   email: 'test2@gmail.com',
