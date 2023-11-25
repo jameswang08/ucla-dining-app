@@ -42,6 +42,18 @@ app.get("/", async (req, res) => {
   res.send("Hello World")
 })
 
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username, password });
+  if (user) {
+    // User with the provided username and password found
+    return res.status(200).json({ success: true });
+  } else {
+    // User not found or incorrect credentials
+    return res.status(200).json({ success: false });
+  }
+})
+
 const port = 3000;
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
