@@ -9,7 +9,7 @@ export default function HomePage() {
           <NavBar />
         </div>
 
-        <div class="text-white text-4xl ps-20">
+        <div class="text-white text-4xl ps-24">
           <pre class="mt-60"> Your one-stop shop for</pre>
           <pre class="ps-16 mt-[5.5rem] mb-60"> UCLA dining reviews.</pre>
         </div>
