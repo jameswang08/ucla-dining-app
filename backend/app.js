@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const mongoose = require("mongoose");
 const UserModel = require('./models/users');
-const TrucksModel = require('./models/trucks');
+const TruckModel = require('./models/trucks');
+const ReviewModel = require('./models/reviews');
 require('dotenv').config();
 
 const app = express();
@@ -15,25 +16,11 @@ main().catch((err) => console.log(err)).finally(() => {console.log("Hello World!
 async function main() {
   await mongoose.connect(mongoDB);
 
-  // let query1 = await UserModel.find({ username: "test2" });
-  // let query2 = await UserModel.getUserByName("test2");
-  // console.log(query1);
-  // console.log(query2);
-
-  // let user = new UserModel({
-  //   username: 'test2',
-  //   email: 'test2@gmail.com',
-  //   password: 'test',
-  // });
-
-  // user
-  //   .save()
-  //   .then((doc) => {
-  //     console.log(doc);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   });
+  /*
+  let user = await UserModel.getUserByName('test1');
+  let truck = await TruckModel.createTruck("test_truck2", "another blurb", "some_image_path");
+  let review = await ReviewModel.createReview(test1._id, truck._id, { waitTime: 5, rating: 4 }, { waitTime: 10, rating: 5 }, null, null);
+  */
 }
 
 app.use(express.json())

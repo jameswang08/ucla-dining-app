@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 let truckSchema = mongoose.Schema({
   name: { type: String, required: true, unique: true },
   blurb: { type: String, required: true },
-  image: { type: String, default: null }, // placeholder for now
+  image: { type: String, default: null },
   reviews: [mongoose.Types.ObjectId],
 });
 truckSchema.methods.avgRating = function () {
@@ -61,12 +61,23 @@ truckSchema.methods.filterLateNightReviews = function () {
     'reviews.lateNight': { $ne: null },
   });
 };
+truckSchema.methods.addReview = async function (reviewId) {
+  this.reviews.push(reviewId);
+  await this.save();
+};
+truckSchema.statics.getTruckById = async function (id) {
+  return await this.findById(id);
+};
+truckSchema.statics.getTruckByName = async function (name) {
+  return await this.findOne({ name: name });
+};
+truckSchema.statics.createTruck = async function (name, blurb, image) {
+  return await this.create({
+    name: name,
+    blurb: blurb,
+    image: image,
+  });
+}
 
 // Model
 let Truck = module.exports = mongoose.model('Truck', truckSchema, 'trucks');
-module.exports.getTruckById = async function (id) {
-  return await Truck.findById(id);
-};
-module.exports.getTruckByName = async function (name) {
-  return await Truck.find({ name: name });
-};

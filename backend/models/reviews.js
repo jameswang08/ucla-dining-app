@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const UserModel = require('./users');
+const TruckModel = require('./trucks');
 
 // Schema
 let mealReviewSchema = mongoose.Schema({
@@ -20,9 +22,26 @@ let reviewSchema = mongoose.Schema({
     likes: { type: Number, default: 0 },
   },
 });
+reviewSchema.statics.getReviewById = async function (id) {
+  return await this.findById(id);
+};
+reviewSchema.statics.createReview = async function (userId, truckId, breakfast, lunch, dinner, lateNight) {
+  let review = await this.create({
+    userId: userId,
+    truckId: truckId,
+    reviews: {
+      breakfast: breakfast,
+      lunch: lunch,
+      dinner: dinner,
+      lateNight: lateNight,
+    },
+  });
+  let user = await UserModel.getUserById(userId);
+  user.addReview(review._id);
+  let truck = await TruckModel.getTruckById(truckId);
+  truck.addReview(review._id);
+  return review;
+}
 
 // Model
 let Review = module.exports = mongoose.model('Review', reviewSchema, 'reviews');
-module.exports.getReviewById = async function (id) {
-  return await Review.findById(id);
-};
