@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "./NavBar.jsx"
-import '../dist/output.css'
+import NavBar from "../components/NavBar.jsx";
+import "../../dist/output.css";
 
 export default function TruckPage() {
     return (
