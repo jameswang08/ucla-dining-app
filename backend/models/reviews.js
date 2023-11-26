@@ -22,6 +22,10 @@ let reviewSchema = mongoose.Schema({
     likes: { type: Number, default: 0 },
   },
 });
+reviewSchema.methods.addLike = async function () {
+  this.meta.likes++;
+  await this.save();
+};
 reviewSchema.statics.getReviewById = async function (id) {
   return await this.findById(id);
 };
@@ -41,7 +45,7 @@ reviewSchema.statics.createReview = async function (userId, truckId, breakfast, 
   let truck = await TruckModel.getTruckById(truckId);
   truck.addReview(review._id);
   return review;
-}
+};
 
 // Model
 let Review = module.exports = mongoose.model('Review', reviewSchema, 'reviews');

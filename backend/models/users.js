@@ -9,28 +9,24 @@ let userSchema = mongoose.Schema({
   favorite: { type: String, default: null },
   reviews: [mongoose.Types.ObjectId],
 });
-userSchema.methods.sortReviewsByPopularity = function () {
-  return mongoose.collection('reviews').aggregate([{
-    $match: {
-      _id: { $in: this.reviews },
-    },
-    $sort: {
-      'meta.likes': -1,
-    },
-  }]);
+userSchema.methods.sortReviewsByPopularity = async function () {
+  return await mongoose.connection.db.collection('reviews').aggregate([
+    { $match: { _id: { $in: this.reviews } } },
+    { $sort: { 'meta.likes': -1 } },
+  ]).toArray();
 };
-userSchema.methods.sortReviewsByDate = function () {
-  return mongoose.collection('reviews').aggregate([{
-    $match: {
-      _id: { $in: this.reviews },
-    },
-    $sort: {
-      'meta.date': -1,
-    },
-  }]);
+userSchema.methods.sortReviewsByDate = async function () {
+  return await mongoose.connection.db.collection('reviews').aggregate([
+    { $match: { _id: { $in: this.reviews } } },
+    { $sort: { 'meta.date': -1 } },
+  ]).toArray();
 };
 userSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);
+  await this.save();
+};
+userSchema.methods.setFavorite = async function (favorite) {
+  this.favorite = favorite;
   await this.save();
 };
 userSchema.statics.getUserById = async function (id) {
