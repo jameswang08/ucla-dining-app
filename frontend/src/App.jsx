@@ -8,7 +8,7 @@ import CreateAccountPage from "./pages/CreateAccountPage";
 function App() {
   return (
     <>
-      <LoginPage />
+      <CreateAccountPage />
     </>
   );
 }

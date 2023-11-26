@@ -10,11 +10,22 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import PasswordChecklist from "react-password-checklist";
 
 export default function LoginPage() {
-  const [password, setPassword] = useState("");
+  const [inputs, setInputs] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputs);
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <div>
         <NavBar />
       </div>
@@ -26,7 +37,15 @@ export default function LoginPage() {
 
         {/* username */}
         <label id="email_label">
-          <input type="text" class="bg-gray" placeholder=" " id="email" />
+          <input
+            type="text"
+            className="bg-gray"
+            placeholder=" "
+            id="email"
+            name="email"
+            value={inputs.email || ""}
+            onChange={handleChange}
+          />
           <span id="email_span"> Email </span>
         </label>
 
@@ -34,7 +53,15 @@ export default function LoginPage() {
 
         {/* username */}
         <label id="username_label">
-          <input type="text" class="bg-gray" placeholder=" " id="username" />
+          <input
+            type="text"
+            className="bg-gray"
+            placeholder=" "
+            id="username"
+            name="username"
+            value={inputs.username || ""}
+            onChange={handleChange}
+          />
           <span id="username_span"> Username </span>
         </label>
 
@@ -45,16 +72,17 @@ export default function LoginPage() {
           <label id="user_password_label">
             <input
               type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              class="user_password bg-gray"
+              value={inputs.password || ""}
+              onChange={handleChange}
+              className="bg-gray"
+              name="password"
               placeholder=" "
               id="user_password"
             />
 
             <span id="user_password_span"> Password </span>
 
-            <PasswordStrengthBar password={password} />
+            <PasswordStrengthBar password={inputs.password} />
           </label>
         </div>
       </div>
@@ -71,10 +99,14 @@ export default function LoginPage() {
         </button>
       </div>
 
-      <ul class="btn btn-active btn-link text-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[10rem]">
+      <ul
+        type="submit"
+        onClick={handleSubmit}
+        class="btn btn-active btn-link text-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[10rem]"
+      >
         Create Account→
       </ul>
-    </div>
+    </form>
   );
 }
 
