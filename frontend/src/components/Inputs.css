@@ -1,0 +1,39 @@
+#username_label, #user_password_label, #button_label, #email_label{
+  position:relative;
+  display:inline-block;
+}
+  
+#username_span, #user_password_span, #email_span{
+  padding:10px;
+  pointer-events: none;
+  position:absolute;
+  left:0;
+  top:0;
+  transition: 0.2s;
+  transition-timing-function: ease;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  opacity:0.5;
+}
+
+/* inputs */
+#username, #user_password, #email {
+  padding-left:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  width: 300px;
+  border-radius: 7px;
+}
+
+
+#username:focus + span, #user_password:focus + span, #username:not(:placeholder-shown) + span,
+#user_password:not(:placeholder-shown) + span, #email:focus + span,
+#email:not(:placeholder-shown) + span{
+  opacity:1;
+  transform: scale(0.8) translateY(-100%) translateX(-20px);
+}
+
+/* For IE Browsers*/
+input:focus + span, input:not(:-ms-input-placeholder) + span{
+  opacity:1;
+  transform: scale(0.8) translateY(-100%) translateX(-20px);
+}
