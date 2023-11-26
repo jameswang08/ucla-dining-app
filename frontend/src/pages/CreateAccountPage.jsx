@@ -8,6 +8,7 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import PasswordStrengthBar from "react-password-strength-bar";
 import PasswordChecklist from "react-password-checklist";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
@@ -99,12 +100,13 @@ export default function LoginPage() {
         </button>
       </div>
 
+      {/* TODO: Pass in username into the dashboard, also must check within database it is new user */}
       <ul
         type="submit"
         onClick={handleSubmit}
         class="btn btn-active btn-link text-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[10rem]"
       >
-        Create Account→
+        <Link to="/dashboard">Create Account→</Link>
       </ul>
     </form>
   );

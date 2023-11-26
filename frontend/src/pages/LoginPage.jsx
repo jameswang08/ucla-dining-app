@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
@@ -67,8 +68,9 @@ export default function LoginPage() {
             <span id="user_password_span"> Password </span>
           </label>
         </div>
-        <ul className="btn btn-active btn-link text-blue text-sm ml-[-1rem] mt-[0.5rem] mb-[3rem]">
-          Create an Account→
+
+        <ul className="btn btn-active btn-link text-white decoration-dark-yellow text-sm ml-[-1rem] mt-[0.5rem] mb-[3rem]">
+          <Link to="/createaccount"> Create an Account→ </Link>
         </ul>
       </div>
 
@@ -84,12 +86,13 @@ export default function LoginPage() {
         </button>
       </div>
 
+      {/* TODO: if success login ELSE: stay on this page*/}
       <ul
         type="submit"
         onClick={handleSubmit}
-        className="btn btn-active btn-link text-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[3rem]"
+        className="btn btn-active btn-link underline text-white decoration-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[3rem]"
       >
-        Login→
+        <Link to="/dashboard">Login→</Link>
       </ul>
     </form>
   );
