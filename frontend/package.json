@@ -15,6 +15,9 @@
     "@mui/material": "^5.14.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons-kit": "^2.0.0",
+    "react-password-checklist": "^1.5.0",
+    "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.20.0"
   },
   "devDependencies": {
