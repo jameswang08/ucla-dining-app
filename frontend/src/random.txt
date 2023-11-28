@@ -1,0 +1,28 @@
+ <Container maxWidth={false} disableGutters>
+        {/*To span entire page */}
+            <Box sx={{ bgcolor: '#cfe8fc', height: '70vh' }}>
+                <text className="backgroundPanel">Your one-stop shop for UCLA dining reviews</text>
+            </Box>
+        {/* <textarea className = 'textarea-ghost label'>Your one-stop shop for UCLA dining reviews</textarea> */}
+        
+        
+        </Container>
+
+
+text-left text-xl p-10 
+
+.blankspace {
+    background-color: black;
+    height: 400px;
+}
+
+.backgroundPanel {
+    background-color: black;
+    color: white;;
+    padding: 65px;
+    /* margin: 65px; */
+
+    /* text-align: left; */
+    font-size: 32px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
