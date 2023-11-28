@@ -2,8 +2,11 @@ import React from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import "../components/grid.css";
+import { useLocation } from "react-router-dom";
 
-export default function DashboardPage({name}) {
+export default function DashboardPage() {
+  const username = useLocation().state.username;
+
   return (
     <div>
       <div>
@@ -11,21 +14,19 @@ export default function DashboardPage({name}) {
       </div>
 
       <div className="prose text-white ps-32 pt-32 pb-16">
-        <h1 className="text-white mb-3"> {name}'s Dashboard</h1>
-        <text>Take a look at your activity</text>
+        <h1 className="text-white mb-3"> {username}'s Dashboard</h1>
+        <pre>Take a look at your activity</pre>
       </div>
 
-      <div className='column ps-48 text-white text-lg'>
+      <div className="column ps-48 text-white text-lg">
         <pre>Favorite Location</pre>
 
         <pre>Reputation</pre>
-
       </div>
 
-      <div className='column text-white text-lg'>
-      <pre>Your reviews</pre>
-      <pre className='text-sm'>Sort by:</pre>
-
+      <div className="column text-white text-lg">
+        <pre>Your reviews</pre>
+        <pre className="text-sm">Sort by:</pre>
       </div>
     </div>
   );

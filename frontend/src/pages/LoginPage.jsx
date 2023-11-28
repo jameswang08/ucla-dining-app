@@ -7,10 +7,12 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -21,6 +23,9 @@ export default function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
+    // TO DO: ONLY IF USERNAME AND PASSWORD MATCHES DATABASE then we move to dashboard page
+    const username = inputs.username;
+    navigate("/dashboard", { state: { username } });
   };
 
   return (
@@ -77,7 +82,7 @@ export default function LoginPage() {
       <div>
         <button
           id="button"
-          type="checkbox"
+          type="button"
           value={showPassword}
           onClick={() => setShowPassword((prev) => !prev)}
           className="absolute text-white ml-[24rem] mt-[-8.8rem]"
@@ -87,13 +92,13 @@ export default function LoginPage() {
       </div>
 
       {/* TODO: if success login ELSE: stay on this page*/}
-      <ul
+      <button
         type="submit"
         onClick={handleSubmit}
         className="btn btn-active btn-link underline text-white decoration-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[3rem]"
       >
-        <Link to="/dashboard">Login→</Link>
-      </ul>
+        Login→
+      </button>
     </form>
   );
 }

@@ -8,11 +8,14 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import PasswordStrengthBar from "react-password-strength-bar";
 import PasswordChecklist from "react-password-checklist";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const emailInput = document.getElementById("email");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -22,7 +25,20 @@ export default function LoginPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputs);
+
+    // TODO: ADD within if statement a check that email isn't already taken up in database
+    if (emailInput !== null && emailInput.validity.valid) {
+      console.log(inputs);
+      const username = inputs.username;
+      navigate("/dashboard", { state: { username } });
+    } else {
+      // alert("not a valid email");
+      setShowMessage(true);
+    }
+  };
+
+  const setPasswordView = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -39,7 +55,7 @@ export default function LoginPage() {
         {/* username */}
         <label id="email_label">
           <input
-            type="text"
+            type="email"
             className="bg-gray"
             placeholder=" "
             id="email"
@@ -48,6 +64,7 @@ export default function LoginPage() {
             onChange={handleChange}
           />
           <span id="email_span"> Email </span>
+          {showMessage ? <span id="message"> X Not a Valid Email </span> : null}
         </label>
 
         <pre class="leading-[2.5rem]">{"\n"}</pre>
@@ -86,27 +103,27 @@ export default function LoginPage() {
             <PasswordStrengthBar password={inputs.password} />
           </label>
         </div>
-      </div>
 
-      <div>
-        <button
-          id="button"
-          type="checkbox"
-          value={showPassword}
-          onClick={() => setShowPassword((prev) => !prev)}
-          class="absolute text-white ml-[24rem] mt-[-4.3rem]"
-        >
-          {showPassword ? <Icon icon={eye} /> : <Icon icon={eyeOff} />}
-        </button>
+        <div>
+          <button
+            id="button"
+            type="button"
+            value={showPassword}
+            onClick={setPasswordView}
+            class="absolute text-white ml-[17rem] mt-[-4.3rem]"
+          >
+            {showPassword ? <Icon icon={eye} /> : <Icon icon={eyeOff} />}
+          </button>
+        </div>
       </div>
 
       {/* TODO: Pass in username into the dashboard, also must check within database it is new user */}
       <ul
         type="submit"
         onClick={handleSubmit}
-        class="btn btn-active btn-link text-light-yellow text-xl ml-[42rem]  mt-[3.5rem] mb-[10rem]"
+        class="bg-white btn btn-active btn-link text-light-yellow text-xl ml-[42rem] mt-[3.5rem] mb-[10rem]"
       >
-        <Link to="/dashboard">Create Account→</Link>
+        Create Account→
       </ul>
     </form>
   );
