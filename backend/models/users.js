@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 // Schema
 let userSchema = mongoose.Schema({
+  name: {
+    first: { type: String, default: null },
+    last: { type: String, default: null },
+  },
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -32,17 +36,21 @@ userSchema.methods.setFavorite = async function (favorite) {
 userSchema.statics.getUserById = async function (id) {
   return await this.findById(id);
 };
-userSchema.statics.getUserByName = async function (username) {
+userSchema.statics.getUserByUsername = async function (username) {
   return await this.findOne({ username: username });
 };
 userSchema.statics.getUserByEmail = async function (email) {
   return await this.findOne({ email: email });
 };
-userSchema.statics.createUser = async function (username, email, password) {
+userSchema.statics.createUser = async function (firstname, lastname, username, email, password) {
   return await this.create({
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    name: {
+      first: firstname,
+      last: lastname,
+    },
+    username: username,
+    email: email,
+    password: password,
   });
 }
 
