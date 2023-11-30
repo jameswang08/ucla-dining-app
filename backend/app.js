@@ -4,9 +4,12 @@ const mongoose = require("mongoose");
 const UserModel = require('./models/users');
 const TruckModel = require('./models/trucks');
 const ReviewModel = require('./models/reviews');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+
+app.use(cors());
 
 // Set up mongoose connection
 mongoose.set("strictQuery", false);
@@ -31,13 +34,11 @@ app.get("/", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username, password });
+  const user = await UserModel.findOne({ username, password });
   if (user) {
-    // User with the provided username and password found
-    return res.status(200).json({ success: true });
+    res.json({ success: true, message: 'Login successful' });
   } else {
-    // User not found or incorrect credentials
-    return res.status(200).json({ success: false });
+    res.json({ success: false, message: 'Invalid username or password' });
   }
 })
 

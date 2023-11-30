@@ -24,8 +24,24 @@ export default function LoginPage() {
     event.preventDefault();
     console.log(inputs);
     // TO DO: ONLY IF USERNAME AND PASSWORD MATCHES DATABASE then we move to dashboard page
-    const username = inputs.username;
-    navigate("/dashboard", { state: { username } });
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username: inputs.username, password: inputs.password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.success){
+        const username = inputs.username;
+        navigate("/dashboard", { state: { username } });
+      }
+      else{
+        console.log("incorrect details");
+      }
+    })
+    .catch(error => console.error('Error:', error));
   };
 
   return (
