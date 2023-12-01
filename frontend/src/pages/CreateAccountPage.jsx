@@ -50,9 +50,14 @@ export default function LoginPage() {
           .then((response) => response.json())
           .then((data) => {
             if (data.success) {
-              const firstname = inputs.firstname;
-              const lastname = inputs.lastname;
-              navigate("/dashboard", { state: { firstname, lastname } });
+              fetch("http://localhost:3000/users/" + inputs.username)
+                .then((data) => {
+                  return data.json();
+                })
+                .then((post) => {
+                  console.log(post);
+                  navigate("/dashboard", { state: post });
+                });
             } else {
               console.log("invalid username");
               setUsernameMessage(true);

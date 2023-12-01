@@ -44,9 +44,7 @@ export default function LoginPage() {
             })
             .then((post) => {
               console.log(post);
-              const firstname = post.name.first;
-              const lastname = post.name.last;
-              navigate("/dashboard", { state: { firstname, lastname } });
+              navigate("/dashboard", { state: post });
             });
         } else {
           console.log("incorrect details");
