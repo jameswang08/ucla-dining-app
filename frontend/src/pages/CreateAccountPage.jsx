@@ -13,7 +13,9 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordScore, setPasswordScore] = useState("weak");
   const [showMessage, setShowMessage] = useState(false);
+  const [passwordMessage, setPasswordMessage] = useState(false);
   const emailInput = document.getElementById("email");
   const navigate = useNavigate();
 
@@ -28,13 +30,22 @@ export default function LoginPage() {
 
     // TODO: ADD within if statement a check that email isn't already taken up in database
     if (emailInput !== null && emailInput.validity.valid) {
-      console.log(inputs);
-      const username = inputs.username;
-      navigate("/dashboard", { state: { username } });
+      setShowMessage(false);
+      if (passwordScore === 4) {
+        const username = inputs.username;
+        navigate("/dashboard", { state: { username } });
+      }
     } else {
       // alert("not a valid email");
       setShowMessage(true);
     }
+
+    if (passwordScore !== 4) {
+      setPasswordMessage(true);
+    } else {
+      setPasswordMessage(false);
+    }
+    console.log(passwordScore);
   };
 
   const setPasswordView = () => {
@@ -47,10 +58,10 @@ export default function LoginPage() {
         <NavBar />
       </div>
 
-      <div class="text-white ml-28 mt-32">
-        <pre class="text-3xl leading-[3rem]">Create an Account{"\n"}</pre>
+      <div className="text-white ml-28 mt-32">
+        <pre className="text-3xl leading-[3rem]">Create an Account{"\n"}</pre>
 
-        <pre class="leading-[2.75rem]">{"\n"}</pre>
+        <pre className="leading-[2.75rem]">{"\n"}</pre>
 
         {/* username */}
         <label id="email_label">
@@ -67,7 +78,7 @@ export default function LoginPage() {
           {showMessage ? <span id="message"> X Not a Valid Email </span> : null}
         </label>
 
-        <pre class="leading-[2.5rem]">{"\n"}</pre>
+        <pre className="leading-[2.5rem]">{"\n"}</pre>
 
         {/* username */}
         <label id="username_label">
@@ -83,7 +94,7 @@ export default function LoginPage() {
           <span id="username_span"> Username </span>
         </label>
 
-        <pre class="leading-[2.5rem]">{"\n"}</pre>
+        <pre className="leading-[2.5rem]">{"\n"}</pre>
 
         {/* password */}
         <div>
@@ -100,7 +111,11 @@ export default function LoginPage() {
 
             <span id="user_password_span"> Password </span>
 
-            <PasswordStrengthBar password={inputs.password} />
+            <PasswordStrengthBar
+              password={inputs.password}
+              minLength={8}
+              onChangeScore={setPasswordScore}
+            />
           </label>
         </div>
 
@@ -110,10 +125,17 @@ export default function LoginPage() {
             type="button"
             value={showPassword}
             onClick={setPasswordView}
-            class="absolute text-white ml-[17rem] mt-[-4.3rem]"
+            className="absolute text-white ml-[17rem] mt-[-4.3rem]"
           >
             {showPassword ? <Icon icon={eye} /> : <Icon icon={eyeOff} />}
           </button>
+
+          {passwordMessage ? (
+            <span className="text-white ml-[0rem]" id="message">
+              {" "}
+              X Set a Stronger Password{" "}
+            </span>
+          ) : null}
         </div>
       </div>
 
@@ -121,7 +143,7 @@ export default function LoginPage() {
       <ul
         type="submit"
         onClick={handleSubmit}
-        class="bg-white btn btn-active btn-link text-light-yellow text-xl ml-[42rem] mt-[3.5rem] mb-[10rem]"
+        className="bg-white btn btn-active btn-link text-light-yellow text-xl ml-[42rem] mt-[3.5rem] mb-[10rem]"
       >
         Create Account→
       </ul>

@@ -50,7 +50,7 @@ export default function LoginPage() {
         <NavBar />
       </div>
 
-      <div class="text-white ml-28 mt-32">
+      <div className="text-white ml-28 mt-32">
         <pre className="text-3xl leading-[3rem]">Login{"\n"}</pre>
 
         <pre className="leading-[2.75rem]">{"\n"}</pre>
@@ -71,7 +71,7 @@ export default function LoginPage() {
           <span id="username_span"> Username </span>
         </label>
 
-        <pre class="leading-[2.5rem]">{"\n"}</pre>
+        <pre className="leading-[2.5rem]">{"\n"}</pre>
 
         {/* password */}
         <div>
