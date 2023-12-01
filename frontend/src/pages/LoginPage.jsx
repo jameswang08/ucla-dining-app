@@ -23,7 +23,6 @@ export default function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
-    // TO DO: ONLY IF USERNAME AND PASSWORD MATCHES DATABASE then we move to dashboard page
     fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {

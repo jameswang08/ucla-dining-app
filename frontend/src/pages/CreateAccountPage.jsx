@@ -16,6 +16,7 @@ export default function LoginPage() {
   const [passwordScore, setPasswordScore] = useState("weak");
   const [showMessage, setShowMessage] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState(false);
+  const [usernameMessage, setUsernameMessage] = useState(false);
   const emailInput = document.getElementById("email");
   const navigate = useNavigate();
 
@@ -28,12 +29,35 @@ export default function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // TODO: ADD within if statement a check that email isn't already taken up in database
+    console.log(inputs);
+
     if (emailInput !== null && emailInput.validity.valid) {
       setShowMessage(false);
       if (passwordScore === 4) {
-        const username = inputs.username;
-        navigate("/dashboard", { state: { username } });
+        fetch("http://localhost:3000/createaccount", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: inputs.email,
+            username: inputs.username,
+            password: inputs.password,
+            firstname: inputs.firstname,
+            lastname: inputs.lastname,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              const firstname = inputs.firstname;
+              navigate("/dashboard", { state: { firstname } });
+            } else {
+              console.log("invalid username");
+              setUsernameMessage(true);
+            }
+          })
+          .catch((error) => console.error("Error:", error));
       }
     } else {
       // alert("not a valid email");
@@ -150,6 +174,3 @@ export default function LoginPage() {
     </form>
   );
 }
-
-
-

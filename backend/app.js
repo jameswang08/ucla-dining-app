@@ -42,6 +42,16 @@ app.post("/login", async (req, res) => {
   }
 })
 
+app.post("/createaccount", async (req, res) => {
+  const { email, username, password, firstname, lastname } = req.body;
+  const user = await UserModel.getUserByUsername(username);
+  if (user) {
+    res.json({ success: false, message: 'Invalid username' });
+  } 
+  await UserModel.createUser(firstname, lastname, username, email, password);
+  res.json({ success: true, message: 'Account creation successful' });
+})
+
 const port = 3000;
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
