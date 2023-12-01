@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -48,6 +49,7 @@ export default function LoginPage() {
             });
         } else {
           console.log("incorrect details");
+          setLoginErrorMessage(true);
         }
       })
       .catch((error) => console.error("Error:", error));
