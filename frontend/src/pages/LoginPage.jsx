@@ -33,8 +33,9 @@ export default function LoginPage() {
     .then(response => response.json())
     .then(data => {
       if(data.success){
-        const username = inputs.username;
-        navigate("/dashboard", { state: { username } });
+        const firstname = inputs.firstname;
+        const lastname = inputs.lastname;
+        navigate("/dashboard", { state: { firstname, lastname } });
       }
       else{
         console.log("incorrect details");
