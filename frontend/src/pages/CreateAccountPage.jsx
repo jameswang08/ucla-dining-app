@@ -32,8 +32,11 @@ export default function LoginPage() {
     if (emailInput !== null && emailInput.validity.valid) {
       setShowMessage(false);
       if (passwordScore === 4) {
-        const username = inputs.username;
-        navigate("/dashboard", { state: { username } });
+        const firstname = inputs.firstname;
+        const lastname = inputs.lastname;
+        navigate("/dashboard", {
+          state: { firstname, lastname },
+        });
       }
     } else {
       // alert("not a valid email");
@@ -63,20 +66,60 @@ export default function LoginPage() {
 
         <pre className="leading-[2.75rem]">{"\n"}</pre>
 
-        {/* username */}
-        <label id="email_label">
-          <input
-            type="email"
-            className="bg-gray"
-            placeholder=" "
-            id="email"
-            name="email"
-            value={inputs.email || ""}
-            onChange={handleChange}
-          />
-          <span id="email_span"> Email </span>
-          {showMessage ? <span id="message"> X Not a Valid Email </span> : null}
-        </label>
+        {/* first name */}
+        <div>
+          <label id="firstname_label">
+            <input
+              type="text"
+              className="bg-gray"
+              placeholder=" "
+              id="firstname"
+              name="firstname"
+              value={inputs.firstname || ""}
+              onChange={handleChange}
+            />
+            <span id="firstname_span"> First Name </span>
+          </label>
+        </div>
+
+        <pre className="leading-[2.5rem]">{"\n"}</pre>
+
+        {/* last name */}
+        <div>
+          <label id="lastname_label">
+            <input
+              type="text"
+              className="bg-gray"
+              placeholder=" "
+              id="lastname"
+              name="lastname"
+              value={inputs.lastname || ""}
+              onChange={handleChange}
+            />
+            <span id="lastname_span"> Last Name </span>
+          </label>
+        </div>
+
+        <pre className="leading-[2.5rem]">{"\n"}</pre>
+
+        {/* email */}
+        <div>
+          <label id="email_label">
+            <input
+              type="email"
+              className="bg-gray"
+              placeholder=" "
+              id="email"
+              name="email"
+              value={inputs.email || ""}
+              onChange={handleChange}
+            />
+            <span id="email_span"> Email </span>
+            {showMessage ? (
+              <span id="message"> X Not a Valid Email </span>
+            ) : null}
+          </label>
+        </div>
 
         <pre className="leading-[2.5rem]">{"\n"}</pre>
 

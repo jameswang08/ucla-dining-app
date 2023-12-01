@@ -1,10 +1,10 @@
-#username_label, #user_password_label, #button_label, #email_label{
+#username_label, #user_password_label, #button_label, #email_label, #firstname_label, #lastname_label{
   position:relative;
   display:inline-block;
 }
   
-#username_span, #user_password_span, #email_span{
-  padding:10px;
+#username_span, #user_password_span, #email_span, #firstname_span, #lastname_span {
+  padding:10px; 
   pointer-events: none;
   position:absolute;
   left:0;
@@ -16,7 +16,7 @@
 }
 
 /* inputs */
-#username, #user_password, #email {
+#username, #user_password, #email, #firstname, #lastname{
   padding-left:10px;
   padding-top:10px;
   padding-bottom:10px;
@@ -27,13 +27,17 @@
 
 #username:focus + span, #user_password:focus + span, #username:not(:placeholder-shown) + span,
 #user_password:not(:placeholder-shown) + span, #email:focus + span,
-#email:not(:placeholder-shown) + span{
+#email:not(:placeholder-shown) + span, #firstname:focus + span, #firstname:not(:placeholder-shown) + span,
+#lastname:focus + span, #lastname:not(:placeholder-shown) + span{
   opacity:1;
   transform: scale(0.8) translateY(-100%) translateX(-20px);
 }
 
 /* For IE Browsers*/
-input:focus + span, input:not(:-ms-input-placeholder) + span{
+#username:focus + span, #user_password:focus + span, #username:not(:placeholder-shown) + span,
+#user_password:not(:placeholder-shown) + span, #email:focus + span,
+#email:not(:placeholder-shown) + span, #firstname:focus + span, #firstname:not(:placeholder-shown) + span,
+#lastname:focus + span, #lastname:not(:placeholder-shown) + span{
   opacity:1;
   transform: scale(0.8) translateY(-100%) translateX(-20px);
 }
