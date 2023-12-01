@@ -1,5 +1,7 @@
 import React from "react";
 import '../../dist/output.css'
+import "./Images.css";
+
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
@@ -7,8 +9,10 @@ export default function NavBar() {
     <>
       <div className="navbar bg-dark-yellow">
         <div className="flex-1">
-          <a className="btn bg-transparent border-none normal-case text-xl">
-            <Link to="/">BruinEats</Link>
+          <a className="btn bg-transparent border-none normal-case">
+            <Link to="/">
+              {<img src="../../images/logo.png" className="logo"></img>}
+            </Link>
           </a>
         </div>
 

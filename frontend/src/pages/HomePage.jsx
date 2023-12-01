@@ -1,18 +1,23 @@
 import React from "react";
 import NavBar from "../components/NavBar.jsx";
 import '../../dist/output.css'
+import "../components/Images.css";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="ps-1rem">
       <div>
         <NavBar />
       </div>
 
-      <div className="text-white text-4xl ps-24">
+      <div className="absolute ps-[36rem] pt-[12rem]">
+        <img src="../../images/ucla-food-prep.png" className="homeimg"></img>
+      </div>
+
+      <div className="text-white text-4xl ps-[5rem]">
         <pre className="mt-60"> Your one-stop shop for</pre>
-        <pre className="ps-16 mt-[5.5rem] mb-60"> UCLA dining reviews.</pre>
+        <pre className="ps-24 mt-[5.5rem] mb-60"> UCLA dining reviews.</pre>
       </div>
 
       <div className="text-black bg-light-yellow ps-24 py-7 my-40 leading-[2rem]">
