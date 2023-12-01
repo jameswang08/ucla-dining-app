@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Schema
 let userSchema = mongoose.Schema({
@@ -14,16 +14,22 @@ let userSchema = mongoose.Schema({
   reviews: [mongoose.Types.ObjectId],
 });
 userSchema.methods.sortReviewsByPopularity = async function () {
-  return await mongoose.connection.db.collection('reviews').aggregate([
-    { $match: { _id: { $in: this.reviews } } },
-    { $sort: { 'meta.likes': -1 } },
-  ]).toArray();
+  return await mongoose.connection.db
+    .collection("reviews")
+    .aggregate([
+      { $match: { _id: { $in: this.reviews } } },
+      { $sort: { "meta.likes": -1 } },
+    ])
+    .toArray();
 };
 userSchema.methods.sortReviewsByDate = async function () {
-  return await mongoose.connection.db.collection('reviews').aggregate([
-    { $match: { _id: { $in: this.reviews } } },
-    { $sort: { 'meta.date': -1 } },
-  ]).toArray();
+  return await mongoose.connection.db
+    .collection("reviews")
+    .aggregate([
+      { $match: { _id: { $in: this.reviews } } },
+      { $sort: { "meta.date": -1 } },
+    ])
+    .toArray();
 };
 userSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);
@@ -37,12 +43,18 @@ userSchema.statics.getUserById = async function (id) {
   return await this.findById(id);
 };
 userSchema.statics.getUserByUsername = async function (username) {
-  return await this.findOne({ username: username });
+  return await this.findOne({ username: username }).lean();
 };
 userSchema.statics.getUserByEmail = async function (email) {
   return await this.findOne({ email: email });
 };
-userSchema.statics.createUser = async function (firstname, lastname, username, email, password) {
+userSchema.statics.createUser = async function (
+  firstname,
+  lastname,
+  username,
+  email,
+  password
+) {
   return await this.create({
     name: {
       first: firstname,
@@ -52,7 +64,7 @@ userSchema.statics.createUser = async function (firstname, lastname, username, e
     email: email,
     password: password,
   });
-}
+};
 
 // Model
-let User = module.exports = mongoose.model('User', userSchema, 'users');
+let User = (module.exports = mongoose.model("User", userSchema, "users"));

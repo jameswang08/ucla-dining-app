@@ -1,11 +1,11 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
-const UserModel = require('./models/users');
-const TruckModel = require('./models/trucks');
-const ReviewModel = require('./models/reviews');
-const cors = require('cors');
-require('dotenv').config();
+const UserModel = require("./models/users");
+const TruckModel = require("./models/trucks");
+const ReviewModel = require("./models/reviews");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -15,7 +15,11 @@ app.use(cors());
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.secretURL;
 
-main().catch((err) => console.log(err)).finally(() => {console.log("Hello World!")});
+main()
+  .catch((err) => console.log(err))
+  .finally(() => {
+    console.log("Hello World!");
+  });
 async function main() {
   await mongoose.connect(mongoDB);
 
@@ -26,35 +30,46 @@ async function main() {
   */
 }
 
-app.use(express.json())
+app.use(express.json());
 
 app.get("/", async (req, res) => {
-  res.send("Hello World")
-})
+  res.send("Hello World");
+});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await UserModel.findOne({ username, password });
   if (user) {
-    res.json({ success: true, message: 'Login successful' });
+    res.json({ success: true, message: "Login successful" });
   } else {
-    res.json({ success: false, message: 'Invalid username or password' });
+    res.json({ success: false, message: "Invalid username or password" });
   }
-})
+});
 
 app.post("/createaccount", async (req, res) => {
   const { email, username, password, firstname, lastname } = req.body;
   const user = await UserModel.getUserByUsername(username);
   if (user) {
-    res.json({ success: false, message: 'Invalid username' });
-  } 
+    res.json({ success: false, message: "Invalid username" });
+  }
   await UserModel.createUser(firstname, lastname, username, email, password);
-  res.json({ success: true, message: 'Account creation successful' });
-})
+  res.json({ success: true, message: "Account creation successful" });
+});
+
+app.get("/users/:username", async (req, res) => {
+  let user = await UserModel.getUserByUsername(req.params.username);
+  delete user["password"];
+  res.json(user);
+});
+
+app.get("/trucks/:truckname", async (req, res) => {
+  const truck = await UserModel.getTruckByName(req.params.truckname);
+  res.json(truck);
+});
 
 const port = 3000;
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
 
 module.exports = app;
