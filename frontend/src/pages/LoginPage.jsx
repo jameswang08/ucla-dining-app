@@ -23,25 +23,36 @@ export default function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
-    fetch('http://localhost:3000/login', {
-      method: 'POST',
+    fetch("http://localhost:3000/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username: inputs.username, password: inputs.password }),
+      body: JSON.stringify({
+        username: inputs.username,
+        password: inputs.password,
+      }),
     })
-    .then(response => response.json())
-    .then(data => {
-      if(data.success){
-        const firstname = inputs.firstname;
-        const lastname = inputs.lastname;
-        navigate("/dashboard", { state: { firstname, lastname } });
-      }
-      else{
-        console.log("incorrect details");
-      }
-    })
-    .catch(error => console.error('Error:', error));
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+          console.log("login success");
+          fetch("http://localhost:3000/users/" + inputs.username)
+            .then((data) => {
+              return data.json();
+            })
+            .then((post) => {
+              console.log(post);
+              const firstname = post.name.first;
+              const lastname = post.name.last;
+              navigate("/dashboard", { state: { firstname, lastname } });
+            });
+        } else {
+          console.log("incorrect details");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
@@ -118,6 +129,3 @@ export default function LoginPage() {
     </form>
   );
 }
-
-
-
