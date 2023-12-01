@@ -9,6 +9,12 @@
 
 .homeimg {
     padding-left: 100px;
+    margin-top: 90px;
     height: 520px;
     width: auto;
+}
+
+.foodtruckimgs {
+    height: 300px;
+    width: 630px;
 }
