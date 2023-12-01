@@ -5,7 +5,8 @@ import "../components/grid.css";
 import { useLocation } from "react-router-dom";
 
 export default function DashboardPage() {
-  const username = useLocation().state.username;
+  const firstname = useLocation().state.firstname;
+  const lastname = useLocation().state.lastname;
 
   return (
     <div>
@@ -14,7 +15,10 @@ export default function DashboardPage() {
       </div>
 
       <div className="prose text-white ps-32 pt-32 pb-16">
-        <h1 className="text-white mb-3"> {username}'s Dashboard</h1>
+        <h1 className="text-white mb-3">
+          {" "}
+          {firstname} {lastname}'s Dashboard
+        </h1>
         <pre>Take a look at your activity</pre>
       </div>
 
