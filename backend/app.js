@@ -63,7 +63,7 @@ app.get("/users/:username", async (req, res) => {
 });
 
 app.get("/trucks/:truckname", async (req, res) => {
-  const truck = await UserModel.getTruckByName(req.params.truckname);
+  const truck = await TruckModel.getTruckByName(req.params.truckname);
   res.json(truck);
 });
 

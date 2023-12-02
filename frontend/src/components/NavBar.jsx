@@ -1,10 +1,25 @@
 import React from "react";
-import '../../dist/output.css'
+import "../../dist/output.css";
 import "./Images.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
+  const navigate = useNavigate();
+  // TODO: put list of all truck names here
+  let trucks = ["test_truck", "test_truck2"];
+
+  const handleClick = (truckname) => {
+    fetch("http://localhost:3000/trucks/" + truckname)
+      .then((data) => {
+        return data.json();
+      })
+      .then((post) => {
+        console.log(post);
+        navigate("/truckpage", { state: post });
+      });
+  };
+
   return (
     <>
       <div className="navbar bg-dark-yellow">
@@ -25,15 +40,11 @@ export default function NavBar() {
             tabIndex={0}
             className="text-black dropdown-content z-[1] menu shadow p-2 bg-base-100 rounded-box w-48"
           >
-            <li>
-              <Link to="/truckpage">
-                <a>Truck 1</a>
-              </Link>
+            <li onClick={() => handleClick(trucks[0])}>
+              <a>{trucks[0]}</a>
             </li>
-            <li>
-              <Link to="/truckpage">
-                <a>Truck 2</a>
-              </Link>
+            <li onClick={() => handleClick(trucks[1])}>
+              <a>{trucks[1]}</a>
             </li>
           </ul>
         </div>
@@ -46,4 +57,4 @@ export default function NavBar() {
       </div>
     </>
   );
-};
+}

@@ -4,9 +4,14 @@ import "../../dist/output.css";
 import RatingsForm from "./RatingsForm.jsx";
 import "../components/Images.css";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function TruckPage() {
   const [loggedIn, setLoggedIn] = useState(true);
+
+  const truck = useLocation().state;
+  const truckname = truck.name;
+
   return (
     <div>
       <div>
@@ -14,7 +19,7 @@ export default function TruckPage() {
       </div>
 
       <div className="prose ps-32 pt-32 pb-8">
-        <h1 className="text-white mb-0">Truck Name</h1>
+        <h1 className="text-white mb-0">{truckname}</h1>
         <text className="text-white">Avg Rating</text>
       </div>
 
