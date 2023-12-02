@@ -24,6 +24,10 @@ reviewSchema.methods.addLike = async function () {
   this.meta.likes++;
   await this.save();
 };
+reviewSchema.methods.removeLike = async function () {
+  this.meta.likes--;
+  await this.save();
+};
 reviewSchema.statics.getReviewById = async function (id) {
   return await this.findById(id);
 };
