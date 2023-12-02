@@ -28,6 +28,19 @@ async function main() {
   let truck = await TruckModel.createTruck("test_truck2", "another blurb", "some_image_path");
   let review = await ReviewModel.createReview(test1._id, truck._id, { waitTime: 5, rating: 4 }, { waitTime: 10, rating: 5 }, null, null);
   */
+
+  /*
+  await TruckModel.createTruck(
+    "test_truck",
+    "another blurb",
+    "some_image_path"
+  );
+  await TruckModel.createTruck(
+    "test_truck2",
+    "another blurb",
+    "some_image_path"
+  );
+  */
 }
 
 app.use(express.json());
