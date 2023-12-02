@@ -3,8 +3,10 @@ import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import RatingsForm from "./RatingsForm.jsx";
 import "../components/Images.css";
+import { useState } from "react";
 
 export default function TruckPage() {
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <div>
       <div>
@@ -42,7 +44,8 @@ export default function TruckPage() {
         <div className="prose w-1/2 px-20 py-[13rem]">
           <h2 className="text-white mb-0">Write a review!</h2>
           <text className="text-white w-3/4">Join the conversation:</text>
-          <RatingsForm />
+          <br/>
+          {loggedIn ? <RatingsForm /> : <span id="message">Log in to leave a review.</span>}
         </div>
 
         <div className="prose w-1/2 px-36 py-8">
