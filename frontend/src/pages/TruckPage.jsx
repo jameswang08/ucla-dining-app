@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import RatingsForm from "./RatingsForm.jsx";
 import "../components/Images.css";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Context } from "../components/Context.jsx";
 
 export default function TruckPage() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
+    useContext(Context);
 
   const truck = useLocation().state;
   const truckname = truck.name;
@@ -54,7 +56,10 @@ export default function TruckPage() {
             <RatingsForm />
           ) : (
             <span id="message" className="text-white">
-              Log in to leave a review.
+              <ul className="btn btn-active btn-link text-black text-xl ml-[42rem] mt-[5.5rem] mb-[1.5rem]">
+                <Link to="/login">Login </Link>
+              </ul>{" "}
+              to leave a review.
             </span>
           )}
         </div>
