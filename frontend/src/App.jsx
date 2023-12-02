@@ -22,6 +22,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import TruckPage from "./pages/TruckPage.jsx";
+import LocationsPage from "./pages/LocationsPage.jsx";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/createaccount" element={<CreateAccountPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/truckpage" element={<TruckPage />} />
+          <Route path="/locations" element={<LocationsPage />} />
         </Routes>
       </BrowserRouter>
     </div>
