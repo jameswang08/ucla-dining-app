@@ -6,7 +6,7 @@ import "../components/Images.css";
 import { useState } from "react";
 
 export default function TruckPage() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <div>
       <div>

@@ -23,36 +23,36 @@ export default function Rating() {
         <div className="bg-medium-grey my-4 px-4 py-4">
           <label className="text-white">
             Most recent wait time:{" "}
-            <input className="bg-light-grey" name="waitTime" /> min
+            <input className="w-20 bg-light-grey" name="waitTime" /> min
           </label>
           <br />
           <label className="text-white">
-            Rating:
+            Rating:{" "}
             <div className="rating rating-xs">
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2"
+                className="mask mask-star-2 bg-white"
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2"
+                className="mask mask-star-2 bg-white"
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2"
+                className="mask mask-star-2 bg-white"
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2"
+                className="mask mask-star-2 bg-white"
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2"
+                className="mask mask-star-2 bg-white"
               />
             </div>
           </label>
