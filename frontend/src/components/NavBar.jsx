@@ -40,12 +40,13 @@ export default function NavBar() {
             tabIndex={0}
             className="text-black dropdown-content z-[1] menu shadow p-2 bg-base-100 rounded-box w-48"
           >
-            <li onClick={() => handleClick(trucks[0])}>
-              <a>{trucks[0]}</a>
-            </li>
-            <li onClick={() => handleClick(trucks[1])}>
-              <a>{trucks[1]}</a>
-            </li>
+            {trucks.map((truck, index) => {
+              return (
+                <li onClick={() => handleClick(truck)} key={index}>
+                  <a>{truck}</a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
