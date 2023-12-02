@@ -80,8 +80,8 @@ export default function Rating() {
               <textarea
                 className="rounded-sm bg-light-grey py-2 px-4"
                 name="review"
-                rows={6}
-                cols={40}
+                rows={8}
+                cols={48}
               ></textarea>
             </div>
           </label>
