@@ -51,10 +51,16 @@ export default function NavBar() {
           </a>
         </div>
 
+        <a className="btn bg-transparent border-none normal-case">
+          <Link to="/locations">
+            {" "} At a Glance {" "}
+          </Link>
+        </a>
+        
         <div className="dropdown dropdown-hover">
           <label tabIndex={0} className="btn bg-transparent border-none">
             {" "}
-            At a Glance{" "}
+            Trucks{" "}
           </label>
           <ul
             tabIndex={0}
