@@ -24,9 +24,20 @@ async function main() {
   await mongoose.connect(mongoDB);
 
   /*
-  let user = await UserModel.getUserByName('test1');
-  let truck = await TruckModel.createTruck("test_truck2", "another blurb", "some_image_path");
-  let review = await ReviewModel.createReview(test1._id, truck._id, { waitTime: 5, rating: 4 }, { waitTime: 10, rating: 5 }, null, null);
+  let user = await UserModel.getUserByUsername("joebruin");
+  let truck = await TruckModel.createTruck(
+    "test_truck3",
+    "another blurb",
+    "some_image_path"
+  );
+  let review = await ReviewModel.createReview(
+    user._id,
+    truck._id,
+    { waitTime: 5, rating: 4 },
+    { waitTime: 10, rating: 5 },
+    null,
+    null
+  );
   */
 
   /*
@@ -78,6 +89,11 @@ app.get("/users/:username", async (req, res) => {
 app.get("/trucks/:truckname", async (req, res) => {
   const truck = await TruckModel.getTruckByName(req.params.truckname);
   res.json(truck);
+});
+
+app.get("/alltrucks", async (req, res) => {
+  const trucks = await TruckModel.find({});
+  res.json(trucks);
 });
 
 const port = 3000;

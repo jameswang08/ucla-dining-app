@@ -13,14 +13,7 @@ export default function NavBar() {
   let trucks = ["test_truck", "test_truck2"];
 
   const handleClick = (truckname) => {
-    fetch("http://localhost:3000/trucks/" + truckname)
-      .then((data) => {
-        return data.json();
-      })
-      .then((post) => {
-        console.log(post);
-        navigate("/truckpage", { state: post });
-      });
+    navigate("/truckpage", { state: truckname });
   };
 
   const loggedInRoute = (event) => {
@@ -52,11 +45,9 @@ export default function NavBar() {
         </div>
 
         <a className="btn bg-transparent border-none normal-case">
-          <Link to="/locations">
-            {" "} At a Glance {" "}
-          </Link>
+          <Link to="/locations"> At a Glance </Link>
         </a>
-        
+
         <div className="dropdown dropdown-hover">
           <label tabIndex={0} className="btn bg-transparent border-none">
             {" "}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import RatingsForm from "./RatingsForm.jsx";
@@ -11,8 +11,41 @@ export default function TruckPage() {
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
     useContext(Context);
 
-  const truck = useLocation().state;
-  const truckname = truck.name;
+  const truckname = useLocation().state;
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await fetch("http://localhost:3000/trucks/" + truckname)
+          .then((data) => {
+            return data.json();
+          })
+          .then((post) => {
+            setData(post);
+            setLoading(false);
+          });
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [truckname]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  console.log(data);
 
   return (
     <div>
@@ -21,7 +54,7 @@ export default function TruckPage() {
       </div>
 
       <div className="prose ps-32 pt-32 pb-8">
-        <h1 className="text-white mb-0">{truckname}</h1>
+        <h1 className="text-white mb-0">{data.name}</h1>
         <text className="text-white">Avg Rating</text>
       </div>
 
@@ -89,7 +122,6 @@ export default function TruckPage() {
               <ul className="text-dark-yellow btn btn-active btn-link">
                 Dinner
               </ul>
-
               <ul className="text-dark-yellow btn btn-active btn-link">
                 Late Night
               </ul>
