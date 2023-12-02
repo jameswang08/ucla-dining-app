@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import "../components/grid.css";
 import { useLocation } from "react-router-dom";
+import { Context } from "../components/Context.jsx";
 
 export default function DashboardPage() {
   const user = useLocation().state;

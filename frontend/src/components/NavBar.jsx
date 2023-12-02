@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../dist/output.css";
 import "./Images.css";
+import { Context } from "../components/Context.jsx";
 
 import { Link, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const navigate = useNavigate();
+  const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
+    useContext(Context);
   // TODO: put list of all truck names here
   let trucks = ["test_truck", "test_truck2"];
 
@@ -17,6 +20,17 @@ export default function NavBar() {
       .then((post) => {
         console.log(post);
         navigate("/truckpage", { state: post });
+      });
+  };
+
+  const loggedInRoute = (event) => {
+    fetch("http://localhost:3000/users/" + savedUser)
+      .then((data) => {
+        return data.json();
+      })
+      .then((post) => {
+        console.log(post);
+        navigate("/dashboard", { state: post });
       });
   };
 
@@ -51,9 +65,15 @@ export default function NavBar() {
         </div>
 
         <div>
-          <Link to="/login">
-            <ul className="btn btn-active btn-link">Login</ul>
-          </Link>
+          {loggedIn ? (
+            <ul className="btn btn-active btn-link" onClick={loggedInRoute}>
+              Dashboard
+            </ul>
+          ) : (
+            <Link to="/login">
+              <ul className="btn btn-active btn-link">Login</ul>
+            </Link>
+          )}
         </div>
       </div>
     </>

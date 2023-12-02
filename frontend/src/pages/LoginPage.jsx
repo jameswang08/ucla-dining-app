@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import "../components/Inputs.css";
@@ -8,12 +8,15 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../components/Context.jsx";
 
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState(false);
   const navigate = useNavigate();
+  const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
+    useContext(Context);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -45,6 +48,8 @@ export default function LoginPage() {
             })
             .then((post) => {
               console.log(post);
+              setLoggedIn(true);
+              setSavedUser(inputs.username);
               navigate("/dashboard", { state: post });
             });
         } else {
@@ -80,6 +85,9 @@ export default function LoginPage() {
             onChange={handleChange}
           />
           <span id="username_span"> Username </span>
+          {loginErrorMessage ? (
+            <span id="message"> X Incorrect username/password </span>
+          ) : null}
         </label>
 
         <pre className="leading-[2.5rem]">{"\n"}</pre>

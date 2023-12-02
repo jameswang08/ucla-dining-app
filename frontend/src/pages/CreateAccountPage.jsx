@@ -162,6 +162,9 @@ export default function LoginPage() {
             onChange={handleChange}
           />
           <span id="username_span"> Username </span>
+          {usernameMessage ? (
+            <span id="message"> X Username already taken </span>
+          ) : null}
         </label>
 
         <pre className="leading-[2.5rem]">{"\n"}</pre>
