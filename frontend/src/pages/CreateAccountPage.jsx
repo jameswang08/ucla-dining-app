@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import "../components/Inputs.css";
@@ -9,6 +9,7 @@ import { eye } from "react-icons-kit/feather/eye";
 import PasswordStrengthBar from "react-password-strength-bar";
 import PasswordChecklist from "react-password-checklist";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../components/Context.jsx";
 
 export default function LoginPage() {
   const [inputs, setInputs] = useState({});
@@ -19,6 +20,8 @@ export default function LoginPage() {
   const [usernameMessage, setUsernameMessage] = useState(false);
   const emailInput = document.getElementById("email");
   const navigate = useNavigate();
+  const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
+    useContext(Context);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -56,6 +59,8 @@ export default function LoginPage() {
                 })
                 .then((post) => {
                   console.log(post);
+                  setLoggedIn(true);
+                  setSavedUser(inputs.username);
                   navigate("/dashboard", { state: post });
                 });
             } else {
