@@ -126,7 +126,6 @@ export default function LoginPage() {
         </button>
       </div>
 
-      {/* TODO: if success login ELSE: stay on this page*/}
       <button
         type="submit"
         onClick={handleSubmit}

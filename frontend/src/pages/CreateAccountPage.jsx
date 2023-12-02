@@ -217,7 +217,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* TODO: Pass in username into the dashboard, also must check within database it is new user */}
       <ul
         type="submit"
         onClick={handleSubmit}

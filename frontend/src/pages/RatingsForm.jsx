@@ -23,7 +23,11 @@ export default function Rating() {
         <div className="bg-medium-grey my-4 px-4 py-4">
           <label className="text-white">
             Most recent wait time:{" "}
-            <input className="w-20 bg-light-grey" name="waitTime" /> min
+            <input
+              className="rounded-sm px-7 py-0.5 w-20 bg-light-grey"
+              name="waitTime"
+            />{" "}
+            min
           </label>
           <br />
           <label className="text-white">
@@ -64,6 +68,9 @@ export default function Rating() {
             </label>{" "}
             <label>
               <input type="radio" name="myRadio" value="dinner" /> Dinner
+            </label>{" "}
+            <label>
+              <input type="radio" name="myRadio" value="latenight" /> Late Night
             </label>
           </p>
           <label className="text-white">
@@ -71,11 +78,11 @@ export default function Rating() {
             <br />
             <div className="grid justify-items-center">
               <textarea
-                className="bg-light-grey"
+                className="rounded-sm bg-light-grey py-2 px-4"
                 name="review"
-                rows={4}
+                rows={6}
                 cols={40}
-              />
+              ></textarea>
             </div>
           </label>
         </div>

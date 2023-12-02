@@ -34,6 +34,12 @@ export default function NavBar() {
       });
   };
 
+  const logOut = (event) => {
+    setLoggedIn(false);
+    setSavedUser("");
+    navigate("/");
+  };
+
   return (
     <>
       <div className="navbar bg-dark-yellow">
@@ -66,9 +72,20 @@ export default function NavBar() {
 
         <div>
           {loggedIn ? (
-            <ul className="btn btn-active btn-link" onClick={loggedInRoute}>
-              Dashboard
-            </ul>
+            <div>
+              <ul
+                className="btn bg-transparent border-none "
+                onClick={loggedInRoute}
+              >
+                Dashboard
+              </ul>
+              <ul
+                className="text-black btn btn-active btn-link"
+                onClick={logOut}
+              >
+                Logout
+              </ul>
+            </div>
           ) : (
             <Link to="/login">
               <ul className="btn btn-active btn-link">Login</ul>
