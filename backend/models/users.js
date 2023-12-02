@@ -12,30 +12,65 @@ let userSchema = mongoose.Schema({
   reputation: { type: Number, default: 0 },
   favorite: { type: String, default: null },
   reviews: [mongoose.Types.ObjectId],
+  likes: [mongoose.Types.ObjectId],
 });
 userSchema.methods.sortReviewsByPopularity = async function () {
   return await mongoose.model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
-      { $sort: { "meta.likes": -1 } },
-    ])
-    .toArray();
+      { $sort: { "likes": -1 } },
+    ]);
 };
 userSchema.methods.sortReviewsByDate = async function () {
   return await mongoose.model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
-      { $sort: { "meta.date": -1 } },
-    ])
-    .toArray();
+      { $sort: { "date": -1 } },
+    ]);
 };
 userSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);
+  let review = await mongoose.model('Review').getReviewById(reviewId);
+  if (review.waitTime != null)
+    this.reputation += 1;
+  if (review.rating != null)
+    this.reputation += 1;
+  if (review.review != null)
+    this.reputation += 3;
   await this.save();
 };
 userSchema.methods.setFavorite = async function (favorite) {
   this.favorite = favorite;
   await this.save();
+};
+userSchema.methods.toggleLike = async function (reviewId) {
+  // exit if own review
+  let review = await mongoose.model('Review').getReviewById(reviewId);
+  if (review.userId.equals(this._id))
+    return false;
+  // check if liked before
+  let liked = false;
+  for (let i = 0; i < this.likes.length; i++)
+    if (this.likes[i].equals(reviewId)) {
+      liked = true;
+      break;
+    }
+  // if liked, remove like
+  if (liked) {
+    this.likes.splice(this.likes.indexOf(reviewId));
+    this.reputation -= 1;
+    await this.save();
+    review.removeLike();
+    return false;
+  }
+  // otherwise, add like
+  else {
+    this.likes.push(reviewId);
+    this.reputation += 1;
+    await this.save();
+    review.addLike();
+    return true;
+  }
 };
 userSchema.statics.getUserById = async function (id) {
   return await this.findById(id);
