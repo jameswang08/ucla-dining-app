@@ -53,7 +53,7 @@ export default function DashboardPage() {
         <pre>Your reviews</pre>
         <pre className="inline-block text-sm">Sort by:</pre>
         <ul className="text-dark-yellow btn btn-active btn-link">Latest</ul>
-        <ul className="text-dark-yellow btn btn-active btn-link">Popular</ul>
+        {/* <ul className="text-dark-yellow btn btn-active btn-link">Popular</ul> */}
 
         <pre className="leading-[2rem]">{"\n"}</pre>
 

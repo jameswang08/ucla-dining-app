@@ -57,7 +57,6 @@ export default function TruckPage() {
             <RatingsForm />
           ) : (
             <div className="text-white">
-              {/* btn btn-active btn-link */}
               <ul className="ps-0 btn btn-active btn-link">
                 <Link
                   className="text-white underline decoration-dark-yellow"
@@ -71,11 +70,31 @@ export default function TruckPage() {
           )}
         </div>
 
-        <div className="prose w-1/2 px-36 py-8">
-          <h2 className="text-white mb-0">Reviews</h2>
-          <text className="text-white w-3/4">Sort by:</text>
-          <ul className="text-dark-yellow btn btn-active btn-link">Latest</ul>
-          <ul className="text-dark-yellow btn btn-active btn-link">Popular</ul>
+        <div className="prose w-1/2 px-36">
+          <p>
+            <h2 className="text-white mb-0  pt-8">Reviews</h2>
+            <text className="inline-block text-white">Sort by:</text>
+            <ul className="text-dark-yellow btn btn-active btn-link">Latest</ul>
+            {/* <ul className="text-dark-yellow btn btn-active btn-link">
+              Popular
+            </ul> */}
+          </p>
+
+          <p className="absolute my-[-4rem]">
+            <text className="inline-block text-white">
+              Filter by:
+              <ul className="text-dark-yellow btn btn-active btn-link">
+                Lunch
+              </ul>
+              <ul className="text-dark-yellow btn btn-active btn-link">
+                Dinner
+              </ul>
+
+              <ul className="text-dark-yellow btn btn-active btn-link">
+                Late Night
+              </ul>
+            </text>
+          </p>
         </div>
       </div>
     </div>
