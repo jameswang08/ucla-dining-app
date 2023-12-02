@@ -8,7 +8,7 @@ let truckSchema = mongoose.Schema({
   reviews: [mongoose.Types.ObjectId],
 });
 truckSchema.methods.avgRating = async function () {
-  const result = await mongoose.connection.db.collection('reviews').aggregate([
+  const result = await mongoose.model('Review').aggregate([
     // filters for reviews associated with this truck
     { $match: { _id: { $in: this.reviews } } },
     // focuses document information on reviews (converts reviews to array to prepare for expansion)
@@ -17,44 +17,44 @@ truckSchema.methods.avgRating = async function () {
     { $unwind: '$reviews' },
     // calculates average of meal ratings, ignoring null meal reviews and null ratings
     { $group: { _id: null, avg: { $avg: '$reviews.v.rating' } } },
-  ]).toArray();
+  ]);
   return result.length > 0 ? result[0].avg : null;
 };
 truckSchema.methods.sortReviewsByPopularity = async function () {
-  return await mongoose.connection.db.collection('reviews').aggregate([
+  return await mongoose.model('Review').aggregate([
     { $match: { _id: { $in: this.reviews } } },
     { $sort: { 'meta.likes': -1 } },
-  ]).toArray();
+  ]);
 };
 truckSchema.methods.sortReviewsByDate = async function () {
-  return await mongoose.connection.db.collection('reviews').aggregate([
+  return await mongoose.model('Review').aggregate([
     { $match: { _id: { $in: this.reviews } } },
     { $sort: { 'meta.date': -1 } },
-  ]).toArray();
+  ]);
 };
 truckSchema.methods.filterBreakfastReviews = async function () {
-  return await mongoose.connection.db.collection('reviews').find({
+  return await mongoose.model('Review').find({
     _id: { $in: this.reviews },
     'reviews.breakfast': { $ne: null },
-  }).toArray();
+  });
 };
 truckSchema.methods.filterLunchReviews = async function () {
-  return await mongoose.connection.db.collection('reviews').find({
+  return await mongoose.model('Review').find({
     _id: { $in: this.reviews },
     'reviews.lunch': { $ne: null },
-  }).toArray();
+  });
 };
 truckSchema.methods.filterDinnerReviews = async function () {
-  return await mongoose.connection.db.collection('reviews').find({
+  return await mongoose.model('Review').find({
     _id: { $in: this.reviews },
     'reviews.dinner': { $ne: null },
-  }).toArray();
+  });
 };
 truckSchema.methods.filterLateNightReviews = async function () {
-  return await mongoose.connection.db.collection('reviews').find({
+  return await mongoose.model('Review').find({
     _id: { $in: this.reviews },
     'reviews.lateNight': { $ne: null },
-  }).toArray();
+  });
 };
 truckSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);

@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const UserModel = require('./users');
-const TruckModel = require('./trucks');
 
 // Schema
 let mealReviewSchema = mongoose.Schema({
@@ -40,9 +38,9 @@ reviewSchema.statics.createReview = async function (userId, truckId, breakfast, 
       lateNight: lateNight,
     },
   });
-  let user = await UserModel.getUserById(userId);
+  let user = await mongoose.model('User').getUserById(userId);
   user.addReview(review._id);
-  let truck = await TruckModel.getTruckById(truckId);
+  let truck = await mongoose.model('Truck').getTruckById(truckId);
   truck.addReview(review._id);
   return review;
 };

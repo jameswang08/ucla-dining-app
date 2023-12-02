@@ -14,8 +14,7 @@ let userSchema = mongoose.Schema({
   reviews: [mongoose.Types.ObjectId],
 });
 userSchema.methods.sortReviewsByPopularity = async function () {
-  return await mongoose.connection.db
-    .collection("reviews")
+  return await mongoose.model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
       { $sort: { "meta.likes": -1 } },
@@ -23,8 +22,7 @@ userSchema.methods.sortReviewsByPopularity = async function () {
     .toArray();
 };
 userSchema.methods.sortReviewsByDate = async function () {
-  return await mongoose.connection.db
-    .collection("reviews")
+  return await mongoose.model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
       { $sort: { "meta.date": -1 } },
