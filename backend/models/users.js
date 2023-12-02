@@ -18,32 +18,25 @@ userSchema.methods.sortReviewsByPopularity = async function () {
   return await mongoose.model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
-      { $sort: { "meta.likes": -1 } },
-    ])
-    .toArray();
+      { $sort: { "likes": -1 } },
+    ]);
 };
 userSchema.methods.sortReviewsByDate = async function () {
   return await mongoose.model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
-      { $sort: { "meta.date": -1 } },
-    ])
-    .toArray();
+      { $sort: { "date": -1 } },
+    ]);
 };
 userSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);
   let review = await mongoose.model('Review').getReviewById(reviewId);
-  let mealReviews = Object.values(review.reviews);
-  for (let i = 0; i < mealReviews.length; i++) {
-    if (mealReviews[i] != null) {
-      if (mealReviews[i].waitTime != null)
-        this.reputation += 1;
-      if (mealReviews[i].rating != null)
-        this.reputation += 1;
-      if (mealReviews[i].review != null)
-        this.reputation += 3;
-    }
-  }
+  if (review.waitTime != null)
+    this.reputation += 1;
+  if (review.rating != null)
+    this.reputation += 1;
+  if (review.review != null)
+    this.reputation += 3;
   await this.save();
 };
 userSchema.methods.setFavorite = async function (favorite) {
