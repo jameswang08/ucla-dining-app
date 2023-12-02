@@ -13,14 +13,12 @@ truckSchema.methods.avgRating = async function () {
     { $match: { _id: { $in: this.reviews } } },
     // focuses document information on reviews (converts reviews to array to prepare for expansion)
     { $project: { reviews: { $objectToArray: '$reviews' } } },
-    // expands reviews into meal reviews, ignoring null meal reviews
+    // expands reviews into meal reviews
     { $unwind: '$reviews' },
-    // focuses document information on meal ratings, keeping null meal ratings
-    { $project: { rating: '$reviews.v.rating' } },
-    // calculates average of meal ratings, ignoring null meal ratings
-    { $group: { _id: null, avg: { $avg: '$rating' } } },
+    // calculates average of meal ratings, ignoring null meal reviews and null ratings
+    { $group: { _id: null, avg: { $avg: '$reviews.v.rating' } } },
   ]).toArray();
-  return result[0].avg;
+  return result.length > 0 ? result[0].avg : null;
 };
 truckSchema.methods.sortReviewsByPopularity = async function () {
   return await mongoose.connection.db.collection('reviews').aggregate([
@@ -61,6 +59,12 @@ truckSchema.methods.filterLateNightReviews = async function () {
 truckSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);
   await this.save();
+};
+truckSchema.statics.getTruckNames = async function (id) {
+  const result = await this.aggregate([
+    { $group: { _id: null, names: { $push: '$name' } } },
+  ]);
+  return result.length > 0 ? result[0].names : [];
 };
 truckSchema.statics.getTruckById = async function (id) {
   return await this.findById(id);
