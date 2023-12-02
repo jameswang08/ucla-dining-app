@@ -52,15 +52,22 @@ export default function TruckPage() {
           <h2 className="text-white mb-0">Write a review!</h2>
           <text className="text-white w-3/4">Join the conversation:</text>
           <br />
+
           {loggedIn ? (
             <RatingsForm />
           ) : (
-            <span id="message" className="text-white">
-              <ul className="btn btn-active btn-link text-black text-xl ml-[42rem] mt-[5.5rem] mb-[1.5rem]">
-                <Link to="/login">Login </Link>
-              </ul>{" "}
+            <div className="text-white">
+              {/* btn btn-active btn-link */}
+              <ul className="ps-0 btn btn-active btn-link">
+                <Link
+                  className="text-white underline decoration-dark-yellow"
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </ul>
               to leave a review.
-            </span>
+            </div>
           )}
         </div>
 
