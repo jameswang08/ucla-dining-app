@@ -127,6 +127,43 @@ export default function TruckPage() {
               </ul>
             </text>
           </p>
+          <div className="prose bg-medium-grey px-4 py-4">
+            <h3 className="text-light-yellow font-normal block my-0">Joe Bruin</h3>
+            <div className="rating rating-xs disabled block">
+              <input
+                type="radio"
+                name="rating-1"
+                className="mask mask-star-2 bg-white" disabled
+              />
+              <input
+                type="radio"
+                name="rating-1"
+                className="mask mask-star-2 bg-white" disabled
+              />
+              <input
+                type="radio"
+                name="rating-1"
+                className="mask mask-star-2 bg-white" checked disabled
+              />
+              <input
+                type="radio"
+                name="rating-1"
+                className="mask mask-star-2 bg-white" disabled
+              />
+              <input
+                type="radio"
+                name="rating-1"
+                className="mask mask-star-2 bg-white" disabled
+              />
+            </div>
+            <text className="prose text-white text-base">
+              B-Plate is THE way to go! Best chicken I’ve ever tasted, and lots of variety too. Bruin Scramble can be hit or miss though.
+            </text>
+            <br/>
+            <text className="text-white text-xs">Oct 24, 2023</text>
+            {" | "}
+            <text className="text-white text-xs">5 likes</text>
+          </div>
         </div>
       </div>
     </div>

@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+// import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
 import "../components/grid.css";
 import { useLocation } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
+import { Icon } from "react-icons-kit";
+import { arrowSortedDown } from "react-icons-kit/typicons/arrowSortedDown";
 
 export default function DashboardPage() {
   const user = useLocation().state;
@@ -13,6 +16,22 @@ export default function DashboardPage() {
   const reputation = user.reputation;
   const reviews = user.reviews;
   const testReviews = ["hi", "bye"];
+  // TODO: put list of all truck names here, temp state
+  let testTrucks = ["test_truck", "test_truck2"];
+  const [testFave, setTestFave] = useState("Stopbye");
+
+  const handleClick = (truck) => {
+    setTestFave(truck);
+  };
+
+  const mystyle = {
+    //padding: "1px 175px 1px 0px",
+    paddingRight: "11.875rem",
+    margin: "auto auto 40px auto", //top, right, bottom, left are the last 2
+    height: "36px",
+    minHeight: "36px",
+    textTransform: "none",
+  };
 
   return (
     <div>
@@ -28,15 +47,43 @@ export default function DashboardPage() {
         <pre className="px-10 mr-24">Take a look at your activity</pre>
       </div>
 
-      <div className="column ps-48 text-white text-lg">
+      <div className="column ps-36 text-white text-lg">
         <pre>Favorite Location: </pre>
 
         <br className="py-10" />
-        {/* <pre>Take a look at your activity</pre> */}
 
-        <pre className="px-10 py-1 rounded-sm w-[20rem] bg-gray text-white">
-          {favorite}{" "}
-        </pre>
+        <div className="dropdown">
+          {/* <pre className="px-10 py-1 rounded-sm w-[20rem] bg-gray text-white">
+            {favorite}{" "}
+          </pre> */}
+          {/* mt-[-2rem] mb-[3rem] */}
+          <label
+            tabIndex={0}
+            className="text-white rounded-sm w-[20rem] btn bg-gray border-none"
+            style={mystyle}
+          >
+            {" "}
+            {testFave}{" "}
+          </label>
+          <span>
+            <Icon
+              icon={arrowSortedDown}
+              className="absolute mx-[-3.2rem] mt-[0.15rem]"
+            />{" "}
+          </span>
+          <ul
+            tabIndex={0}
+            className="mt-[-2rem] mb-[3rem] text-white dropdown-content z-[1] menu shadow p-2 bg-gray rounded-box w-[20rem]"
+          >
+            {testTrucks.map((truck, index) => {
+              return (
+                <li onClick={() => handleClick(truck)} key={index}>
+                  <a>{truck}</a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         <br />
 
@@ -49,7 +96,7 @@ export default function DashboardPage() {
         </pre>
       </div>
 
-      <div className="column text-white text-lg">
+      <div className="column ps-16 text-white text-lg">
         <pre>Your reviews</pre>
         <pre className="inline-block text-sm">Sort by:</pre>
         <ul className="text-dark-yellow btn btn-active btn-link">Latest</ul>
@@ -62,8 +109,8 @@ export default function DashboardPage() {
             <textarea
               className="rounded-sm text-sm bg-light-grey py-2 px-4"
               name="review"
-              rows={6}
-              cols={51}
+              rows={8}
+              cols={61}
               disabled
             >
               {testReviews[0]}
@@ -74,8 +121,8 @@ export default function DashboardPage() {
             <textarea
               className="rounded-sm text-sm bg-light-grey py-2 px-4"
               name="review"
-              rows={6}
-              cols={51}
+              rows={8}
+              cols={61}
               disabled
             >
               {testReviews[1]}
