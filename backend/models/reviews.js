@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
+
 // Schema
-let reviewSchema = mongoose.Schema({
+const reviewSchema = new Schema({
   username: { type: String, required: true },
   truckname: { type: String, required: true },
   meal: { type: String, required: true },
@@ -39,4 +41,4 @@ reviewSchema.statics.createReview = async function (username, truckname, meal, w
 };
 
 // Model
-let Review = module.exports = mongoose.model('Review', reviewSchema, 'reviews');
+module.exports = mongoose.model('Review', reviewSchema, "reviews");

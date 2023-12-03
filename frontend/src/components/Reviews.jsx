@@ -75,21 +75,30 @@ function Reviews({ truck, sortMethod }) {
           console.error('Error:', error);
         }
       };
-  
       fetchData();
     }, [truck, sortMethod]);
   
     return (
       <>
-        {reviewList.map((item) => (
-          <Review
-            key={item._id}
-            name={item.name}
-            review={item.review}
-            date={item.date}
-            likes={item.likes}
-          />
-        ))}
+        {console.log("I stink1", reviewList)}
+        {console.log("I stink2", reviewList.reviews)}
+        {console.log("I stink3", reviewList.reviews[0].reviews)}
+        {reviewList.reviews && reviewList.reviews.length > 0 ? (
+            reviewList.reviews[0].reviews.map((item) => (
+                <>
+                    <Review
+                        key={item._id}
+                        name={item.username}
+                        review={item.review}
+                        date={item.date}
+                        likes={item.rating}
+                    />
+                    <h1>Break</h1>
+                </>
+            ))
+        ) : (
+            <p>No reviews available.</p>
+        )}
       </>
     );
   } 

@@ -88,7 +88,20 @@ app.get("/users/:username", async (req, res) => {
 
 app.get("/trucks/:truckname", async (req, res) => {
   const truck = await TruckModel.getTruckByName(req.params.truckname);
-  res.json(truck);
+  res.json({truck});
+});
+
+app.post("/trucks/:truckname", async (req, res) => {
+  console.log("I got called", req.body.sortMethod)
+  const reviews = await TruckModel.find({name:req.params.truckname}).populate("reviews").exec();
+  console.log(reviews);
+  if(req.body.sortMethod === "latest"){
+    const sortedReviews = reviews.sort({date: -1});
+    res.json({sortedReviews});
+  }
+  else{
+    res.json({reviews});
+  }
 });
 
 app.get("/alltrucks", async (req, res) => {

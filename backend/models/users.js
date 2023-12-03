@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
+const Schema = mongoose.Schema;
+
 // Schema
-let userSchema = mongoose.Schema({
+let userSchema = new Schema({
   name: {
     first: { type: String, default: null },
     last: { type: String, default: null },
@@ -100,4 +102,4 @@ userSchema.statics.createUser = async function (
 };
 
 // Model
-let User = (module.exports = mongoose.model("User", userSchema, "users"));
+module.exports = mongoose.model("User", userSchema, "users");

@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
+
 // Schema
-let truckSchema = mongoose.Schema({
+const truckSchema = new Schema({
   name: { type: String, required: true, unique: true },
   blurb: { type: String, required: true },
   image: { type: String, default: null },
-  reviews: [mongoose.Types.ObjectId],
+  reviews: [{type: Schema.Types.ObjectId, ref: "Review"}],
 });
 truckSchema.methods.avgRating = async function () {
   const result = await mongoose.model('Review').aggregate([
@@ -76,4 +78,4 @@ truckSchema.statics.createTruck = async function (name, blurb, image) {
 };
 
 // Model
-let Truck = module.exports = mongoose.model('Truck', truckSchema, 'trucks');
+module.exports = mongoose.model('Truck', truckSchema, 'trucks');
