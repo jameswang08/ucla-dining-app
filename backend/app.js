@@ -92,9 +92,7 @@ app.get("/trucks/:truckname", async (req, res) => {
 });
 
 app.post("/trucks/:truckname", async (req, res) => {
-  console.log("I got called", req.body.sortMethod)
   const reviews = await TruckModel.find({name:req.params.truckname}).populate("reviews").exec();
-  console.log(reviews);
   if(req.body.sortMethod === "latest"){
     const sortedReviews = reviews.sort({date: -1});
     res.json({sortedReviews});
