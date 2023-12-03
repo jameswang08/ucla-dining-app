@@ -40,6 +40,7 @@ export default function Rating({ truckname }) {
         if (data.success) {
           console.log(data);
           console.log("review posting success");
+          setInputs({});
           navigate("/truckpage", { state: truckname });
         } else {
           console.log("review posting failed");
@@ -66,38 +67,48 @@ export default function Rating({ truckname }) {
           Rating:{" "}
           <div
             className="rating rating-xs"
-            onChange={handleChange}
-            value={inputs.rating || ""}
+            // onChange={handleChange}
+            // value={inputs.rating || ""}
           >
             <input
               type="radio"
               name="rating"
               className="mask mask-star bg-white"
               value={1}
+              checked={inputs.rating == 1}
+              onChange={handleChange}
             />
             <input
               type="radio"
               name="rating"
               className="mask mask-star bg-white"
               value={2}
+              checked={inputs.rating == 2}
+              onChange={handleChange}
             />
             <input
               type="radio"
               name="rating"
               className="mask mask-star bg-white"
               value={3}
+              checked={inputs.rating == 3}
+              onChange={handleChange}
             />
             <input
               type="radio"
               name="rating"
               className="mask mask-star bg-white"
               value={4}
+              checked={inputs.rating == 4}
+              onChange={handleChange}
             />
             <input
               type="radio"
               name="rating"
               className="mask mask-star bg-white"
               value={5}
+              checked={inputs.rating == 5}
+              onChange={handleChange}
             />
           </div>
         </label>
@@ -109,9 +120,30 @@ export default function Rating({ truckname }) {
             onChange={handleChange}
             value={inputs.mealTime || ""}
           >
-            <input type="radio" name="mealTime" value="lunch" /> Lunch{" "}
-            <input type="radio" name="mealTime" value="dinner" /> Dinner{" "}
-            <input type="radio" name="mealTime" value="lateNight" /> Late Night
+            <input
+              type="radio"
+              name="mealTime"
+              value="lunch"
+              checked={inputs.mealTime === "lunch"}
+              onChange={handleChange}
+            />{" "}
+            Lunch{" "}
+            <input
+              type="radio"
+              name="mealTime"
+              value="dinner"
+              checked={inputs.mealTime === "dinner"}
+              onChange={handleChange}
+            />{" "}
+            Dinner{" "}
+            <input
+              type="radio"
+              name="mealTime"
+              value="lateNight"
+              checked={inputs.mealTime === "lateNight"}
+              onChange={handleChange}
+            />{" "}
+            Late Night
           </div>
         </p>
 
