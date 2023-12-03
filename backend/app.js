@@ -24,33 +24,11 @@ async function main() {
   await mongoose.connect(mongoDB);
 
   /*
-  let user = await UserModel.getUserByUsername("joebruin");
-  let truck = await TruckModel.createTruck(
-    "test_truck3",
-    "another blurb",
-    "some_image_path"
-  );
-  let review = await ReviewModel.createReview(
-    user._id,
-    truck._id,
-    { waitTime: 5, rating: 4 },
-    { waitTime: 10, rating: 5 },
-    null,
-    null
-  );
-  */
-
-  /*
-  await TruckModel.createTruck(
-    "test_truck",
-    "another blurb",
-    "some_image_path"
-  );
-  await TruckModel.createTruck(
-    "test_truck2",
-    "another blurb",
-    "some_image_path"
-  );
+  await TruckModel.createTruck("Kalamaki", "another blurb");
+  await TruckModel.createTruck("Baja California", "another blurb");
+  await TruckModel.createTruck("BittieBitez Mini-Donuts", "another blurb");
+  await TruckModel.createTruck("StopBye", "another blurb");
+  await TruckModel.createTruck("Sugo Italiano", "another blurb");
   */
 }
 
@@ -112,13 +90,16 @@ app.get("/trucks/:truckname", async (req, res) => {
 });
 
 app.post("/trucks/:truckname", async (req, res) => {
-  if(req.body.sortMethod === "latest"){
-    const reviews = await ReviewModel.find({truckname:req.params.truckname}).sort({date: 1}).exec();
-    res.json({reviews});
-  }
-  else{
-    const reviews = await ReviewModel.find({truckname:req.params.truckname}).exec();
-    res.json({reviews});
+  if (req.body.sortMethod === "latest") {
+    const reviews = await ReviewModel.find({ truckname: req.params.truckname })
+      .sort({ date: 1 })
+      .exec();
+    res.json({ reviews });
+  } else {
+    const reviews = await ReviewModel.find({
+      truckname: req.params.truckname,
+    }).exec();
+    res.json({ reviews });
   }
 });
 

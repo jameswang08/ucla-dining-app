@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 const truckSchema = new Schema({
   name: { type: String, required: true, unique: true },
   blurb: { type: String, required: true },
-  image: { type: String, default: null },
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   ratingAvg: { type: Number, default: 0 },
   waitTimeAvg: { type: Number, default: 0 },
@@ -46,9 +45,13 @@ truckSchema.methods.filterLateNightReviews = async function () {
   });
 };
 truckSchema.methods.addReview = async function (reviewId) {
-  let review = await mongoose.model('Review').getReviewById(reviewId);
-  this.ratingAvg = (this.ratingAvg * this.reviews.length + review.rating) / (this.reviews.length + 1);
-  this.waitTimeAvg = (this.waitTimeAvg * this.reviews.length + review.waitTime) / (this.reviews.length + 1);
+  let review = await mongoose.model("Review").getReviewById(reviewId);
+  this.ratingAvg =
+    (this.ratingAvg * this.reviews.length + review.rating) /
+    (this.reviews.length + 1);
+  this.waitTimeAvg =
+    (this.waitTimeAvg * this.reviews.length + review.waitTime) /
+    (this.reviews.length + 1);
   this.reviews.push(reviewId);
   await this.save();
 };
@@ -64,13 +67,12 @@ truckSchema.statics.getTruckById = async function (id) {
 truckSchema.statics.getTruckByName = async function (name) {
   return await this.findOne({ name: name });
 };
-truckSchema.statics.createTruck = async function (name, blurb, image) {
+truckSchema.statics.createTruck = async function (name, blurb) {
   return await this.create({
     name: name,
     blurb: blurb,
-    image: image,
   });
 };
 
 // Model
-module.exports = mongoose.model('Truck', truckSchema, 'trucks');
+module.exports = mongoose.model("Truck", truckSchema, "trucks");
