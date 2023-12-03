@@ -3,13 +3,18 @@ import NavBar from "../components/NavBar.jsx";
 import "../components/Images.css";
 import "../components/headers.css";
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
 
 export default function LocationsPage() {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const handleClick = (truckname) => {
+    navigate("/truckpage", { state: truckname });
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -56,56 +61,36 @@ export default function LocationsPage() {
       {"\n\n\n"}
       <div className="flex">
         <div className="prose w-1/2 ml-32 mr-4">
-            {data.forEach((truck, i) =>
-                <div className="flex-wrap w-1/2 mx-16">
-                    <div className="text-white">
-                        <h3 className="text-white mt-2 font-base">{truck.name}</h3>
-                        {"  "}
-                        <text></text>
-                        <div className="rating rating-xs">
-                            <input
-                                type="radio"
-                                name="rating-2"
-                                className="mask mask-star-2 bg-white"
-                                checked
-                            />
-                        </div>
-                        {" | "}
-                        <text>_ min</text>
-                    </div>
-                    <div className="bg-medium-grey text-white my-4 px-2 py-2">
-                        <text>{truck.blurb}</text>
-                    </div>
-                    <button className="btn btn-active btn-link underline decoration-dark-yellow text-white">
-                        EXPLORE
-
-                    </button>
+          {data.map((truck, index) => {
+            return (
+              <div className="flex-wrap w-1/2 mx-16">
+                <div className="text-white">
+                  <h3 className="text-white mt-2 font-base">{truck.name}</h3>
+                  {"  "}
+                  <text></text>
+                  <div className="rating rating-xs">
+                    <input
+                      type="radio"
+                      name="rating-2"
+                      className="mask mask-star-2 bg-white"
+                      checked
+                    />
+                  </div>
+                  {" | "}
+                  <text>_ min</text>
                 </div>
-            )}
-            <div className="flex-wrap w-1/2 mx-16">
-                    <div className="text-white">
-                        <h3 className="text-white mt-2 font-base">{data[0].name}</h3>
-                        {"  "}
-                        <text></text>
-                        <div className="rating rating-xs">
-                            <input
-                                type="radio"
-                                name="rating-2"
-                                className="mask mask-star-2 bg-white"
-                                checked
-                            />
-                        </div>
-                        {" | "}
-                        <text>_ min</text>
-                    </div>
-                    <div className="bg-medium-grey text-white my-4 px-2 py-2">
-                        <text>{data[0].blurb}</text>
-                    </div>
-                    <button className="btn btn-active btn-link underline decoration-dark-yellow text-white">
-                        EXPLORE
-
-                    </button>
-            </div>
+                <div className="bg-medium-grey text-white my-4 px-2 py-2">
+                  <text>{truck.blurb}</text>
+                </div>
+                <button
+                  className="btn btn-active btn-link underline decoration-dark-yellow text-white"
+                  onClick={() => handleClick(truck.name)}
+                >
+                  EXPLORE
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
