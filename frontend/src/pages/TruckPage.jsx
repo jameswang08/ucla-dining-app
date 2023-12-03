@@ -91,11 +91,7 @@ export default function TruckPage() {
       <div className="ps-[36rem]">
         <div className="max-w-full prose bg-light-yellow mt-4 ">
           <h2 className="text-black pl-20 pt-20 pr-120">Overview</h2>
-          <p className="text-black pl-20 pr-20 pb-16">
-            This is a placeholder because I cannot write, but hopefully this is
-            enough to get an idea of how much text goes here, and how it will be
-            formatted. Too much empty space to the right?
-          </p>
+          <p className="text-black pl-20 pr-20 pb-16">{data.truck.blurb}</p>
         </div>
       </div>
 
