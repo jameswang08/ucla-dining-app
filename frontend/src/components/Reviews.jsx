@@ -1,7 +1,5 @@
 import "../../dist/output.css";
-import React from 'react';
-
-
+import React, { useEffect, useState } from 'react';
 
 function Review({name, review, date, likes}) {
     return(
@@ -51,24 +49,49 @@ function Review({name, review, date, likes}) {
     )
 }
 
-function Reviews({truck, sortMethod}){
-    const req = fetch(`http://localhost:3000/trucks/${truck}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sortMethod: sortMethod,
-        }),
-    });
-    const reviewList = req.json();
-    return(
-        <>
-            {reviewList.map((item) => {
-                <Review name={item.name} review={item.review} date={item.date} likes={item.likes}></Review>
-            })}
-        </>
-    )
-}   
+function Reviews({ truck, sortMethod }) {
+    const [reviewList, setReviewList] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:3000/trucks/${truck}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              sortMethod: sortMethod,
+            }),
+          });
+  
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          setReviewList(data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+  
+      fetchData();
+    }, [truck, sortMethod]);
+  
+    return (
+      <>
+        {reviewList.map((item) => (
+          <Review
+            key={item._id}
+            name={item.name}
+            review={item.review}
+            date={item.date}
+            likes={item.likes}
+          />
+        ))}
+      </>
+    );
+  } 
 
 export default Reviews
