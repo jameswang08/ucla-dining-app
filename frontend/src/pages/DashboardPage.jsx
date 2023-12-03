@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 // import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
@@ -16,9 +16,39 @@ export default function DashboardPage() {
   const reputation = user.reputation;
   const reviews = user.reviews;
   const testReviews = ["hi", "bye"];
-  // TODO: put list of all truck names here, temp state
-  let testTrucks = ["test_truck", "test_truck2"];
-  const [testFave, setTestFave] = useState("Stopbye");
+  const [testFave, setTestFave] = useState(favorite);
+
+  const [trucks, setTrucks] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await fetch("http://localhost:3000/alltrucknames")
+          .then((data) => {
+            return data.json();
+          })
+          .then((post) => {
+            setTrucks(post);
+            setLoading(false);
+          });
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const handleClick = (truck) => {
     setTestFave(truck);
@@ -75,7 +105,7 @@ export default function DashboardPage() {
             tabIndex={0}
             className="mt-[-2rem] mb-[3rem] text-white dropdown-content z-[1] menu shadow p-2 bg-gray rounded-box w-[20rem]"
           >
-            {testTrucks.map((truck, index) => {
+            {trucks.map((truck, index) => {
               return (
                 <li onClick={() => handleClick(truck)} key={index}>
                   <a>{truck}</a>
