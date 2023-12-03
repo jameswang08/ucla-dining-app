@@ -123,7 +123,7 @@ export default function TruckPage() {
         </div>
 
         <div className="prose w-1/2 px-36">
-          <p>
+          <div>
             <h2 className="text-white mb-0  pt-8">Reviews</h2>
             <text className="inline-block text-white">Sort by:</text>
             <ul
@@ -135,9 +135,9 @@ export default function TruckPage() {
             {/* <ul className="text-dark-yellow btn btn-active btn-link">
               Popular
             </ul> */}
-          </p>
+          </div>
 
-          <p className="absolute my-[-4rem]">
+          <div className="absolute my-[-3rem]">
             <text className="inline-block text-white">
               Filter by:
               <ul className="text-dark-yellow btn btn-active btn-link">
@@ -150,7 +150,9 @@ export default function TruckPage() {
                 Late Night
               </ul>
             </text>
-          </p>
+          </div>
+
+          <br />
           {/* Reviews go here */}
           <Reviews truck={truckname} sortMethod={sort}></Reviews>
         </div>

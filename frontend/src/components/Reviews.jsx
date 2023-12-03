@@ -1,6 +1,7 @@
 import "../../dist/output.css";
 import React, { useEffect, useState } from 'react';
 import { DateTime } from "luxon";
+import TextareaAutosize from "react-textarea-autosize";
 
 function Review({ name, review, date, likes, rating }) {
   let items = [];
@@ -23,12 +24,20 @@ function Review({ name, review, date, likes, rating }) {
   }
   return (
     <>
-      <div className="prose bg-medium-grey text-white px-4 py-4">
+      <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
         {/*name*/}
         <h3 className="text-light-yellow font-normal block my-0">{name}</h3>
         <div className="rating rating-xs block">{items}</div>
         {/*review*/}
-        <text className="prose text-white text-base">{review}</text>
+        <div>
+          <TextareaAutosize
+            className="flex w-[27.5rem] text-white text-sm bg-transparent py-2"
+            name="scrollHeight"
+            disabled
+          >
+            {review}
+          </TextareaAutosize>
+        </div>
         <br />
         {/*DATE*/}
         <text className="text-white text-xs">{date}</text>
