@@ -76,7 +76,7 @@ export default function NavBar() {
           </a>
         </div>
 
-        <a className="btn bg-transparent border-none normal-case">
+        <a className="btn bg-transparent border-none">
           <Link to="/locations"> At a Glance </Link>
         </a>
 
