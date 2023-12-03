@@ -118,7 +118,7 @@ export default function TruckPage() {
           <p>
             <h2 className="text-white mb-0  pt-8">Reviews</h2>
             <text className="inline-block text-white">Sort by:</text>
-            <ul className="text-dark-yellow btn btn-active btn-link" onClick = {() => setSort("latest")}>Latest</ul>
+            <ul className="text-dark-yellow btn btn-active btn-link" onClick = {() => {setSort("latest"); console.log("clicked")}}>Latest</ul>
             {/* <ul className="text-dark-yellow btn btn-active btn-link">
               Popular
             </ul> */}

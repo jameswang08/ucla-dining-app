@@ -81,10 +81,11 @@ function Reviews({ truck, sortMethod }) {
   
     return (
       <>
+        {console.log("I stink", reviewList.reviews)}
         {reviewList.reviews && reviewList.reviews.length > 0 ? (
-            reviewList.reviews[0].reviews.map((item) => (
+            reviewList.reviews.map((item, index) => (
                 <Review
-                    key={item._id}
+                    key={index}
                     name={item.username}
                     review={item.review}
                     date={DateTime.fromISO(item.date).toLocaleString(DateTime.DATETIME_MED)}

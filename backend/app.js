@@ -93,11 +93,11 @@ app.get("/trucks/:truckname", async (req, res) => {
 
 app.post("/trucks/:truckname", async (req, res) => {
   if(req.body.sortMethod === "latest"){
-    const reviews = await TruckModel.find({name:req.params.truckname}).populate("reviews").sort({date: -1}).exec();
+    const reviews = await ReviewModel.find({truckname:req.params.truckname}).sort({date: 1}).exec();
     res.json({reviews});
   }
   else{
-    const reviews = await TruckModel.find({name:req.params.truckname}).populate("reviews").exec();
+    const reviews = await ReviewModel.find({truckname:req.params.truckname}).exec();
     res.json({reviews});
   }
 });
