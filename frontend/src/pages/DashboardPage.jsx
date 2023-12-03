@@ -12,11 +12,10 @@ export default function DashboardPage() {
   const user = useLocation().state;
   const firstname = user.name.first;
   const lastname = user.name.last;
-  const favorite = user.favorite;
   const reputation = user.reputation;
   const reviews = user.reviews;
   const testReviews = ["hi", "bye"];
-  const [testFave, setTestFave] = useState(favorite);
+  const [favorite, setFavorite] = useState(user.favorite);
 
   const [trucks, setTrucks] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,7 +50,7 @@ export default function DashboardPage() {
   }
 
   const handleClick = (truck) => {
-    setTestFave(truck);
+    setFavorite(truck);
   };
 
   const mystyle = {
@@ -93,7 +92,7 @@ export default function DashboardPage() {
             style={mystyle}
           >
             {" "}
-            {testFave}{" "}
+            {favorite}{" "}
           </label>
           <span>
             <Icon
