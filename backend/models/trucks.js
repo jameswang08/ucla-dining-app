@@ -6,25 +6,9 @@ let truckSchema = mongoose.Schema({
   blurb: { type: String, required: true },
   image: { type: String, default: null },
   reviews: [mongoose.Types.ObjectId],
+  ratingAvg: { type: Number, default: 0 },
+  waitTimeAvg: { type: Number, default: 0 },
 });
-truckSchema.methods.avgRating = async function () {
-  const result = await mongoose
-    .model("Review")
-    .aggregate([
-      { $match: { _id: { $in: this.reviews } } },
-      { $group: { _id: null, avg: { $avg: "$rating" } } },
-    ]);
-  return result.length > 0 ? result[0].avg : null;
-};
-truckSchema.methods.avgWaitTime = async function () {
-  const result = await mongoose
-    .model("Review")
-    .aggregate([
-      { $match: { _id: { $in: this.reviews } } },
-      { $group: { _id: null, avg: { $avg: "$waitTime" } } },
-    ]);
-  return result.length > 0 ? result[0].avg : null;
-};
 truckSchema.methods.sortReviewsByPopularity = async function () {
   return await mongoose
     .model("Review")
@@ -60,6 +44,9 @@ truckSchema.methods.filterLateNightReviews = async function () {
   });
 };
 truckSchema.methods.addReview = async function (reviewId) {
+  let review = await mongoose.model('Review').getReviewById(reviewId);
+  this.ratingAvg = (this.ratingAvg * this.reviews.length + review.rating) / (this.reviews.length + 1);
+  this.waitTimeAvg = (this.waitTimeAvg * this.reviews.length + review.waitTime) / (this.reviews.length + 1);
   this.reviews.push(reviewId);
   await this.save();
 };
