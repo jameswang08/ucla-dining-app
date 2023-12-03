@@ -80,6 +80,13 @@ app.post("/createaccount", async (req, res) => {
   res.json({ success: true, message: "Account creation successful" });
 });
 
+app.post("/setfavorite", async (req, res) => {
+  const { username, favorite } = req.body;
+  const user = await UserModel.getUserByUsername(username);
+  await user.setFavorite(favorite);
+  res.json({ success: true, message: "Update to favorite successful" });
+});
+
 app.get("/users/:username", async (req, res) => {
   let user = await UserModel.getUserByUsername(req.params.username);
   delete user["password"];

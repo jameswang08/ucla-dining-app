@@ -60,6 +60,18 @@ export default function DashboardPage() {
 
   const handleClick = (truck) => {
     setFavorite(truck);
+    fetch("http://localhost:3000/setfavorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: user.username,
+        favorite: truck,
+      }),
+    })
+      .then((response) => response.json())
+      .catch((error) => console.error("Error:", error));
   };
 
   const mystyle = {
