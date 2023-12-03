@@ -70,7 +70,7 @@ export default function TruckPage() {
 
       <div className="absolute pt-[10rem]">
         <img
-          src="../../images/ucla-food-prep.png"
+          src={"../../images/" + data.name +".png"}
           className="foodtruckimgs"
         ></img>
       </div>
