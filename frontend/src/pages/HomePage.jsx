@@ -31,9 +31,8 @@ export default function HomePage() {
         <pre className="leading-[1rem]">How we do this? {"\n\n"} </pre>
         <pre className="leading-[2rem]">
           By helping Bruins help Bruins navigate on-campus dining.{"\n"}
-          We offer a digital space for students to review UCLA’s dining {"\n"}
-          halls and takeout restaurants and benefit current and future {"\n"}
-          students alike.
+          We offer a digital space for students to review UCLA’s food {"\n"}
+          trucks and benefit current and future students alike.
         </pre>
 
         <ul className="btn btn-active btn-link text-black text-xl ml-[42rem] mt-[5.5rem] mb-[1.5rem]">

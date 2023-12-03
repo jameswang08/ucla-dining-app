@@ -72,7 +72,7 @@ export default function LocationsPage() {
                     <input
                       type="radio"
                       name="rating-2"
-                      className="mask mask-star-2 bg-white"
+                      className="mask mask-star bg-white"
                       checked
                     />
                   </div>

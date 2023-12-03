@@ -60,7 +60,7 @@ export default function TruckPage() {
           <input
             type="radio"
             name="rating-2"
-            className="mask mask-star-2 bg-white"
+            className="mask mask-star bg-white"
             checked
           />
         </div>
@@ -144,27 +144,27 @@ export default function TruckPage() {
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2 bg-white" disabled
+                className="mask mask-star bg-white" disabled
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2 bg-white" disabled
+                className="mask mask-star bg-white" disabled
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2 bg-white" checked disabled
+                className="mask mask-star bg-white" checked disabled
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2 bg-white" disabled
+                className="mask mask-star bg-white" disabled
               />
               <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star-2 bg-white" disabled
+                className="mask mask-star bg-white" disabled
               />
             </div>
             <text className="prose text-white text-base">
