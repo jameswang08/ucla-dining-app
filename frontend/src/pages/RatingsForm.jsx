@@ -67,7 +67,7 @@ export default function Rating({ truckname }) {
           <div
             className="rating rating-xs"
             onChange={handleChange}
-            value={inputs.mealTime || ""}
+            value={inputs.rating || ""}
           >
             <input
               type="radio"
