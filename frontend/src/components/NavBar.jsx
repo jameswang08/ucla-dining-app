@@ -42,8 +42,6 @@ export default function NavBar() {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(trucks);
-
   const handleClick = (truckname) => {
     navigate("/truckpage", { state: truckname });
   };

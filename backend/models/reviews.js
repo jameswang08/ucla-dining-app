@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const Schema = mongoose.Schema;
 
 // Schema
@@ -13,6 +14,7 @@ const reviewSchema = new Schema({
   date: { type: Date, default: Date.now },
   likes: { type: Number, default: 0 },
 });
+
 reviewSchema.methods.addLike = async function () {
   this.likes++;
   await this.save();
