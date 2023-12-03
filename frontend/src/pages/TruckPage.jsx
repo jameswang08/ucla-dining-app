@@ -106,7 +106,7 @@ export default function TruckPage() {
           <br />
 
           {loggedIn ? (
-            <RatingsForm truckname={data.truck.name} />
+            <RatingsForm truckname={data.truck.name} key={data.truck.name} />
           ) : (
             <div className="text-white">
               <ul className="ps-0 btn btn-active btn-link">
