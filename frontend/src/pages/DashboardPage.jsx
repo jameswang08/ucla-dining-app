@@ -60,17 +60,18 @@ export default function DashboardPage() {
 
   const handleClick = (truck) => {
     setFavorite(truck);
-  };
-
-  const handleChange = (event) => {
-    console.log(event.target.rows);
-    const height = event.target.scrollHeight;
-    const rowHeight = 15;
-    const trows = Math.ceil(height / rowHeight) - 1;
-
-    if (trows > textareaheight) {
-      setTextareaheight(trows);
-    }
+    fetch("http://localhost:3000/setfavorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: user.username,
+        favorite: truck,
+      }),
+    })
+      .then((response) => response.json())
+      .catch((error) => console.error("Error:", error));
   };
 
   const mystyle = {
@@ -191,11 +192,10 @@ export default function DashboardPage() {
           <p>{"\n"}</p>
           <TextareaAutosize
             className="flex w-[27.5rem] text-white rounded-sm text-sm bg-transparent py-2"
-            onChange={handleChange}
             name="scrollHeight"
             disabled
           >
-            {testReviews[0]}
+            {testReviews[1]}
           </TextareaAutosize>
           <br />
           <text className="text-white text-xs">Oct 24, 2023</text>

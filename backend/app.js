@@ -80,15 +80,35 @@ app.post("/createaccount", async (req, res) => {
   res.json({ success: true, message: "Account creation successful" });
 });
 
+app.post("/postreview", async (req, res) => {
+  const { username, truckname, meal, waitTime, rating, review } = req.body;
+  await ReviewModel.createReview(
+    username,
+    truckname,
+    meal,
+    waitTime,
+    rating,
+    review
+  );
+  res.json({ success: true, message: "Posting review successful" });
+});
+
+app.post("/setfavorite", async (req, res) => {
+  const { username, favorite } = req.body;
+  const user = await UserModel.getUserByUsername(username);
+  await user.setFavorite(favorite);
+  res.json({ success: true, message: "Update to favorite successful" });
+});
+
 app.get("/users/:username", async (req, res) => {
-  let user = await UserModel.getUserByUsername(req.params.username);
+  let user = await UserModel.findOne({ username: req.params.username }).lean();
   delete user["password"];
   res.json(user);
 });
 
 app.get("/trucks/:truckname", async (req, res) => {
   const truck = await TruckModel.getTruckByName(req.params.truckname);
-  res.json({truck});
+  res.json({ truck });
 });
 
 app.post("/trucks/:truckname", async (req, res) => {

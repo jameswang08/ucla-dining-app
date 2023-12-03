@@ -17,17 +17,19 @@ let userSchema = new Schema({
   likes: [mongoose.Types.ObjectId],
 });
 userSchema.methods.sortReviewsByPopularity = async function () {
-  return await mongoose.model("Review")
+  return await mongoose
+    .model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
-      { $sort: { "likes": -1 } },
+      { $sort: { likes: -1 } },
     ]);
 };
 userSchema.methods.sortReviewsByDate = async function () {
-  return await mongoose.model("Review")
+  return await mongoose
+    .model("Review")
     .aggregate([
       { $match: { _id: { $in: this.reviews } } },
-      { $sort: { "date": -1 } },
+      { $sort: { date: -1 } },
     ]);
 };
 userSchema.methods.addReview = async function (reviewId) {
@@ -41,9 +43,8 @@ userSchema.methods.setFavorite = async function (favorite) {
 };
 userSchema.methods.toggleLike = async function (reviewId) {
   // exit if own review
-  let review = await mongoose.model('Review').getReviewById(reviewId);
-  if (review.userId.equals(this._id))
-    return false;
+  let review = await mongoose.model("Review").getReviewById(reviewId);
+  if (review.userId.equals(this._id)) return false;
   // check if liked before
   let liked = false;
   for (let i = 0; i < this.likes.length; i++)
@@ -72,7 +73,7 @@ userSchema.statics.getUserById = async function (id) {
   return await this.findById(id);
 };
 userSchema.statics.getUserByUsername = async function (username) {
-  return await this.findOne({ username: username }).lean();
+  return await this.findOne({ username: username });
 };
 userSchema.statics.getUserByEmail = async function (email) {
   return await this.findOne({ email: email });

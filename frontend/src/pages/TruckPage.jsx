@@ -48,6 +48,8 @@ export default function TruckPage() {
     return <div>Error: {error.message}</div>;
   }
 
+  console.log("Truck data", data.truck);
+
   return (
     <div>
       <div>
@@ -55,9 +57,13 @@ export default function TruckPage() {
       </div>
       {console.log(data)}
       <div className="prose ps-32 pt-32 pb-8">
-        <h1 className="text-white mb-0">{data.name}</h1>
-        {data.ratingAvg == 0 ? <text className="inline text-white">-</text> : <text className="inline text-white">{data.ratingAvg}</text>}
-        {" "}<div className="rating rating-xs inline">
+        <h1 className="text-white mb-0">{data.truck.name}</h1>
+        {data.truck.ratingAvg == 0 ? (
+          <text className="inline text-white">-</text>
+        ) : (
+          <text className="inline text-white">{data.truck.ratingAvg}</text>
+        )}{" "}
+        <div className="rating rating-xs inline">
           <input
             type="radio"
             name="rating-2"
@@ -66,12 +72,18 @@ export default function TruckPage() {
           />
         </div>
         <text className="inline text-white"> | </text>
-        {data.waitTimeAvg == 0 ? <text className="inline text-white">- min</text> : <text className="inline text-white">{data.waitTimeAvg} min</text>}
+        {data.truck.waitTimeAvg == 0 ? (
+          <text className="inline text-white">- min</text>
+        ) : (
+          <text className="inline text-white">
+            {data.truck.waitTimeAvg} min
+          </text>
+        )}
       </div>
 
       <div className="absolute pt-[10rem]">
         <img
-          src={"../../images/" + data.name +".png"}
+          src={"../../images/" + data.truck.name + ".png"}
           className="foodtruckimgs"
         ></img>
       </div>
@@ -98,7 +110,7 @@ export default function TruckPage() {
           <br />
 
           {loggedIn ? (
-            <RatingsForm />
+            <RatingsForm truckname={data.truck.name} />
           ) : (
             <div className="text-white">
               <ul className="ps-0 btn btn-active btn-link">
@@ -118,7 +130,12 @@ export default function TruckPage() {
           <p>
             <h2 className="text-white mb-0  pt-8">Reviews</h2>
             <text className="inline-block text-white">Sort by:</text>
-            <ul className="text-dark-yellow btn btn-active btn-link" onClick = {() => {setSort("latest"); console.log("clicked")}}>Latest</ul>
+            <ul
+              className="text-dark-yellow btn btn-active btn-link"
+              onClick={() => setSort("latest")}
+            >
+              Latest
+            </ul>
             {/* <ul className="text-dark-yellow btn btn-active btn-link">
               Popular
             </ul> */}
@@ -139,7 +156,7 @@ export default function TruckPage() {
             </text>
           </p>
           {/* Reviews go here */}
-          <Reviews truck = {truckname} sortMethod = {sort}></Reviews>
+          <Reviews truck={truckname} sortMethod={sort}></Reviews>
         </div>
       </div>
     </div>
