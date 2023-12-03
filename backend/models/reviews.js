@@ -7,9 +7,9 @@ const reviewSchema = new Schema({
   username: { type: String, required: true },
   truckname: { type: String, required: true },
   meal: { type: String, required: true },
-  waitTime: { type: Number, default: null },
-  rating: { type: Number, default: null },
-  review: { type: String, default: null },
+  waitTime: { type: Number, required: true },
+  rating: { type: Number, required: true },
+  review: { type: String, required: true },
   date: { type: Date, default: Date.now },
   likes: { type: Number, default: 0 },
 });

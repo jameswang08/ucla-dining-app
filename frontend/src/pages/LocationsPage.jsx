@@ -2,14 +2,20 @@ import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../components/Images.css";
 import "../components/headers.css";
+import "../components/grid.css";
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
 
 export default function LocationsPage() {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const handleClick = (truckname) => {
+    navigate("/truckpage", { state: truckname });
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -54,91 +60,38 @@ export default function LocationsPage() {
         </text>
       </div>
       {"\n\n\n"}
-      <div className="flex">
-        <div className="prose w-1/2 ml-32 mr-4">
-          <h2 className="text-light-yellow mb-2 font-medium">
-            Normal Hours Food Trucks
-          </h2>
-          <div className="text-white">
-            <h3 className="text-white mt-2 font-base">Baja California</h3>
-            {"  "}
-            <text>_._</text>
-            <div className="rating rating-xs">
-              <input
-                type="radio"
-                name="rating-2"
-                className="mask mask-star-2 bg-white"
-                checked
-              />
-            </div>
-            {" | "}
-            <text>_ min</text>
-          </div>
-          <div className="bg-medium-grey text-white my-4 px-2 py-2">
-            <text>[Blurb]</text>
-          </div>
-          <button className="btn btn-active btn-link underline decoration-dark-yellow text-white">
-            EXPLORE
-          </button>
-
-          <br />
-
-          <div className="text-white">
-            <h3 className="text-white mt-2 font-base">Kalamaki</h3>
-            {"  "}
-            <text>_._</text>
-            <div className="rating rating-xs">
-              <input
-                type="radio"
-                name="rating-2"
-                className="mask mask-star-2 bg-white"
-                checked
-              />
-            </div>
-            {" | "}
-            <text>_ min</text>
-          </div>
-          <div className="bg-medium-grey text-white my-4 px-2 py-2">
-            <text>[Blurb]</text>
-          </div>
-          <button className="btn btn-active btn-link underline decoration-dark-yellow text-white">
-            EXPLORE
-          </button>
-        </div>
-
-        <div className="prose w-1/2 mr-32 ml-4">
-          <h2 className="text-light-yellow mb-2 font-medium">
-            Late Night Only Food Trucks
-          </h2>
-          <div className="text-white">
-            <h3 className="text-white mt-2 font-base">
-              BittieBitez Mini-Donuts
-            </h3>
-            {"  "}
-            <text>_._</text>
-            <div className="rating rating-xs">
-              <input
-                type="radio"
-                name="rating-2"
-                className="mask mask-star-2 bg-white"
-                checked
-              />
-            </div>
-            {" | "}
-            <text>_ min</text>
-          </div>
-          <div className="bg-medium-grey text-white my-4 px-2 py-2">
-            <text>
-              Donut truck in Southern California providing fresh made mini
-              donuts food truck with a variety of toppings from chocolate, oreo,
-              to Fruity Pebbles.
-            </text>
-          </div>
-          <button className="btn btn-active btn-link underline decoration-dark-yellow text-white">
-            EXPLORE
-          </button>
+      <div className="prose ml-16 mr-16 max-w-full px-4 grid gap-24 grid-cols-2">
+          {data.map((truck, index) => {
+            return (
+              <div className="">
+                <div className="text-white">
+                  <h3 className="text-white mt-2 font-base">{truck.name}</h3>
+                  {"  "}
+                  {truck.ratingAvg == 0 ? <text>-</text> : <text>{truck.ratingAvg}</text>}
+                  <div className="rating rating-xs">
+                    <input
+                      type="radio"
+                      name="rating-2"
+                      className="mask mask-star bg-white"
+                      checked
+                    />
+                  </div>
+                  {" | "}
+                  {truck.waitTimeAvg == 0 ? <text>- min</text> : <text>{truck.waitTimeAvg} min</text>}
+                </div>
+                <div className="bg-medium-grey text-white my-4 px-2 py-2">
+                  <text>{truck.blurb}</text>
+                </div>
+                <button
+                  className="btn btn-active btn-link underline decoration-dark-yellow text-white"
+                  onClick={() => handleClick(truck.name)}
+                >
+                  EXPLORE→
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </div>
   );
 }

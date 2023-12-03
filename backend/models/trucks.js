@@ -24,42 +24,49 @@ truckSchema.methods.avgWaitTime = async function () {
   return result.length > 0 ? result[0].avg : null;
 };
 truckSchema.methods.sortReviewsByPopularity = async function () {
-  return await mongoose.model('Review').aggregate([
-    { $match: { _id: { $in: this.reviews } } },
-    { $sort: { 'likes': -1 } },
-  ]);
+  return await mongoose
+    .model("Review")
+    .aggregate([
+      { $match: { _id: { $in: this.reviews } } },
+      { $sort: { likes: -1 } },
+    ]);
 };
 truckSchema.methods.sortReviewsByDate = async function () {
-  return await mongoose.model('Review').aggregate([
-    { $match: { _id: { $in: this.reviews } } },
-    { $sort: { 'date': -1 } },
-  ]);
+  return await mongoose
+    .model("Review")
+    .aggregate([
+      { $match: { _id: { $in: this.reviews } } },
+      { $sort: { date: -1 } },
+    ]);
 };
 truckSchema.methods.filterLunchReviews = async function () {
-  return await mongoose.model('Review').find({
+  return await mongoose.model("Review").find({
     _id: { $in: this.reviews },
-    meal: 'lunch',
+    meal: "lunch",
   });
 };
 truckSchema.methods.filterDinnerReviews = async function () {
-  return await mongoose.model('Review').find({
+  return await mongoose.model("Review").find({
     _id: { $in: this.reviews },
-    meal: 'dinner',
+    meal: "dinner",
   });
 };
 truckSchema.methods.filterLateNightReviews = async function () {
-  return await mongoose.model('Review').find({
+  return await mongoose.model("Review").find({
     _id: { $in: this.reviews },
-    meal: 'lateNight',
+    meal: "lateNight",
   });
 };
 truckSchema.methods.addReview = async function (reviewId) {
+  let review = await mongoose.model('Review').getReviewById(reviewId);
+  this.ratingAvg = (this.ratingAvg * this.reviews.length + review.rating) / (this.reviews.length + 1);
+  this.waitTimeAvg = (this.waitTimeAvg * this.reviews.length + review.waitTime) / (this.reviews.length + 1);
   this.reviews.push(reviewId);
   await this.save();
 };
-truckSchema.statics.getTruckNames = async function (id) {
+truckSchema.statics.getTruckNames = async function () {
   const result = await this.aggregate([
-    { $group: { _id: null, names: { $push: '$name' } } },
+    { $group: { _id: null, names: { $push: "$name" } } },
   ]);
   return result.length > 0 ? result[0].names : [];
 };

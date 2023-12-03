@@ -12,7 +12,7 @@ let userSchema = new Schema({
   email: { type: String, required: true, unique: false },
   password: { type: String, required: true },
   reputation: { type: Number, default: 0 },
-  favorite: { type: String, default: null },
+  favorite: { type: String, default: "None" },
   reviews: [mongoose.Types.ObjectId],
   likes: [mongoose.Types.ObjectId],
 });
@@ -32,13 +32,7 @@ userSchema.methods.sortReviewsByDate = async function () {
 };
 userSchema.methods.addReview = async function (reviewId) {
   this.reviews.push(reviewId);
-  let review = await mongoose.model('Review').getReviewById(reviewId);
-  if (review.waitTime != null)
-    this.reputation += 1;
-  if (review.rating != null)
-    this.reputation += 1;
-  if (review.review != null)
-    this.reputation += 3;
+  this.reputation += 10;
   await this.save();
 };
 userSchema.methods.setFavorite = async function (favorite) {

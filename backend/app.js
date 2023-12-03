@@ -109,6 +109,11 @@ app.get("/alltrucks", async (req, res) => {
   res.json(trucks);
 });
 
+app.get("/alltrucknames", async (req, res) => {
+  const trucknames = await TruckModel.getTruckNames();
+  res.json(trucknames);
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

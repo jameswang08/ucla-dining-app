@@ -56,12 +56,22 @@ export default function TruckPage() {
 
       <div className="prose ps-32 pt-32 pb-8">
         <h1 className="text-white mb-0">{data.name}</h1>
-        <text className="text-white">Avg Rating</text>
+        {data.ratingAvg == 0 ? <text className="inline text-white">-</text> : <text className="inline text-white">{data.ratingAvg}</text>}
+        {" "}<div className="rating rating-xs inline">
+          <input
+            type="radio"
+            name="rating-2"
+            className="mask mask-star bg-white"
+            checked
+          />
+        </div>
+        <text className="inline text-white"> | </text>
+        {data.waitTimeAvg == 0 ? <text className="inline text-white">- min</text> : <text className="inline text-white">{data.waitTimeAvg} min</text>}
       </div>
 
       <div className="absolute pt-[10rem]">
         <img
-          src="../../images/ucla-food-prep.png"
+          src={"../../images/" + data.name +".png"}
           className="foodtruckimgs"
         ></img>
       </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 // import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../../dist/output.css";
@@ -7,21 +7,70 @@ import { useLocation } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
 import { Icon } from "react-icons-kit";
 import { arrowSortedDown } from "react-icons-kit/typicons/arrowSortedDown";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function DashboardPage() {
   const user = useLocation().state;
   const firstname = user.name.first;
   const lastname = user.name.last;
-  const favorite = user.favorite;
   const reputation = user.reputation;
   const reviews = user.reviews;
-  const testReviews = ["hi", "bye"];
-  // TODO: put list of all truck names here, temp state
-  let testTrucks = ["test_truck", "test_truck2"];
-  const [testFave, setTestFave] = useState("Stopbye");
+  const testReviews = [
+    "hijsojfpoejpqjwpojqpojfoqjfoqjfopqjopfjqpjfqpjfpoqjopfjqopfjadjoajodapjaojajoapjopqp \
+  qjfiopqwjfpiqjwfpiqjpiaipajidfjdiapjfpajipfjapjfpajifpjipajfpiajpfjajifpjapijfjapijpiajpfjpsajfpaf \
+  jiajdfaojfapojpjdpfjaijdfpajfipjaipjfipasjfpajdpfijafjdpajfiajfpiasjfpiajfiapjfpiajpfajpisfjpaijfpiajfipa \
+  asjoipdfjapijfpiajfpiajfpiajpifjaipjfpiajipfjaipjfaipjapijap \
+  apple aofjpwoejpfajopjefpoawjefopjawopfjpoawjopfjawpoefjpoawjefopawjpofajwpfojawpofjawopjfpaojopjspojposj",
+    "bye",
+  ];
+  const [favorite, setFavorite] = useState(user.favorite);
+
+  const [trucks, setTrucks] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [textareaheight, setTextareaheight] = useState(1);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await fetch("http://localhost:3000/alltrucknames")
+          .then((data) => {
+            return data.json();
+          })
+          .then((post) => {
+            setTrucks(post);
+            setLoading(false);
+          });
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const handleClick = (truck) => {
-    setTestFave(truck);
+    setFavorite(truck);
+  };
+
+  const handleChange = (event) => {
+    console.log(event.target.rows);
+    const height = event.target.scrollHeight;
+    const rowHeight = 15;
+    const trows = Math.ceil(height / rowHeight) - 1;
+
+    if (trows > textareaheight) {
+      setTextareaheight(trows);
+    }
   };
 
   const mystyle = {
@@ -63,7 +112,7 @@ export default function DashboardPage() {
             style={mystyle}
           >
             {" "}
-            {testFave}{" "}
+            {favorite}{" "}
           </label>
           <span>
             <Icon
@@ -75,7 +124,7 @@ export default function DashboardPage() {
             tabIndex={0}
             className="mt-[-2rem] mb-[3rem] text-white dropdown-content z-[1] menu shadow p-2 bg-gray rounded-box w-[20rem]"
           >
-            {testTrucks.map((truck, index) => {
+            {trucks.map((truck, index) => {
               return (
                 <li onClick={() => handleClick(truck)} key={index}>
                   <a>{truck}</a>
@@ -104,31 +153,54 @@ export default function DashboardPage() {
 
         <pre className="leading-[2rem]">{"\n"}</pre>
 
-        <div>
-          <ul>
-            <textarea
-              className="rounded-sm text-sm bg-light-grey py-2 px-4"
-              name="review"
-              rows={8}
-              cols={61}
+        <div className="w-[31.5rem] prose bg-gray px-8 py-6">
+          <h3 className="text-dark-yellow font-normal block my-0">Joe Bruin</h3>
+          <div className="rating rating-xs disabled block">
+            <input
+              type="radio"
+              name="rating-1"
+              className="mask mask-star bg-white"
               disabled
-            >
-              {testReviews[0]}
-            </textarea>
-
-            <pre className="leading-[2rem]">{"\n"}</pre>
-
-            <textarea
-              className="rounded-sm text-sm bg-light-grey py-2 px-4"
-              name="review"
-              rows={8}
-              cols={61}
+            />
+            <input
+              type="radio"
+              name="rating-1"
+              className="mask mask-star bg-white"
               disabled
-            >
-              {testReviews[1]}
-            </textarea>
-            <br />
-          </ul>
+            />
+            <input
+              type="radio"
+              name="rating-1"
+              className="mask mask-star bg-white"
+              checked
+              disabled
+            />
+            <input
+              type="radio"
+              name="rating-1"
+              className="mask mask-star bg-white"
+              disabled
+            />
+            <input
+              type="radio"
+              name="rating-1"
+              className="mask mask-star bg-white"
+              disabled
+            />
+          </div>
+          <p>{"\n"}</p>
+          <TextareaAutosize
+            className="flex w-[27.5rem] text-white rounded-sm text-sm bg-transparent py-2"
+            onChange={handleChange}
+            name="scrollHeight"
+            disabled
+          >
+            {testReviews[0]}
+          </TextareaAutosize>
+          <br />
+          <text className="text-white text-xs">Oct 24, 2023</text>
+          {" | "}
+          <text className="text-white text-xs">5 likes</text>
         </div>
 
         <pre className="leading-[2rem]">{"\n\n\n"}</pre>
