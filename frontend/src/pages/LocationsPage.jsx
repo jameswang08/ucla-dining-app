@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "../components/Images.css";
 import "../components/headers.css";
+import "../components/grid.css";
 import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
@@ -59,15 +60,14 @@ export default function LocationsPage() {
         </text>
       </div>
       {"\n\n\n"}
-      <div className="flex">
-        <div className="prose w-1/2 ml-32 mr-4">
+      <div className="prose ml-16 mr-16 max-w-full px-4 grid gap-24 grid-cols-2">
           {data.map((truck, index) => {
             return (
-              <div className="flex-wrap w-1/2 mx-16">
+              <div className="">
                 <div className="text-white">
                   <h3 className="text-white mt-2 font-base">{truck.name}</h3>
                   {"  "}
-                  <text></text>
+                  {truck.ratingAvg == 0 ? <text>-</text> : <text>{truck.ratingAvg}</text>}
                   <div className="rating rating-xs">
                     <input
                       type="radio"
@@ -77,7 +77,7 @@ export default function LocationsPage() {
                     />
                   </div>
                   {" | "}
-                  <text>_ min</text>
+                  {truck.waitTimeAvg == 0 ? <text>- min</text> : <text>{truck.waitTimeAvg} min</text>}
                 </div>
                 <div className="bg-medium-grey text-white my-4 px-2 py-2">
                   <text>{truck.blurb}</text>
@@ -86,13 +86,12 @@ export default function LocationsPage() {
                   className="btn btn-active btn-link underline decoration-dark-yellow text-white"
                   onClick={() => handleClick(truck.name)}
                 >
-                  EXPLORE
+                  EXPLORE→
                 </button>
               </div>
             );
           })}
         </div>
       </div>
-    </div>
   );
 }
