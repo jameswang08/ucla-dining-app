@@ -80,21 +80,15 @@ function Reviews({ truck, sortMethod }) {
   
     return (
       <>
-        {console.log("I stink1", reviewList)}
-        {console.log("I stink2", reviewList.reviews)}
-        {console.log("I stink3", reviewList.reviews[0].reviews)}
         {reviewList.reviews && reviewList.reviews.length > 0 ? (
             reviewList.reviews[0].reviews.map((item) => (
-                <>
-                    <Review
-                        key={item._id}
-                        name={item.username}
-                        review={item.review}
-                        date={item.date}
-                        likes={item.rating}
-                    />
-                    <h1>Break</h1>
-                </>
+                <Review
+                    key={item._id}
+                    name={item.username}
+                    review={item.review}
+                    date={item.date}
+                    likes={item.rating}
+                />
             ))
         ) : (
             <p>No reviews available.</p>
