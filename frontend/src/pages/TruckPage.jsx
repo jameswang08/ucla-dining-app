@@ -83,7 +83,7 @@ export default function TruckPage() {
 
       <div className="absolute pt-[10rem]">
         <img
-          src={"../../images/" + data.name + ".png"}
+          src={"../../images/" + data.truck.name + ".png"}
           className="foodtruckimgs"
         ></img>
       </div>
@@ -110,7 +110,7 @@ export default function TruckPage() {
           <br />
 
           {loggedIn ? (
-            <RatingsForm />
+            <RatingsForm truckname={data.truck.name} />
           ) : (
             <div className="text-white">
               <ul className="ps-0 btn btn-active btn-link">

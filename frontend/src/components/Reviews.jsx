@@ -1,7 +1,7 @@
 import "../../dist/output.css";
 import React, { useEffect, useState } from "react";
 
-function Review({ name, review, date, likes }) {
+function Review({ name, review, date, likes, rating }) {
   return (
     <>
       <div className="prose bg-medium-grey px-4 py-4">
@@ -95,7 +95,8 @@ function Reviews({ truck, sortMethod }) {
               name={item.username}
               review={item.review}
               date={item.date}
-              likes={item.rating}
+              likes={item.likes}
+              rating={item.rating}
             />
             <h1>Break</h1>
           </>
