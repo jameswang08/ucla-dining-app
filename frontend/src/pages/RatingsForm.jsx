@@ -40,31 +40,31 @@ export default function Rating() {
             <input
               type="radio"
               name="rating"
-              className="mask mask-star-2 bg-white"
+              className="mask mask-star bg-white"
               value={1}
             />
             <input
               type="radio"
               name="rating"
-              className="mask mask-star-2 bg-white"
+              className="mask mask-star bg-white"
               value={2}
             />
             <input
               type="radio"
               name="rating"
-              className="mask mask-star-2 bg-white"
+              className="mask mask-star bg-white"
               value={3}
             />
             <input
               type="radio"
               name="rating"
-              className="mask mask-star-2 bg-white"
+              className="mask mask-star bg-white"
               value={4}
             />
             <input
               type="radio"
               name="rating"
-              className="mask mask-star-2 bg-white"
+              className="mask mask-star bg-white"
               value={5}
             />
           </div>
