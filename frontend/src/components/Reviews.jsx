@@ -1,5 +1,6 @@
 import "../../dist/output.css";
 import React, { useEffect, useState } from 'react';
+import { DateTime } from "luxon";
 
 function Review({name, review, date, likes}) {
     return(
@@ -86,7 +87,7 @@ function Reviews({ truck, sortMethod }) {
                     key={item._id}
                     name={item.username}
                     review={item.review}
-                    date={item.date}
+                    date={DateTime.fromISO(item.date).toLocaleString(DateTime.DATETIME_MED)}
                     likes={item.rating}
                 />
             ))

@@ -53,7 +53,7 @@ export default function TruckPage() {
       <div>
         <NavBar />
       </div>
-
+      {console.log(data)}
       <div className="prose ps-32 pt-32 pb-8">
         <h1 className="text-white mb-0">{data.name}</h1>
         {data.ratingAvg == 0 ? <text className="inline text-white">-</text> : <text className="inline text-white">{data.ratingAvg}</text>}
