@@ -127,6 +127,7 @@ export default function TruckPage() {
               </ul>
             </text>
           </p>
+          
           <div className="prose bg-medium-grey px-4 py-4">
             <h3 className="text-light-yellow font-normal block my-0">Joe Bruin</h3>
             <div className="rating rating-xs disabled block">
