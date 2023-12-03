@@ -3,44 +3,30 @@ import React, { useEffect, useState } from 'react';
 import { DateTime } from "luxon";
 
 function Review({ name, review, date, likes, rating }) {
+  let items = [];
+  let i = 0;
+  for (; i < rating; i++) {
+    items.push(
+      <input
+        type="radio"
+        name="rating-1"
+        className="mask mask-star bg-white"
+        disabled
+      />
+    );
+  }
+
+  for (; i < 5; i++) {
+    items.push(
+      <input type="radio" name="rating-1" className="mask mask-star" disabled />
+    );
+  }
   return (
     <>
       <div className="prose bg-medium-grey text-white px-4 py-4">
         {/*name*/}
         <h3 className="text-light-yellow font-normal block my-0">{name}</h3>
-        <div className="rating rating-xs disabled block">
-          <input
-            type="radio"
-            name="rating-1"
-            className="mask mask-star-2 bg-white"
-            disabled
-          />
-          <input
-            type="radio"
-            name="rating-1"
-            className="mask mask-star-2 bg-white"
-            disabled
-          />
-          <input
-            type="radio"
-            name="rating-1"
-            className="mask mask-star-2 bg-white"
-            checked
-            disabled
-          />
-          <input
-            type="radio"
-            name="rating-1"
-            className="mask mask-star-2 bg-white"
-            disabled
-          />
-          <input
-            type="radio"
-            name="rating-1"
-            className="mask mask-star-2 bg-white"
-            disabled
-          />
-        </div>
+        <div className="rating rating-xs block">{items}</div>
         {/*review*/}
         <text className="prose text-white text-base">{review}</text>
         <br />
@@ -97,6 +83,7 @@ function Reviews({ truck, sortMethod }) {
                 DateTime.DATETIME_MED
               )}
               likes={item.likes}
+              rating={item.rating}
             />
             <br />
           </div>
