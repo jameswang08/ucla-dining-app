@@ -154,7 +154,7 @@ export default function DashboardPage() {
 
         <pre className="leading-[2rem]">{"\n"}</pre>
 
-        <div className="w-[31.5rem] prose bg-gray px-8 py-6">
+        <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
           <h3 className="text-dark-yellow font-normal block my-0">Joe Bruin</h3>
           <div className="rating rating-xs disabled block">
             <input
@@ -191,7 +191,7 @@ export default function DashboardPage() {
           </div>
           <p>{"\n"}</p>
           <TextareaAutosize
-            className="flex w-[27.5rem] text-white rounded-sm text-sm bg-transparent py-2"
+            className="flex w-[27.5rem] text-white text-sm bg-transparent py-2"
             name="scrollHeight"
             disabled
           >

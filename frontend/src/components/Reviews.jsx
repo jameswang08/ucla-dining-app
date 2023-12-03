@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 function Review({ name, review, date, likes, rating }) {
   return (
     <>
-      <div className="prose bg-medium-grey px-4 py-4">
+      <div className="prose bg-medium-grey text-white px-4 py-4">
         {/*name*/}
         <h3 className="text-light-yellow font-normal block my-0">{name}</h3>
         <div className="rating rating-xs disabled block">
@@ -48,59 +48,64 @@ function Review({ name, review, date, likes, rating }) {
         <text className="text-white text-xs">{date}</text>
         {" | "}
         {/*LIKES*/}
-        <text className="text-white text-xs">{likes}</text>
+        <text className="text-white text-xs">{likes} likes</text>
       </div>
     </>
   );
 }
 
 function Reviews({ truck, sortMethod }) {
-    const [reviewList, setReviewList] = useState([]);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(`http://localhost:3000/trucks/${truck}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              sortMethod: sortMethod,
-            }),
-          });
-  
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-  
-          const data = await response.json();
-          setReviewList(data);
-        } catch (error) {
-          console.error('Error:', error);
+  const [reviewList, setReviewList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/trucks/${truck}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sortMethod: sortMethod,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-      };
-      fetchData();
-    }, [truck, sortMethod]);
-  
-    return (
-      <>
-        {console.log("I stink", reviewList.reviews)}
-        {reviewList.reviews && reviewList.reviews.length > 0 ? (
-            reviewList.reviews.map((item, index) => (
-                <Review
-                    key={index}
-                    name={item.username}
-                    review={item.review}
-                    date={DateTime.fromISO(item.date).toLocaleString(DateTime.DATETIME_MED)}
-                    likes={item.rating}
-                />
-            ))
-        ) : (
-            <p>No reviews available.</p>
-        )}
-      </>
-    );
-  } 
+
+        const data = await response.json();
+        setReviewList(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchData();
+  }, [truck, sortMethod]);
+
+  return (
+    <>
+      {console.log("I stink", reviewList.reviews)}
+      {reviewList.reviews && reviewList.reviews.length > 0 ? (
+        reviewList.reviews.map((item, index) => (
+          <div>
+            <Review
+              key={index}
+              name={item.username}
+              review={item.review}
+              date={DateTime.fromISO(item.date).toLocaleString(
+                DateTime.DATETIME_MED
+              )}
+              likes={item.likes}
+            />
+            <br />
+          </div>
+        ))
+      ) : (
+        <p className="text-white">No reviews available.</p>
+      )}
+    </>
+  );
+} 
 
 export default Reviews;
