@@ -18,7 +18,8 @@
     "react-icons-kit": "^2.0.0",
     "react-password-checklist": "^1.5.0",
     "react-password-strength-bar": "^0.4.1",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "react-textarea-autosize": "^8.5.3"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
