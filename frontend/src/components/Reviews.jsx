@@ -52,7 +52,23 @@ function Review({name, review, date, likes}) {
 }
 
 function Reviews({truck, sortMethod}){
-
-}
+    const req = fetch(`http://localhost:3000/trucks/${truck}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sortMethod: sortMethod,
+        }),
+    });
+    const reviewList = req.json();
+    return(
+        <>
+            {reviewList.map((item) => {
+                <Review name={item.name} review={item.review} date={item.date} likes={item.likes}></Review>
+            })}
+        </>
+    )
+}   
 
 export default Reviews
