@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../../dist/output.css";
 import "./Images.css";
 import { Context } from "../components/Context.jsx";
@@ -9,8 +9,40 @@ export default function NavBar() {
   const navigate = useNavigate();
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
     useContext(Context);
-  // TODO: put list of all truck names here
-  let trucks = ["test_truck", "test_truck2"];
+
+  const [trucks, setTrucks] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await fetch("http://localhost:3000/alltrucknames")
+          .then((data) => {
+            return data.json();
+          })
+          .then((post) => {
+            setTrucks(post);
+            setLoading(false);
+          });
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  console.log(trucks);
 
   const handleClick = (truckname) => {
     navigate("/truckpage", { state: truckname });
