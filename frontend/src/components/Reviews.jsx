@@ -82,6 +82,59 @@ function Reviews({ truck, sortMethod }) {
     <>
       {console.log("I stink", reviewList.reviews)}
       {reviewList.reviews && reviewList.reviews.length > 0 ? (
+        reviewList.reviews.map((item, index) => (
+          <div>
+            <Review
+              key={index}
+              name={item.username}
+              review={item.review}
+              date={DateTime.fromISO(item.date).toLocaleString(
+                DateTime.DATETIME_MED
+              )}
+              likes={item.likes}
+              rating={item.rating}
+            />
+            <br />
+          </div>
+        ))
+      ) : (
+        <p className="text-white">No reviews available.</p>
+      )}
+    </>
+  );
+} 
+  const [reviewList, setReviewList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/trucks/${truck}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sortMethod: sortMethod,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setReviewList(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchData();
+  }, [truck, sortMethod]);
+
+  return (
+    <>
+      {console.log("I stink", reviewList.reviews)}
+      {reviewList.reviews && reviewList.reviews.length > 0 ? (
         reviewList.reviews.map((item) => (
           <div key={item._id}>
             <Review
