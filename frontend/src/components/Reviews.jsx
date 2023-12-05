@@ -1,9 +1,53 @@
 import "../../dist/output.css";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { Icon } from "react-icons-kit";
+import { thumbsUp } from "react-icons-kit/feather/thumbsUp";
 import { DateTime } from "luxon";
 import TextareaAutosize from "react-textarea-autosize";
+import { Context } from "../components/Context.jsx";
 
-function Review({ name, review, date, likes, rating }) {
+function Review({ id, name, review, date, likes, rating }) {
+  const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
+    useContext(Context);
+  const [liked, setLiked] = useState(false);  // assumes no likes when logged in
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const handleLikeClick = (event) => {
+    event.preventDefault();
+    if (!loggedIn)
+      return;
+    if (name == savedUser)
+      return;
+    fetch("http://localhost:3000/updatelike", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: savedUser,
+        reviewId: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+          console.log("like update success");
+          if (data.liked != liked) {
+            setLiked(data.liked);
+            if (data.liked)
+              setLikeCount(likeCount+1);
+            else
+              setLikeCount(likeCount-1);
+          }
+        } else {
+          console.log("like update failure");
+          setLoginErrorMessage(true);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
   let items = [];
   let i = 0;
   for (; i < rating; i++) {
@@ -43,7 +87,17 @@ function Review({ name, review, date, likes, rating }) {
         <text className="text-white text-xs">{date}</text>
         {" | "}
         {/*LIKES*/}
-        <text className="text-white text-xs">{likes} likes</text>
+        <text className="text-white text-xs">{likeCount} likes</text>
+        {/*LIKE BUTTON*/}
+        <button
+          id="button"
+          type="button"
+          value={liked}
+          onClick={(event) => handleLikeClick(event)}
+          className={"absolute text-" + (liked ? "white" : "gray") + " ml-[0.25rem] mt-[0rem]"}
+        >
+          <Icon icon={thumbsUp} />
+        </button>
       </div>
     </>
   );
@@ -85,6 +139,7 @@ function Reviews({ truck, sortMethod }) {
         reviewList.reviews.map((item) => (
           <div key={item._id}>
             <Review
+              id={item._id}
               name={item.username}
               review={item.review}
               date={DateTime.fromISO(item.date).toLocaleString(

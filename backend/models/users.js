@@ -44,7 +44,7 @@ userSchema.methods.setFavorite = async function (favorite) {
 userSchema.methods.toggleLike = async function (reviewId) {
   // exit if own review
   let review = await mongoose.model("Review").getReviewById(reviewId);
-  if (review.userId.equals(this._id)) return false;
+  if (review.username == this.username) return false;
   // check if liked before
   let liked = false;
   for (let i = 0; i < this.likes.length; i++)

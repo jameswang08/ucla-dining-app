@@ -113,6 +113,12 @@ app.get("/alltrucknames", async (req, res) => {
   res.json(trucknames);
 });
 
+app.patch("/updatelike", async (req, res) => {
+  const user = await UserModel.getUserByUsername(req.body.username);
+  const liked = await user.toggleLike(new mongoose.Types.ObjectId(req.body.reviewId));
+  res.json({ success: true, liked: liked, message: "Update to like successful" });
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
