@@ -67,7 +67,11 @@ export default function LocationsPage() {
                 <div className="text-white">
                   <h3 className="text-white mt-2 font-base">{truck.name}</h3>
                   {"  "}
-                  {truck.ratingAvg == 0 ? <text>-</text> : <text>{truck.ratingAvg}</text>}
+                  {truck.ratingAvg == 0 ? (
+                    <text>-</text>
+                  ) : (
+                    <text>{parseInt(truck.ratingAvg * 100) / 100}</text>
+                  )}
                   <div className="rating rating-xs">
                     <input
                       type="radio"
@@ -77,7 +81,11 @@ export default function LocationsPage() {
                     />
                   </div>
                   {" | "}
-                  {truck.waitTimeAvg == 0 ? <text>- min</text> : <text>{truck.waitTimeAvg} min</text>}
+                  {truck.waitTimeAvg == 0 ? (
+                    <text>- min</text>
+                  ) : (
+                    <text>{parseInt(truck.waitTimeAvg * 100) / 100} min</text>
+                  )}
                 </div>
                 <div className="bg-medium-grey text-white my-4 px-2 py-2">
                   <text>{truck.blurb}</text>

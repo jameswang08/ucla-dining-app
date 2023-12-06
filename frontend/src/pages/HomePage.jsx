@@ -21,7 +21,7 @@ export default function HomePage() {
       </div>
 
       <div className="text-black bg-light-yellow ps-24 py-7 my-40 leading-[2rem]">
-        <pre className="text-2xl font-bold leading-[2rem]">
+        <pre className="text-2xl font-bold leading-[2rem] pt-[1rem]">
           Our goals{"\n\n"}
         </pre>
 
