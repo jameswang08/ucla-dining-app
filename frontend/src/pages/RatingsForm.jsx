@@ -5,7 +5,7 @@ import "../components/ratings.css";
 
 import { useNavigate } from "react-router-dom";
 
-export default function Rating({ truckname }) {
+export default function Rating({ truckname, setReview }) {
   const [inputs, setInputs] = useState({ rating: 5 });
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
     useContext(Context);
@@ -41,7 +41,7 @@ export default function Rating({ truckname }) {
           console.log(data);
           console.log("review posting success");
           setInputs({ rating: 5 });
-          navigate("/truckpage", { state: truckname });
+          setReview();
         } else {
           console.log("review posting failed");
         }

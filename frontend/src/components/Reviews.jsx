@@ -101,6 +101,8 @@ function Review({ id, name, review, date, likes, rating }) {
       <input type="radio" name="rating-1" className="mask mask-star" disabled />
     );
   }
+
+  console.log("Review component rerendered");
   return (
     <>
       <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
@@ -142,7 +144,7 @@ function Review({ id, name, review, date, likes, rating }) {
   );
 }
 
-function Reviews({ truck, sortMethod }) {
+function Reviews({ truck, sortMethod, rerender }) {
   const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
@@ -169,7 +171,7 @@ function Reviews({ truck, sortMethod }) {
       }
     };
     fetchData();
-  }, [truck, sortMethod]);
+  }, [truck, sortMethod, rerender]);
 
   return (
     <>

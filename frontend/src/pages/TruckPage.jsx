@@ -15,6 +15,7 @@ export default function TruckPage() {
   const truckname = useLocation().state;
 
   const [sort, setSort] = useState(null);
+  const [review, setReview] = useState(0);
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,6 +50,13 @@ export default function TruckPage() {
   }
 
   console.log("Truck data", data.truck);
+
+  const rerenderReview = () => {
+    setReview(review + 1);
+    console.log("Updating review");
+  };
+
+  console.log("Truckpage component rerendered");
 
   return (
     <div>
@@ -106,7 +114,12 @@ export default function TruckPage() {
           <br />
 
           {loggedIn ? (
-            <RatingsForm truckname={data.truck.name} key={data.truck.name} />
+            <RatingsForm
+              truckname={data.truck.name}
+              key={data.truck.name}
+              setReview={rerenderReview}
+              value={review}
+            />
           ) : (
             <div className="text-white">
               <ul className="ps-0 btn btn-active btn-link">
@@ -154,7 +167,11 @@ export default function TruckPage() {
 
           <br />
           {/* Reviews go here */}
-          <Reviews truck={truckname} sortMethod={sort}></Reviews>
+          <Reviews
+            truck={truckname}
+            sortMethod={sort}
+            rerender={review}
+          ></Reviews>
         </div>
       </div>
     </div>
