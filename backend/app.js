@@ -24,11 +24,27 @@ async function main() {
   await mongoose.connect(mongoDB);
 
   /*
-  await TruckModel.createTruck("Kalamaki", "another blurb");
-  await TruckModel.createTruck("Baja California", "another blurb");
-  await TruckModel.createTruck("BittieBitez Mini-Donuts", "another blurb");
-  await TruckModel.createTruck("StopBye", "another blurb");
-  await TruckModel.createTruck("Sugo Italiano", "another blurb");
+  await TruckModel.createTruck("Kalamaki", "Kalamaki Greek Street Food \
+   specializes in fine Greek food, including gyros, salads, yogurts, and \
+    smoothies.");
+
+  await TruckModel.createTruck("Pinch of Flavor", "Pinch of Flavor specializes \
+   in homemade seafood dishes, with options like shrimp tempura bowls or beef \
+   or chicken teriyaki.");
+
+  await TruckModel.createTruck("BittieBitez Mini-Donuts", "BittieBitez \
+  Mini-Donuts is a dessert food truck specializing in freshly-made mini \
+  donuts with a variety of toppings including chocolate, oreo, and Fruity \
+  Pebbles. This dessert truck is a favored late-night option for those with \
+   a sweet tooth.");
+
+  await TruckModel.createTruck("StopBye", "StopBye Indonesian Fusion specializes \
+  in Indonesian fusion food featuring ingredients from “Spice Island”, such as \
+  lemongrass fried chicken sandwiches or chicken mee goreng (Indonesian chow mein).");
+
+  await TruckModel.createTruck("Sugo Italiano", "Sugo Italiano is an authentic Italian \
+  food truck, and the best place to get pasta to-go. The menu features items such as four \
+  cheese Italian ravioli and pasta vodka pink sauce.");
   */
 }
 
