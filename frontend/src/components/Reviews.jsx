@@ -25,7 +25,7 @@ function Review({ id, name, review, date, likes, rating }) {
             return data.json();
           })
           .then((post) => {
-            console.log("Like rendering", post);
+            // console.log("Like rendering", post);
             if (post.success) {
               setLiked(true);
             }
@@ -102,7 +102,6 @@ function Review({ id, name, review, date, likes, rating }) {
     );
   }
 
-  console.log("Review component rerendered");
   return (
     <>
       <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
@@ -175,7 +174,7 @@ function Reviews({ truck, sortMethod, rerender }) {
 
   return (
     <>
-      {console.log("I stink", reviewList.reviews)}
+      {console.log("Reviews list", reviewList.reviews)}
       {reviewList.reviews && reviewList.reviews.length > 0 ? (
         reviewList.reviews.map((item) => (
           <div key={item._id}>

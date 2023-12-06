@@ -56,8 +56,6 @@ export default function TruckPage() {
     console.log("Updating review");
   };
 
-  console.log("Truckpage component rerendered");
-
   return (
     <div>
       <div>
