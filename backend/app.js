@@ -113,8 +113,13 @@ app.get("/alltrucknames", async (req, res) => {
   res.json(trucknames);
 });
 
-app.patch("/updatelike", async (req, res) => {
-  const user = await UserModel.getUserByUsername(req.body.username);
+app.get("/users/:username/likes", async (req, res) => {
+  const user = await UserModel.getUserByUsername(req.params.username);
+  res.json(user.likes);
+});
+
+app.patch("/users/:username/updatelike", async (req, res) => {
+  const user = await UserModel.getUserByUsername(req.params.username);
   const liked = await user.toggleLike(new mongoose.Types.ObjectId(req.body.reviewId));
   res.json({ success: true, liked: liked, message: "Update to like successful" });
 });

@@ -6,11 +6,12 @@ import { DateTime } from "luxon";
 import TextareaAutosize from "react-textarea-autosize";
 import { Context } from "../components/Context.jsx";
 
-function Review({ id, name, review, date, likes, rating }) {
+function Review({ id, name, review, date, likes, rating, liked }) {
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
     useContext(Context);
-  const [liked, setLiked] = useState(false);  // assumes no likes when logged in
+  const [likeState, setLikeState] = useState(liked);
   const [likeCount, setLikeCount] = useState(likes);
+  console.log(liked);
 
   const handleLikeClick = (event) => {
     event.preventDefault();
@@ -18,13 +19,20 @@ function Review({ id, name, review, date, likes, rating }) {
       return;
     if (name == savedUser)
       return;
-    fetch("http://localhost:3000/updatelike", {
+    if (likeState == true) {
+      setLikeCount(likeCount - 1);
+      setLikeState(false);
+    }
+    else {
+      setLikeCount(likeCount + 1);
+      setLikeState(true);
+    }
+    fetch(`http://localhost:3000/users/${savedUser}/updatelike`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: savedUser,
         reviewId: id,
       }),
     })
@@ -33,16 +41,8 @@ function Review({ id, name, review, date, likes, rating }) {
         if (data.success) {
           console.log(data);
           console.log("like update success");
-          if (data.liked != liked) {
-            setLiked(data.liked);
-            if (data.liked)
-              setLikeCount(likeCount+1);
-            else
-              setLikeCount(likeCount-1);
-          }
         } else {
           console.log("like update failure");
-          setLoginErrorMessage(true);
         }
       })
       .catch((error) => console.error("Error:", error));
@@ -92,19 +92,46 @@ function Review({ id, name, review, date, likes, rating }) {
         <button
           id="button"
           type="button"
-          value={liked}
+          value={likeState}
           onClick={(event) => handleLikeClick(event)}
-          className={"absolute text-" + (liked ? "white" : "gray") + " ml-[0.25rem] mt-[0rem]"}
+          className={"absolute text-" + (likeState ? "white" : "gray") + " ml-[0.25rem] mt-[0rem]"}
         >
           <Icon icon={thumbsUp} />
         </button>
+        { console.log(likeState) }
       </div>
     </>
   );
 }
 
 function Reviews({ truck, sortMethod }) {
+  const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
+    useContext(Context);
   const [reviewList, setReviewList] = useState([]);
+  const [userLikes, setUserLikes] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/users/${savedUser}/likes`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        setUserLikes(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    if (loggedIn)
+      fetchData();
+  }, [truck, sortMethod]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -147,6 +174,7 @@ function Reviews({ truck, sortMethod }) {
               )}
               likes={item.likes}
               rating={item.rating}
+              liked={loggedIn ? (userLikes.indexOf(item._id) != -1) : false}
             />
             <br />
           </div>
