@@ -115,8 +115,21 @@ app.get("/alltrucknames", async (req, res) => {
 
 app.patch("/updatelike", async (req, res) => {
   const user = await UserModel.getUserByUsername(req.body.username);
-  const liked = await user.toggleLike(new mongoose.Types.ObjectId(req.body.reviewId));
-  res.json({ success: true, liked: liked, message: "Update to like successful" });
+  const liked = await user.toggleLike(
+    new mongoose.Types.ObjectId(req.body.reviewId)
+  );
+  res.json({
+    success: true,
+    liked: liked,
+    message: "Update to like successful",
+  });
+});
+
+app.get("/likes/:username/reviewid/:review", async (req, res) => {
+  const user = await UserModel.getUserByUsername(req.params.username);
+  const likes = user.likes;
+  if (likes.indexOf(req.params.review) == -1) res.json({ success: false });
+  else res.json({ success: true });
 });
 
 const port = 3000;

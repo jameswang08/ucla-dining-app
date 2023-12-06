@@ -1,5 +1,5 @@
 import "../../dist/output.css";
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from "react";
 import { Icon } from "react-icons-kit";
 import { thumbsUp } from "react-icons-kit/feather/thumbsUp";
 import { DateTime } from "luxon";
@@ -9,15 +9,53 @@ import { Context } from "../components/Context.jsx";
 function Review({ id, name, review, date, likes, rating }) {
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
     useContext(Context);
-  const [liked, setLiked] = useState(false);  // assumes no likes when logged in
+  const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(likes);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await fetch(
+          "http://localhost:3000/likes/" + savedUser + "/reviewid/" + id
+        )
+          .then((data) => {
+            return data.json();
+          })
+          .then((post) => {
+            console.log("Like rendering", post);
+            if (post.success) {
+              setLiked(true);
+            }
+            setLoading(false);
+          });
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+
+    if (loggedIn) {
+      fetchData();
+    } else {
+      setLoading(false);
+    }
+  }, [loggedIn, savedUser, id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const handleLikeClick = (event) => {
     event.preventDefault();
-    if (!loggedIn)
-      return;
-    if (name == savedUser)
-      return;
+    if (!loggedIn) return;
+    if (name == savedUser) return;
     fetch("http://localhost:3000/updatelike", {
       method: "PATCH",
       headers: {
@@ -35,14 +73,11 @@ function Review({ id, name, review, date, likes, rating }) {
           console.log("like update success");
           if (data.liked != liked) {
             setLiked(data.liked);
-            if (data.liked)
-              setLikeCount(likeCount+1);
-            else
-              setLikeCount(likeCount-1);
+            if (data.liked) setLikeCount(likeCount + 1);
+            else setLikeCount(likeCount - 1);
           }
         } else {
           console.log("like update failure");
-          setLoginErrorMessage(true);
         }
       })
       .catch((error) => console.error("Error:", error));
@@ -94,7 +129,11 @@ function Review({ id, name, review, date, likes, rating }) {
           type="button"
           value={liked}
           onClick={(event) => handleLikeClick(event)}
-          className={"absolute text-" + (liked ? "white" : "gray") + " ml-[0.25rem] mt-[0rem]"}
+          className={
+            "absolute text-" +
+            (liked ? "white" : "gray") +
+            " ml-[0.25rem] mt-[0rem]"
+          }
         >
           <Icon icon={thumbsUp} />
         </button>
@@ -156,6 +195,6 @@ function Reviews({ truck, sortMethod }) {
       )}
     </>
   );
-} 
+}
 
 export default Reviews;
