@@ -68,7 +68,7 @@ export default function TruckPage() {
           <text className="inline text-white">-</text>
         ) : (
           <text className="inline text-white">
-            {data.truck.ratingAvg.toFixed(2)}
+            {parseInt(data.truck.ratingAvg * 100) / 100}
           </text>
         )}{" "}
         <div className="rating rating-xs inline">
@@ -84,7 +84,7 @@ export default function TruckPage() {
           <text className="inline text-white">- min</text>
         ) : (
           <text className="inline text-white">
-            {data.truck.waitTimeAvg.toFixed(2)} min
+            {parseInt(data.truck.waitTimeAvg * 100) / 100} min
           </text>
         )}
       </div>
