@@ -157,6 +157,15 @@ export default function TruckPage() {
             >
               Earliest
             </ul>
+            <ul
+              className="text-dark-yellow btn btn-active btn-link"
+              onClick={() => {
+                console.log("clicked");
+                setSort("popularity");
+              }}
+            >
+              Popularity
+            </ul>
             {/* <ul className="text-dark-yellow btn btn-active btn-link">
               Popular
             </ul> */}
