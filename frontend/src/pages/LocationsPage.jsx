@@ -87,7 +87,7 @@ export default function LocationsPage() {
                     <text>{parseInt(truck.waitTimeAvg * 100) / 100} min</text>
                   )}
                 </div>
-                <div className="bg-medium-grey text-white my-4 px-2 py-2">
+                <div className="bg-medium-grey text-white my-4 mx-3 px-2 py-2">
                   <text>{truck.blurb}</text>
                 </div>
                 <button

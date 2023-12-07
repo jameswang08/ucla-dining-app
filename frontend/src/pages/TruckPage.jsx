@@ -139,35 +139,53 @@ export default function TruckPage() {
         <div className="prose w-1/2 pl-36">
           <div>
             <h2 className="text-white mb-0 pt-8 pb-2">Reviews</h2>
-            <text className="inline-block text-white">Sort by:
-            <ul
-              className="text-dark-yellow btn btn-active btn-link my-0"
-              onClick={() => {
-                setSort("latest");
-              }}
-            >
-              Latest
-            </ul>
-            <ul
-              className="text-dark-yellow btn btn-active btn-link my-0"
-              onClick={() => {
-                setSort("earliest");
-              }}
-            >
-              Earliest
-            </ul>
-            <ul
-                className="text-dark-yellow btn btn-active btn-link my-0"
-              onClick={() => {
-                setSort("popularity");
-              }}
-            >
-              Popularity
-              </ul>
+            <text className="text-white">
+              Sort by:
+              <div className="inline-block mx-5 text-dark-yellow font-bold">
+                <input
+                  type="radio"
+                  checked={sort === "latest"}
+                  onChange={() => {
+                    setSort("latest");
+                  }}
+                />
+                Latest
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+                <input
+                  type="radio"
+                  checked={sort === "earliest"}
+                  onChange={() => {
+                    setSort("earliest");
+                  }}
+                />
+                Earliest
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+                <input
+                  type="radio"
+                  checked={sort === "popularity"}
+                  onChange={() => {
+                    setSort("popularity");
+                  }}
+                />
+                Popularity
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+              </div>
             </text>
-            <text className="inline-block text-white">
+            <text className="inline-block text-dark-yellow font-bold">
               Filter by:
-              <ul className="text-dark-yellow btn btn-active btn-link my-0"
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="checkbox"
+                defaultChecked={false}
+                // className="text-dark-yellow btn btn-active btn-link my-0"
                 onClick={() => {
                   console.log("Clicked", appliedFilters);
                   const tempArr = [...appliedFilters];
@@ -181,10 +199,15 @@ export default function TruckPage() {
                   }
                   setAppliedFilters(tempArr);
                 }}
-              >
-                Lunch
-              </ul>
-              <ul className="text-dark-yellow btn btn-active btn-link my-0"
+              />
+              Lunch
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="checkbox"
+                defaultChecked={false}
+                // className="text-dark-yellow btn btn-active btn-link my-0"
                 onClick={() => {
                   const tempArr = [...appliedFilters];
                   const index = tempArr.indexOf("dinner");
@@ -197,10 +220,15 @@ export default function TruckPage() {
                   }
                   setAppliedFilters(tempArr);
                 }}
-              >
-                Dinner
-              </ul>
-              <ul className="text-dark-yellow btn btn-active btn-link my-0"
+              />
+              Dinner
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="checkbox"
+                defaultChecked={false}
+                // className="text-dark-yellow btn btn-active btn-link my-0"
                 onClick={() => {
                   const tempArr = [...appliedFilters];
                   const index = tempArr.indexOf("lateNight");
@@ -213,9 +241,11 @@ export default function TruckPage() {
                   }
                   setAppliedFilters(tempArr);
                 }}
-              >
-                Late Night
-              </ul>
+              />
+              Late Night
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
             </text>
           </div>
 
