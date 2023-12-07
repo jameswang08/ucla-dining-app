@@ -116,6 +116,11 @@ app.post("/trucks/:truckname", async (req, res) => {
     .sort({ date: 1 })
     .exec();
     res.json({ reviews });   
+  } else if (req.body.sortMethod === "popularity") {
+    const reviews = await ReviewModel.find({ truckname: req.params.truckname })
+    .sort({ likes: -1 })
+    .exec();
+    res.json({ reviews }); 
   } else {
     const reviews = await ReviewModel.find({
       truckname: req.params.truckname,
