@@ -105,6 +105,57 @@ app.get("/trucks/:truckname", async (req, res) => {
   res.json({ truck });
 });
 
+app.post("/users/:username", async (req, res) => {
+  //If there are filters
+  console.log(req.body.filters);
+  if (req.body.filters !== undefined && req.body.filters.length !== 0) {
+    if (req.body.sortMethod === "latest") {
+      const reviews = await ReviewModel.find({ username: req.params.username, meal: { $in: req.body.filters } })
+        .sort({ date: -1 })
+        .exec();
+      res.json({ reviews });
+    } else if (req.body.sortMethod === "earliest") {
+      const reviews = await ReviewModel.find({ username: req.params.username, meal: { $in: req.body.filters } })
+        .sort({ date: 1 })
+        .exec();
+      res.json({ reviews });
+    } else if (req.body.sortMethod === "popularity") {
+      const reviews = await ReviewModel.find({ username: req.params.username, meal: { $in: req.body.filters } })
+        .sort({ likes: -1 })
+        .exec();
+      res.json({ reviews });
+    } else {
+      const reviews = await ReviewModel.find({
+        username: req.params.username, meal: { $in: req.body.filters }
+      }).exec();
+      res.json({ reviews });
+    }
+  }
+  else {
+    if (req.body.sortMethod === "latest") {
+      const reviews = await ReviewModel.find({ username: req.params.username })
+        .sort({ date: -1 })
+        .exec();
+      res.json({ reviews });
+    } else if (req.body.sortMethod === "earliest") {
+      const reviews = await ReviewModel.find({ username: req.params.username })
+        .sort({ date: 1 })
+        .exec();
+      res.json({ reviews });
+    } else if (req.body.sortMethod === "popularity") {
+      const reviews = await ReviewModel.find({ username: req.params.username })
+        .sort({ likes: -1 })
+        .exec();
+      res.json({ reviews });
+    } else {
+      const reviews = await ReviewModel.find({
+        username: req.params.username,
+      }).exec();
+      res.json({ reviews });
+    }
+  }
+});
+
 app.post("/trucks/:truckname", async (req, res) => {
   //If there are filters
   console.log(req.body.filters);

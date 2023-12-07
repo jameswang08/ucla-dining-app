@@ -6,7 +6,7 @@ import "../components/Images.css";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
-import Reviews from "../components/Reviews.jsx";
+import TruckReviews from "../components/TruckReviews.jsx";
 
 export default function TruckPage() {
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
@@ -252,12 +252,12 @@ export default function TruckPage() {
 
           <br />
           {/* Reviews go here */}
-          <Reviews
+          <TruckReviews
             truck={truckname}
             sortMethod={sort}
             filters={appliedFilters}
             rerender={review}
-          ></Reviews>
+          ></TruckReviews>
         </div>
       </div>
     </div>

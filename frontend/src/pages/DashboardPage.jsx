@@ -7,28 +7,21 @@ import { useLocation } from "react-router-dom";
 import { Context } from "../components/Context.jsx";
 import { Icon } from "react-icons-kit";
 import { arrowSortedDown } from "react-icons-kit/typicons/arrowSortedDown";
-import TextareaAutosize from "react-textarea-autosize";
+import UserReviews from "../components/UserReviews.jsx";
 
 export default function DashboardPage() {
   const user = useLocation().state;
   const firstname = user.name.first;
   const lastname = user.name.last;
   const reputation = user.reputation;
-  const reviews = user.reviews;
-  const testReviews = [
-    "hijsojfpoejpqjwpojqpojfoqjfoqjfopqjopfjqpjfqpjfpoqjopfjqopfjadjoajodapjaojajoapjopqp \
-  qjfiopqwjfpiqjwfpiqjpiaipajidfjdiapjfpajipfjapjfpajifpjipajfpiajpfjajifpjapijfjapijpiajpfjpsajfpaf \
-  jiajdfaojfapojpjdpfjaijdfpajfipjaipjfipasjfpajdpfijafjdpajfiajfpiasjfpiajfiapjfpiajpfajpisfjpaijfpiajfipa \
-  asjoipdfjapijfpiajfpiajfpiajpifjaipjfpiajipfjaipjfaipjapijap \
-  apple aofjpwoejpfajopjefpoawjefopjawopfjpoawjopfjawpoefjpoawjefopawjpofajwpfojawpofjawopjfpaojopjspojposj",
-    "bye",
-  ];
   const [favorite, setFavorite] = useState(user.favorite);
 
   const [trucks, setTrucks] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [textareaheight, setTextareaheight] = useState(1);
+
+  const [sort, setSort] = useState("");
+  const [appliedFilters, setAppliedFilters] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -147,61 +140,125 @@ export default function DashboardPage() {
       </div>
 
       <div className="column ps-16 text-white text-lg">
-        <pre>Your reviews</pre>
-        <pre className="inline-block text-sm">Sort by:</pre>
-        <ul className="text-dark-yellow btn btn-active btn-link">Latest</ul>
-        {/* <ul className="text-dark-yellow btn btn-active btn-link">Popular</ul> */}
-
-        <pre className="leading-[2rem]">{"\n"}</pre>
-
-        <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
-          <h3 className="text-dark-yellow font-normal block my-0">Joe Bruin</h3>
-          <div className="rating rating-xs disabled block">
-            <input
-              type="radio"
-              name="rating-1"
-              className="mask mask-star bg-white"
-              disabled
-            />
-            <input
-              type="radio"
-              name="rating-1"
-              className="mask mask-star bg-white"
-              disabled
-            />
-            <input
-              type="radio"
-              name="rating-1"
-              className="mask mask-star bg-white"
-              checked
-              disabled
-            />
-            <input
-              type="radio"
-              name="rating-1"
-              className="mask mask-star bg-white"
-              disabled
-            />
-            <input
-              type="radio"
-              name="rating-1"
-              className="mask mask-star bg-white"
-              disabled
-            />
-          </div>
-          <p>{"\n"}</p>
-          <TextareaAutosize
-            className="flex w-[27.5rem] text-white text-sm bg-transparent py-2"
-            name="scrollHeight"
-            disabled
-          >
-            {testReviews[1]}
-          </TextareaAutosize>
-          <br />
-          <text className="text-white text-xs">Oct 24, 2023</text>
-          {" | "}
-          <text className="text-white text-xs">5 likes</text>
+        <div>
+          <h2 className="text-white mb-0 pt-8 pb-2">Reviews</h2>
+          <text className="text-white">
+            Sort by:
+            <div className="inline-block mx-5 text-dark-yellow font-bold">
+              <input
+                type="radio"
+                checked={sort === "latest"}
+                onChange={() => {
+                  setSort("latest");
+                }}
+              />
+              Latest
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="radio"
+                checked={sort === "earliest"}
+                onChange={() => {
+                  setSort("earliest");
+                }}
+              />
+              Earliest
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="radio"
+                checked={sort === "popularity"}
+                onChange={() => {
+                  setSort("popularity");
+                }}
+              />
+              Popularity
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+            </div>
+          </text>
+          <text className="inline-block text-white">
+            Filter by:
+            <div className="inline-block text-dark-yellow font-bold">
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="checkbox"
+                defaultChecked={false}
+                onClick={() => {
+                  console.log("Clicked", appliedFilters);
+                  const tempArr = [...appliedFilters];
+                  const index = tempArr.indexOf("lunch");
+                  if (index === -1) {
+                    // Element is not in the array, so add it
+                    tempArr.push("lunch");
+                  } else {
+                    // Element is in the array, so remove it
+                    tempArr.splice(index, 1);
+                  }
+                  setAppliedFilters(tempArr);
+                }}
+              />
+              Lunch
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="checkbox"
+                defaultChecked={false}
+                // className="text-dark-yellow btn btn-active btn-link my-0"
+                onClick={() => {
+                  const tempArr = [...appliedFilters];
+                  const index = tempArr.indexOf("dinner");
+                  if (index === -1) {
+                    // Element is not in the array, so add it
+                    tempArr.push("dinner");
+                  } else {
+                    // Element is in the array, so remove it
+                    tempArr.splice(index, 1);
+                  }
+                  setAppliedFilters(tempArr);
+                }}
+              />
+              Dinner
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+              <input
+                type="checkbox"
+                defaultChecked={false}
+                // className="text-dark-yellow btn btn-active btn-link my-0"
+                onClick={() => {
+                  const tempArr = [...appliedFilters];
+                  const index = tempArr.indexOf("lateNight");
+                  if (index === -1) {
+                    // Element is not in the array, so add it
+                    tempArr.push("lateNight");
+                  } else {
+                    // Element is in the array, so remove it
+                    tempArr.splice(index, 1);
+                  }
+                  setAppliedFilters(tempArr);
+                }}
+              />
+              Late Night
+              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                {" "}
+              </pre>
+            </div>
+          </text>
         </div>
+
+        <br />
+        <UserReviews
+          user={user.username}
+          sortMethod={sort}
+          filters={appliedFilters}
+        ></UserReviews>
 
         <pre className="leading-[2rem]">{"\n\n\n"}</pre>
       </div>
