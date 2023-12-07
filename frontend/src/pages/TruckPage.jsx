@@ -171,6 +171,7 @@ export default function TruckPage() {
               Filter by:
               <ul className="text-dark-yellow btn btn-active btn-link"
                 onClick={() => {
+                  console.log("Clicked", appliedFilters);
                   const tempArr = [...appliedFilters];
                   const index = tempArr.indexOf("lunch");
                   if (index === -1) {
@@ -204,10 +205,10 @@ export default function TruckPage() {
               <ul className="text-dark-yellow btn btn-active btn-link"
                 onClick={() => {
                   const tempArr = [...appliedFilters];
-                  const index = tempArr.indexOf("late_night");
+                  const index = tempArr.indexOf("lateNight");
                   if (index === -1) {
                     // Element is not in the array, so add it
-                    tempArr.push("late_night");
+                    tempArr.push("lateNight");
                   } else {
                     // Element is in the array, so remove it
                     tempArr.splice(index, 1);
