@@ -14,7 +14,7 @@ export default function TruckPage() {
 
   const truckname = useLocation().state;
 
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState("");
   const [review, setReview] = useState(0);
 
   const [data, setData] = useState(null);
@@ -141,9 +141,21 @@ export default function TruckPage() {
             <text className="inline-block text-white">Sort by:</text>
             <ul
               className="text-dark-yellow btn btn-active btn-link"
-              onClick={() => setSort("latest")}
+              onClick={() => {
+                console.log("clicked");
+                setSort("latest");
+              }}
             >
               Latest
+            </ul>
+            <ul
+              className="text-dark-yellow btn btn-active btn-link"
+              onClick={() => {
+                console.log("clicked");
+                setSort("earliest");
+              }}
+            >
+              Earliest
             </ul>
             {/* <ul className="text-dark-yellow btn btn-active btn-link">
               Popular
