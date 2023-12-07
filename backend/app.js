@@ -108,9 +108,14 @@ app.get("/trucks/:truckname", async (req, res) => {
 app.post("/trucks/:truckname", async (req, res) => {
   if (req.body.sortMethod === "latest") {
     const reviews = await ReviewModel.find({ truckname: req.params.truckname })
-      .sort({ date: 1 })
+      .sort({ date: -1 })
       .exec();
     res.json({ reviews });
+  } else if (req.body.sortMethod === "earliest") {
+    const reviews = await ReviewModel.find({ truckname: req.params.truckname })
+    .sort({ date: 1 })
+    .exec();
+    res.json({ reviews });   
   } else {
     const reviews = await ReviewModel.find({
       truckname: req.params.truckname,
