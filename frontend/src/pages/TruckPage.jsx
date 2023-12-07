@@ -177,75 +177,76 @@ export default function TruckPage() {
                 </pre>
               </div>
             </text>
-            <text className="inline-block text-dark-yellow font-bold">
+            <text className="inline-block text-white">
               Filter by:
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                {" "}
-              </pre>
-              <input
-                type="checkbox"
-                defaultChecked={false}
-                // className="text-dark-yellow btn btn-active btn-link my-0"
-                onClick={() => {
-                  console.log("Clicked", appliedFilters);
-                  const tempArr = [...appliedFilters];
-                  const index = tempArr.indexOf("lunch");
-                  if (index === -1) {
-                    // Element is not in the array, so add it
-                    tempArr.push("lunch");
-                  } else {
-                    // Element is in the array, so remove it
-                    tempArr.splice(index, 1);
-                  }
-                  setAppliedFilters(tempArr);
-                }}
-              />
-              Lunch
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                {" "}
-              </pre>
-              <input
-                type="checkbox"
-                defaultChecked={false}
-                // className="text-dark-yellow btn btn-active btn-link my-0"
-                onClick={() => {
-                  const tempArr = [...appliedFilters];
-                  const index = tempArr.indexOf("dinner");
-                  if (index === -1) {
-                    // Element is not in the array, so add it
-                    tempArr.push("dinner");
-                  } else {
-                    // Element is in the array, so remove it
-                    tempArr.splice(index, 1);
-                  }
-                  setAppliedFilters(tempArr);
-                }}
-              />
-              Dinner
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                {" "}
-              </pre>
-              <input
-                type="checkbox"
-                defaultChecked={false}
-                // className="text-dark-yellow btn btn-active btn-link my-0"
-                onClick={() => {
-                  const tempArr = [...appliedFilters];
-                  const index = tempArr.indexOf("lateNight");
-                  if (index === -1) {
-                    // Element is not in the array, so add it
-                    tempArr.push("lateNight");
-                  } else {
-                    // Element is in the array, so remove it
-                    tempArr.splice(index, 1);
-                  }
-                  setAppliedFilters(tempArr);
-                }}
-              />
-              Late Night
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                {" "}
-              </pre>
+              <div className="inline-block text-dark-yellow font-bold">
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+                <input
+                  type="checkbox"
+                  defaultChecked={false}
+                  onClick={() => {
+                    console.log("Clicked", appliedFilters);
+                    const tempArr = [...appliedFilters];
+                    const index = tempArr.indexOf("lunch");
+                    if (index === -1) {
+                      // Element is not in the array, so add it
+                      tempArr.push("lunch");
+                    } else {
+                      // Element is in the array, so remove it
+                      tempArr.splice(index, 1);
+                    }
+                    setAppliedFilters(tempArr);
+                  }}
+                />
+                Lunch
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+                <input
+                  type="checkbox"
+                  defaultChecked={false}
+                  // className="text-dark-yellow btn btn-active btn-link my-0"
+                  onClick={() => {
+                    const tempArr = [...appliedFilters];
+                    const index = tempArr.indexOf("dinner");
+                    if (index === -1) {
+                      // Element is not in the array, so add it
+                      tempArr.push("dinner");
+                    } else {
+                      // Element is in the array, so remove it
+                      tempArr.splice(index, 1);
+                    }
+                    setAppliedFilters(tempArr);
+                  }}
+                />
+                Dinner
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+                <input
+                  type="checkbox"
+                  defaultChecked={false}
+                  // className="text-dark-yellow btn btn-active btn-link my-0"
+                  onClick={() => {
+                    const tempArr = [...appliedFilters];
+                    const index = tempArr.indexOf("lateNight");
+                    if (index === -1) {
+                      // Element is not in the array, so add it
+                      tempArr.push("lateNight");
+                    } else {
+                      // Element is in the array, so remove it
+                      tempArr.splice(index, 1);
+                    }
+                    setAppliedFilters(tempArr);
+                  }}
+                />
+                Late Night
+                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+                  {" "}
+                </pre>
+              </div>
             </text>
           </div>
 
