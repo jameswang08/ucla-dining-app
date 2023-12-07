@@ -15,6 +15,7 @@ export default function TruckPage() {
   const truckname = useLocation().state;
 
   const [sort, setSort] = useState("");
+  const [appliedFilters, setAppliedFilters] = useState([]);
   const [review, setReview] = useState(0);
 
   const [data, setData] = useState(null);
@@ -142,7 +143,6 @@ export default function TruckPage() {
             <ul
               className="text-dark-yellow btn btn-active btn-link"
               onClick={() => {
-                console.log("clicked");
                 setSort("latest");
               }}
             >
@@ -151,7 +151,6 @@ export default function TruckPage() {
             <ul
               className="text-dark-yellow btn btn-active btn-link"
               onClick={() => {
-                console.log("clicked");
                 setSort("earliest");
               }}
             >
@@ -160,27 +159,62 @@ export default function TruckPage() {
             <ul
               className="text-dark-yellow btn btn-active btn-link"
               onClick={() => {
-                console.log("clicked");
                 setSort("popularity");
               }}
             >
               Popularity
             </ul>
-            {/* <ul className="text-dark-yellow btn btn-active btn-link">
-              Popular
-            </ul> */}
           </div>
 
           <div className="absolute my-[-3rem]">
             <text className="inline-block text-white">
               Filter by:
-              <ul className="text-dark-yellow btn btn-active btn-link">
+              <ul className="text-dark-yellow btn btn-active btn-link"
+                onClick={() => {
+                  const tempArr = [...appliedFilters];
+                  const index = tempArr.indexOf("lunch");
+                  if (index === -1) {
+                    // Element is not in the array, so add it
+                    tempArr.push("lunch");
+                  } else {
+                    // Element is in the array, so remove it
+                    tempArr.splice(index, 1);
+                  }
+                  setAppliedFilters(tempArr);
+                }}
+              >
                 Lunch
               </ul>
-              <ul className="text-dark-yellow btn btn-active btn-link">
+              <ul className="text-dark-yellow btn btn-active btn-link"
+                onClick={() => {
+                  const tempArr = [...appliedFilters];
+                  const index = tempArr.indexOf("dinner");
+                  if (index === -1) {
+                    // Element is not in the array, so add it
+                    tempArr.push("dinner");
+                  } else {
+                    // Element is in the array, so remove it
+                    tempArr.splice(index, 1);
+                  }
+                  setAppliedFilters(tempArr);
+                }}
+              >
                 Dinner
               </ul>
-              <ul className="text-dark-yellow btn btn-active btn-link">
+              <ul className="text-dark-yellow btn btn-active btn-link"
+                onClick={() => {
+                  const tempArr = [...appliedFilters];
+                  const index = tempArr.indexOf("late_night");
+                  if (index === -1) {
+                    // Element is not in the array, so add it
+                    tempArr.push("late_night");
+                  } else {
+                    // Element is in the array, so remove it
+                    tempArr.splice(index, 1);
+                  }
+                  setAppliedFilters(tempArr);
+                }}
+              >
                 Late Night
               </ul>
             </text>
@@ -191,6 +225,7 @@ export default function TruckPage() {
           <Reviews
             truck={truckname}
             sortMethod={sort}
+            filters={appliedFilters}
             rerender={review}
           ></Reviews>
         </div>
