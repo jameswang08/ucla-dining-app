@@ -6,7 +6,7 @@ import { DateTime } from "luxon";
 import TextareaAutosize from "react-textarea-autosize";
 import { Context } from "../components/Context.jsx";
 
-function Review({ id, name, review, date, likes, rating }) {
+function Review({ id, name, review, date, likes, rating, meal }) {
   const { loggedIn, setLoggedIn, savedUser, setSavedUser } =
     useContext(Context);
   const [liked, setLiked] = useState(false);
@@ -102,11 +102,25 @@ function Review({ id, name, review, date, likes, rating }) {
     );
   }
 
+  const prettifyMeal = (meal) => {
+    switch (meal) {
+      case 'lunch':
+        return 'Lunch';
+      case 'dinner':
+        return 'Dinner';
+      case 'lateNight':
+        return 'Late Night';
+      default:
+        return '';
+    }
+  };
+
   return (
     <>
       <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
         {/*name*/}
         <h3 className="text-light-yellow font-normal block my-0">{name}</h3>
+        <p className="text-white text-xs my-0">{prettifyMeal(meal)}</p>
         <div className="rating rating-xs block">{items}</div>
         {/*review*/}
         <div>
@@ -187,6 +201,7 @@ function Reviews({ truck, sortMethod, filters, rerender }) {
               )}
               likes={item.likes}
               rating={item.rating}
+              meal={item.meal}
             />
             <br />
           </div>

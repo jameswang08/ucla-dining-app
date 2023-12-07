@@ -136,12 +136,12 @@ export default function TruckPage() {
           )}
         </div>
 
-        <div className="prose w-1/2 px-36">
+        <div className="prose w-1/2 pl-36">
           <div>
-            <h2 className="text-white mb-0  pt-8">Reviews</h2>
-            <text className="inline-block text-white">Sort by:</text>
+            <h2 className="text-white mb-0 pt-8 pb-2">Reviews</h2>
+            <text className="inline-block text-white">Sort by:
             <ul
-              className="text-dark-yellow btn btn-active btn-link"
+              className="text-dark-yellow btn btn-active btn-link my-0"
               onClick={() => {
                 setSort("latest");
               }}
@@ -149,7 +149,7 @@ export default function TruckPage() {
               Latest
             </ul>
             <ul
-              className="text-dark-yellow btn btn-active btn-link"
+              className="text-dark-yellow btn btn-active btn-link my-0"
               onClick={() => {
                 setSort("earliest");
               }}
@@ -157,19 +157,17 @@ export default function TruckPage() {
               Earliest
             </ul>
             <ul
-              className="text-dark-yellow btn btn-active btn-link"
+                className="text-dark-yellow btn btn-active btn-link my-0"
               onClick={() => {
                 setSort("popularity");
               }}
             >
               Popularity
-            </ul>
-          </div>
-
-          <div className="absolute my-[-3rem]">
+              </ul>
+            </text>
             <text className="inline-block text-white">
               Filter by:
-              <ul className="text-dark-yellow btn btn-active btn-link"
+              <ul className="text-dark-yellow btn btn-active btn-link my-0"
                 onClick={() => {
                   console.log("Clicked", appliedFilters);
                   const tempArr = [...appliedFilters];
@@ -186,7 +184,7 @@ export default function TruckPage() {
               >
                 Lunch
               </ul>
-              <ul className="text-dark-yellow btn btn-active btn-link"
+              <ul className="text-dark-yellow btn btn-active btn-link my-0"
                 onClick={() => {
                   const tempArr = [...appliedFilters];
                   const index = tempArr.indexOf("dinner");
@@ -202,7 +200,7 @@ export default function TruckPage() {
               >
                 Dinner
               </ul>
-              <ul className="text-dark-yellow btn btn-active btn-link"
+              <ul className="text-dark-yellow btn btn-active btn-link my-0"
                 onClick={() => {
                   const tempArr = [...appliedFilters];
                   const index = tempArr.indexOf("lateNight");
