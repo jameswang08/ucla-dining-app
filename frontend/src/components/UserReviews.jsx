@@ -40,7 +40,7 @@ function UserReviews({ user, sortMethod, filters, rerender }) {
           <div key={item._id}>
             <Review
               id={item._id}
-              name={item.username}
+              name={item.truckname}
               review={item.review}
               date={DateTime.fromISO(item.date).toLocaleString(
                 DateTime.DATETIME_MED

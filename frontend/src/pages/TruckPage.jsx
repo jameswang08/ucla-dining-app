@@ -104,8 +104,9 @@ export default function TruckPage() {
         </div>
       </div>
 
-      <div className="leading-20rem">
+      <div className="pt-40 leading-20rem">
         <pre>{"\n\n"}</pre>
+
       </div>
 
       <div className="flex">
@@ -135,10 +136,11 @@ export default function TruckPage() {
             </div>
           )}
         </div>
+        
 
-        <div className="prose w-1/2 pl-36">
+        <div className="prose w-1/2 pl-36 mt-[-10rem] ">
           <div>
-            <h2 className="text-white mb-0 pt-8 pb-2">Reviews</h2>
+            <h2 className="text-white mb-0 pb-2">Reviews</h2>
             <text className="text-white">
               Sort by:
               <div className="inline-block mx-5 text-dark-yellow font-bold">
