@@ -106,26 +106,53 @@ app.get("/trucks/:truckname", async (req, res) => {
 });
 
 app.post("/trucks/:truckname", async (req, res) => {
-  if (req.body.sortMethod === "latest") {
-    const reviews = await ReviewModel.find({ truckname: req.params.truckname })
-      .sort({ date: -1 })
+  //If there are filters
+  console.log(req.body.filters);
+  if( req.body.filters !== undefined && req.body.filters.length !== 0){
+    if (req.body.sortMethod === "latest") {
+      const reviews = await ReviewModel.find({ truckname: req.params.truckname, meal: {$in: req.body.filters}} )
+        .sort({ date: -1 })
+        .exec();
+      res.json({ reviews });
+    } else if (req.body.sortMethod === "earliest") {
+      const reviews = await ReviewModel.find({ truckname: req.params.truckname, meal: {$in: req.body.filters}} )
+      .sort({ date: 1 })
       .exec();
-    res.json({ reviews });
-  } else if (req.body.sortMethod === "earliest") {
-    const reviews = await ReviewModel.find({ truckname: req.params.truckname })
-    .sort({ date: 1 })
-    .exec();
-    res.json({ reviews });   
-  } else if (req.body.sortMethod === "popularity") {
-    const reviews = await ReviewModel.find({ truckname: req.params.truckname })
-    .sort({ likes: -1 })
-    .exec();
-    res.json({ reviews }); 
-  } else {
-    const reviews = await ReviewModel.find({
-      truckname: req.params.truckname,
-    }).exec();
-    res.json({ reviews });
+      res.json({ reviews });   
+    } else if (req.body.sortMethod === "popularity") {
+      const reviews = await ReviewModel.find({ truckname: req.params.truckname, meal: {$in: req.body.filters}} )
+      .sort({ likes: -1 })
+      .exec();
+      res.json({ reviews }); 
+    } else {
+      const reviews = await ReviewModel.find({
+        truckname: req.params.truckname, meal: {$in: req.body.filters}
+      }).exec();
+      res.json({ reviews });
+    }
+  }
+  else{
+    if (req.body.sortMethod === "latest") {
+      const reviews = await ReviewModel.find({ truckname: req.params.truckname })
+        .sort({ date: -1 })
+        .exec();
+      res.json({ reviews });
+    } else if (req.body.sortMethod === "earliest") {
+      const reviews = await ReviewModel.find({ truckname: req.params.truckname })
+      .sort({ date: 1 })
+      .exec();
+      res.json({ reviews });   
+    } else if (req.body.sortMethod === "popularity") {
+      const reviews = await ReviewModel.find({ truckname: req.params.truckname })
+      .sort({ likes: -1 })
+      .exec();
+      res.json({ reviews }); 
+    } else {
+      const reviews = await ReviewModel.find({
+        truckname: req.params.truckname,
+      }).exec();
+      res.json({ reviews });
+    }
   }
 });
 
