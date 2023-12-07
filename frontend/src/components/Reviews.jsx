@@ -143,7 +143,7 @@ function Review({ id, name, review, date, likes, rating }) {
   );
 }
 
-function Reviews({ truck, sortMethod, rerender }) {
+function Reviews({ truck, sortMethod, filters, rerender }) {
   const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
@@ -156,6 +156,7 @@ function Reviews({ truck, sortMethod, rerender }) {
           },
           body: JSON.stringify({
             sortMethod: sortMethod,
+            filters: filters,
           }),
         });
 
@@ -170,11 +171,10 @@ function Reviews({ truck, sortMethod, rerender }) {
       }
     };
     fetchData();
-  }, [truck, sortMethod, rerender]);
+  }, [truck, sortMethod, filters, rerender]);
 
   return (
     <>
-      {console.log("Reviews list", reviewList.reviews)}
       {reviewList.reviews && reviewList.reviews.length > 0 ? (
         reviewList.reviews.map((item) => (
           <div key={item._id}>
