@@ -120,8 +120,10 @@ function Review({ id, name, review, date, likes, rating, meal }) {
       <div className="w-[31.5rem] rounded-sm prose bg-gray px-8 py-6">
         {/*name*/}
         <h3 className="text-light-yellow font-normal block my-0">{name}</h3>
-        <p className="text-white text-xs my-0">{prettifyMeal(meal)}</p>
+        
+        <p className="text-white text-xs pt-3 my-0">{prettifyMeal(meal)}</p>
         <div className="rating rating-xs block">{items}</div>
+        <p>{"\n"}</p>
         {/*review*/}
         <div>
           <TextareaAutosize
