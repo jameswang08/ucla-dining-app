@@ -263,9 +263,13 @@ export default function DashboardPage() {
 
         <pre className="leading-[2rem]">{"\n\n\n"}</pre>
       </div>
+
+      <p className="bg-black text-transparent leading-[3rem]">placeholder {"\n\n\n"}</p>
+      
       <div>
         <BottomBar />
       </div>
+
     </div>
   );
 }
