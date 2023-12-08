@@ -62,48 +62,50 @@ export default function LocationsPage() {
       </div>
       {"\n\n\n"}
       <div className="prose ml-16 mr-16 max-w-full px-4 grid gap-24 grid-cols-2">
-          {data.map((truck, index) => {
-            return (
-              <div className="">
-                <div className="text-white">
-                  <h3 className="text-white mt-2 font-base">{truck.name}</h3>
-                  {"  "}
-                  {truck.ratingAvg == 0 ? (
-                    <text>-</text>
-                  ) : (
-                    <text>{parseInt(truck.ratingAvg * 100) / 100}</text>
-                  )}
-                  <div className="rating rating-xs">
-                    <input
-                      type="radio"
-                      name="rating-2"
-                      className="mask mask-star bg-white"
-                      checked
-                    />
-                  </div>
-                  {" | "}
-                  {truck.waitTimeAvg == 0 ? (
-                    <text>- min</text>
-                  ) : (
-                    <text>{parseInt(truck.waitTimeAvg * 100) / 100} min</text>
-                  )}
+        {data.map((truck, index) => {
+          return (
+            <div className="">
+              <div className="text-white">
+                <h3 className="text-white mt-2 font-base pr-3">{truck.name}</h3>
+                {"  "}
+                {truck.ratingAvg == 0 ? (
+                  <text>-</text>
+                ) : (
+                  <text>{parseInt(truck.ratingAvg * 100) / 100}</text>
+                )}
+                <div className="rating rating-xs">
+                  <input
+                    type="radio"
+                    name="rating-2"
+                    className="mask mask-star bg-white"
+                    checked
+                  />
                 </div>
-                <div className="bg-medium-grey text-white my-4 mx-3 px-2 py-2">
-                  <text>{truck.blurb}</text>
-                </div>
-                <button
-                  className="btn btn-active btn-link underline decoration-dark-yellow text-white"
-                  onClick={() => handleClick(truck.name)}
-                >
-                  EXPLORE→
-                </button>
+                {" | "}
+                {truck.waitTimeAvg == 0 ? (
+                  <text>- min</text>
+                ) : (
+                  <text>{parseInt(truck.waitTimeAvg * 100) / 100} min</text>
+                )}
               </div>
-            );
-          })}
-        </div>
-        <div>
-          <BottomBar />
-        </div>
+              <div className="bg-medium-grey text-white rounded-sm my-4 mx-3 px-5 py-5">
+                <text>{truck.blurb}</text>
+              </div>
+              <button
+                className="btn btn-active btn-link underline decoration-dark-yellow text-white"
+                onClick={() => handleClick(truck.name)}
+              >
+                EXPLORE→
+              </button>
+            </div>
+          );
+        })}
       </div>
+      <br />
+      <br />
+      <div>
+        <BottomBar />
+      </div>
+    </div>
   );
 }
