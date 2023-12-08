@@ -142,7 +142,8 @@ export default function DashboardPage() {
 
       <div className="column ps-16 text-white text-lg">
         <div>
-          <h2 className="text-white mb-0 pt-8 pb-2">Reviews</h2>
+          <pre className="text-white mt-[-2rem] mb-0 pt-8 pb-6">Reviews </pre>
+
           <text className="text-white">
             Sort by:
             <div className="inline-block mx-5 text-dark-yellow font-bold">
@@ -154,9 +155,10 @@ export default function DashboardPage() {
                 }}
               />
               Latest
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
               <input
                 type="radio"
                 checked={sort === "earliest"}
@@ -165,9 +167,10 @@ export default function DashboardPage() {
                 }}
               />
               Earliest
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
               <input
                 type="radio"
                 checked={sort === "popularity"}
@@ -176,17 +179,19 @@ export default function DashboardPage() {
                 }}
               />
               Popularity
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
             </div>
           </text>
           <text className="inline-block text-white">
             Filter by:
             <div className="inline-block text-dark-yellow font-bold">
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
               <input
                 type="checkbox"
                 defaultChecked={false}
@@ -205,9 +210,10 @@ export default function DashboardPage() {
                 }}
               />
               Lunch
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
               <input
                 type="checkbox"
                 defaultChecked={false}
@@ -226,9 +232,10 @@ export default function DashboardPage() {
                 }}
               />
               Dinner
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
               <input
                 type="checkbox"
                 defaultChecked={false}
@@ -247,9 +254,10 @@ export default function DashboardPage() {
                 }}
               />
               Late Night
-              <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent">
                 {" "}
-              </pre>
+                space
+              </p>
             </div>
           </text>
         </div>
@@ -264,12 +272,13 @@ export default function DashboardPage() {
         <pre className="leading-[2rem]">{"\n\n\n"}</pre>
       </div>
 
-      <p className="bg-black text-transparent leading-[3rem]">placeholder {"\n\n\n"}</p>
-      
+      <p className="bg-black text-transparent leading-[3rem]">
+        placeholder {"\n\n\n"}
+      </p>
+
       <div>
         <BottomBar />
       </div>
-
     </div>
   );
 }

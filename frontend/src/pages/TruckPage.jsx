@@ -107,7 +107,6 @@ export default function TruckPage() {
 
       <div className="pt-40 leading-20rem">
         <pre>{"\n\n"}</pre>
-
       </div>
 
       <div className="flex">
@@ -137,7 +136,6 @@ export default function TruckPage() {
             </div>
           )}
         </div>
-        
 
         <div className="prose w-1/2 pl-36 mt-[-10rem] ">
           <div>
@@ -153,9 +151,7 @@ export default function TruckPage() {
                   }}
                 />
                 Latest
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+                <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent"> space</p>
                 <input
                   type="radio"
                   checked={sort === "earliest"}
@@ -164,9 +160,7 @@ export default function TruckPage() {
                   }}
                 />
                 Earliest
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+                <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent"> space</p>
                 <input
                   type="radio"
                   checked={sort === "popularity"}
@@ -175,17 +169,13 @@ export default function TruckPage() {
                   }}
                 />
                 Popularity
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+                <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent"> space</p>
               </div>
             </text>
             <text className="inline-block text-white">
               Filter by:
               <div className="inline-block text-dark-yellow font-bold">
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+              <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent"> space</p>
                 <input
                   type="checkbox"
                   defaultChecked={false}
@@ -204,9 +194,7 @@ export default function TruckPage() {
                   }}
                 />
                 Lunch
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+                <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent"> space</p>
                 <input
                   type="checkbox"
                   defaultChecked={false}
@@ -225,9 +213,7 @@ export default function TruckPage() {
                   }}
                 />
                 Dinner
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+                <p className="mt-[-2rem] py-0 bg-transparent inline-block text-transparent"> space</p>
                 <input
                   type="checkbox"
                   defaultChecked={false}
@@ -246,9 +232,7 @@ export default function TruckPage() {
                   }}
                 />
                 Late Night
-                <pre className="mt-[-2rem] py-0 bg-transparent inline-block">
-                  {" "}
-                </pre>
+                <p className="mt-[-2rem] py-0 bg-transparent inline-block"> </p>
               </div>
             </text>
           </div>
