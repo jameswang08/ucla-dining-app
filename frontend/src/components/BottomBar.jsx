@@ -8,7 +8,7 @@ export default function BottomBar() {
     <>
       <div className="navbar bg-dark-yellow">
           <div className="flex-1 prose max-w-full">
-            <h3 className="text-black"> BruinEats © 2023</h3>
+            <h3 className="pl-8 text-black"> BruinEats © 2023</h3>
           </div>
           <a className="link text-black mx-4">
                 <Link to="https://github.com/jameswang08/ucla-dining-app"> Project GitHub </Link>
@@ -16,7 +16,7 @@ export default function BottomBar() {
           <a className="link text-black mx-4">
                 <Link to="https://menu.dining.ucla.edu/Menus"> UCLA Menu </Link>
           </a>
-          <a className="link text-black mx-4">
+          <a className="link text-black mx-4 pr-8">
                 <Link to="https://menu.dining.ucla.edu/hours/"> UCLA Hours of Operation </Link>
           </a>
       </div>
