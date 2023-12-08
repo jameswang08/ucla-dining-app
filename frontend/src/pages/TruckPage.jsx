@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
+import BottomBar from "../components/BottomBar.jsx";
 import "../../dist/output.css";
 import RatingsForm from "./RatingsForm.jsx";
 import "../components/Images.css";
@@ -261,6 +262,9 @@ export default function TruckPage() {
             rerender={review}
           ></TruckReviews>
         </div>
+      </div>
+      <div>
+        <BottomBar />
       </div>
     </div>
   );

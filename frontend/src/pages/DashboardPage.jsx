@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 // import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
+import BottomBar from "../components/BottomBar.jsx";
 import "../../dist/output.css";
 import "../components/grid.css";
 import { useLocation } from "react-router-dom";
@@ -261,6 +262,9 @@ export default function DashboardPage() {
         ></UserReviews>
 
         <pre className="leading-[2rem]">{"\n\n\n"}</pre>
+      </div>
+      <div>
+        <BottomBar />
       </div>
     </div>
   );

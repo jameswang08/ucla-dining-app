@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar.jsx";
+import BottomBar from "../components/BottomBar.jsx";
 import '../../dist/output.css'
 import "../components/Images.css";
 import { Link } from "react-router-dom";
@@ -38,6 +39,9 @@ export default function HomePage() {
         <ul className="btn btn-active btn-link text-black text-xl ml-[42rem] mt-[5.5rem] mb-[1.5rem]">
           <Link to="/login">Begin→ </Link>
         </ul>
+      </div>
+      <div>
+        <BottomBar />
       </div>
     </div>
   );

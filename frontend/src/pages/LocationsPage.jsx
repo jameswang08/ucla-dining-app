@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
+import BottomBar from "../components/BottomBar.jsx";
 import "../components/Images.css";
 import "../components/headers.css";
 import "../components/grid.css";
@@ -99,6 +100,9 @@ export default function LocationsPage() {
               </div>
             );
           })}
+        </div>
+        <div>
+          <BottomBar />
         </div>
       </div>
   );

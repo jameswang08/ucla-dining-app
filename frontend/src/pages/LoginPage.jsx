@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import NavBar from "../components/NavBar.jsx";
+import BottomBar from "../components/BottomBar.jsx";
 import "../../dist/output.css";
 import "../components/Inputs.css";
 import { useState } from "react";
@@ -133,6 +134,9 @@ export default function LoginPage() {
       >
         Login→
       </button>
+      <div>
+        <BottomBar />
+      </div>
     </form>
   );
 }
