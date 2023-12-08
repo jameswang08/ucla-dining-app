@@ -12,21 +12,31 @@ or not. Users can also sort, filter, and like reviews.
 
 ## Installation and Running the Code
 
-1. Clone the git repository.
-2. Make sure your cwd is your local ucla-dining-app repository.
-3. Run the command: <code>cd backend</code>.
-4. In backend, run the following:
+### Clone the git repository
 ```
-npm install
-npm start
+git clone https://github.com/jameswang08/ucla-dining-app/
+cd ucla-dining-app
 ```
-5. Start a new shell tab.
-6. Run the command: <code>cd ../frontend</code>.
-7. In frontend, run the following:
+
+### Frontend setup
+Beginning from the root directory, run the following:
 ```
+cd frontend
 npm install
 npx tailwindcss -i ./src/App.css -o ./dist/output.css --watch
 npm run dev
 ```
-8. Open the link from running <code>npm run dev</code> in your preferred browser
+Open the link from running <code>npm run dev</code> in your preferred browser
 to view the BruinEats web app.
+
+### Backend setup
+Beginning from the root directory, run <code>cd backend</code>
+Create a <code>.env</code> file in the following format, replacing <code>"mongodb_url"</code> with the database connection string: 
+```
+secretURL="mongodb_url"
+```
+Run the following: 
+```
+npm install
+npm start
+```
